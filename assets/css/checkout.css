@@ -65,26 +65,15 @@
 }
 
 /* Invoice Fields Container */
-.wcgvi-invoice-fields {
-    display: none;
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 5px;
-    margin: 15px 0;
-    border: 1px solid #e0e0e0;
+.wcgvi-invoice-fields,
+#billing_company_field.wcgvi-invoice-fields,
+.woocommerce-billing-fields #billing_company_field.wcgvi-invoice-fields {
+    display: none !important;
 }
 
-/* Also hide the billing_company field wrapper */
-#billing_company_field.wcgvi-invoice-fields {
-    display: none;
-    background: transparent;
-    padding: 0;
-    border: none;
-    margin: 0;
-}
-
-.wcgvi-invoice-fields.visible {
-    display: block;
+.wcgvi-invoice-fields.visible,
+#billing_company_field.wcgvi-invoice-fields.visible {
+    display: block !important;
 }
 
 .wcgvi-invoice-fields h3 {

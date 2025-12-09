@@ -47,10 +47,10 @@ jQuery(document).ready(function($) {
             var $invoiceFields = $('.wcgvi-invoice-fields');
             
             if (invoiceType === 'invoice') {
-                $invoiceFields.slideDown(300);
+                $invoiceFields.addClass('visible').slideDown(300);
                 $invoiceFields.find('input').prop('required', true);
             } else {
-                $invoiceFields.slideUp(300);
+                $invoiceFields.removeClass('visible').slideUp(300);
                 $invoiceFields.find('input').prop('required', false);
             }
         },
