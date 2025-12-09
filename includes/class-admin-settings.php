@@ -28,9 +28,28 @@ class WCGVI_Admin_Settings {
         // Add admin menu
         add_action('admin_menu', array($this, 'add_admin_menu'), 60);
         
+        // Enqueue media uploader
+        add_action('admin_enqueue_scripts', array($this, 'enqueue_media_uploader'));
+        
         // AJAX handlers for test connections
         add_action('wp_ajax_wcgvi_test_aade', array($this, 'ajax_test_aade'));
         add_action('wp_ajax_wcgvi_test_vies', array($this, 'ajax_test_vies'));
+    }
+    
+    /**
+     * Enqueue media uploader
+     */
+    public function enqueue_media_uploader($hook) {
+        if ($hook !== 'woocommerce_page_wc-settings') {
+            return;
+        }
+        
+        if (!isset($_GET['tab']) || $_GET['tab'] !== 'greek_vat_invoices') {
+            return;
+        }
+        
+        wp_enqueue_media();
+        wp_enqueue_script('wcgvi-media-uploader', plugin_dir_url(dirname(__FILE__)) . 'assets/js/admin-media-uploader.js', array('jquery'), '1.0', true);
     }
     
     /**
@@ -305,6 +324,16 @@ class WCGVI_Admin_Settings {
             ),
             
             array(
+                'title' => __('Λογότυπο Επιχείρησης', 'wc-greek-vat-invoices'),
+                'desc' => __('Ανεβάστε το λογότυπο της επιχείρησής σας για τα παραστατικά (προτεινόμενο μέγεθος: 200x80px)', 'wc-greek-vat-invoices'),
+                'id' => 'wcgvi_company_logo',
+                'type' => 'text',
+                'default' => '',
+                'css' => 'min-width:300px;',
+                'desc_tip' => __('Επιλέξτε μια εικόνα από τη Βιβλιοθήκη Πολυμέσων ή ανεβάστε μία νέα', 'wc-greek-vat-invoices'),
+            ),
+            
+            array(
                 'title' => __('Επωνυμία Επιχείρησης', 'wc-greek-vat-invoices'),
                 'desc' => __('Η νομική επωνυμία της επιχείρησής σας', 'wc-greek-vat-invoices'),
                 'id' => 'wcgvi_company_name',
@@ -350,6 +379,14 @@ class WCGVI_Admin_Settings {
                 'id' => 'wcgvi_company_email',
                 'type' => 'email',
                 'default' => get_option('admin_email')
+            ),
+            
+            array(
+                'title' => __('Website', 'wc-greek-vat-invoices'),
+                'desc' => __('Η διεύθυνση του website σας', 'wc-greek-vat-invoices'),
+                'id' => 'wcgvi_company_website',
+                'type' => 'text',
+                'default' => get_site_url()
             ),
             
             array(
