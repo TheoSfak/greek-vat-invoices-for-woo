@@ -20,8 +20,8 @@ class WCGVI_Checkout_Fields {
     }
     
     private function __construct() {
-        // Add invoice/receipt selection field
-        add_filter('woocommerce_checkout_fields', array($this, 'add_invoice_fields'), 10, 1);
+        // Add invoice/receipt selection field - Run AFTER Smart Checkout Fields Manager (999)
+        add_filter('woocommerce_checkout_fields', array($this, 'add_invoice_fields'), 1000, 1);
         
         // Validate fields
         add_action('woocommerce_after_checkout_validation', array($this, 'validate_invoice_fields'), 10, 2);
