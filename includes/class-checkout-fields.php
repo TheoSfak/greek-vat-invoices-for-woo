@@ -88,8 +88,12 @@ class WCGVI_Checkout_Fields {
         }
         $fields['billing']['billing_company']['class'][] = 'form-row-wide';
         $fields['billing']['billing_company']['class'][] = 'wcgvi-invoice-fields';
+        $fields['billing']['billing_company']['class'][] = 'hidden-by-default';
         $fields['billing']['billing_company']['required'] = false;
         $fields['billing']['billing_company']['priority'] = $invoice_type_priority + 1;
+        $fields['billing']['billing_company']['custom_attributes'] = array(
+            'data-invoice-field' => 'true'
+        );
         
         // VAT Number (AFM)
         $fields['billing']['billing_vat_number'] = array(
