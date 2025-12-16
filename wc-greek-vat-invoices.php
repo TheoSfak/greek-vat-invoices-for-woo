@@ -31,7 +31,7 @@ define('GRVATIN_PLUGIN_BASENAME', plugin_basename(__FILE__));
 // Check if WooCommerce is active
 if (!in_array('woocommerce/woocommerce.php', apply_filters('GRVATIN_active_plugins', get_option('active_plugins')))) {
     add_action('admin_notices', function() {
-        echo '<div class="error"><p><strong>' . esc_html__('Greek VAT & Invoices for WooCommerce', 'greek-vat-invoices-for-woocommerce') . '</strong> ' . esc_html__('απαιτεί το WooCommerce να είναι εγκατεστημένο και ενεργοποιημένο.', 'greek-vat-invoices-for-woocommerce') . '</p></div>';
+        echo '<div class="error"><p><strong>' . esc_html__('Greek VAT & Invoices for WooCommerce', 'wc-greek-vat-invoices') . '</strong> ' . esc_html__('απαιτεί το WooCommerce να είναι εγκατεστημένο και ενεργοποιημένο.', 'wc-greek-vat-invoices') . '</p></div>';
     });
     return;
 }
@@ -122,10 +122,10 @@ class WC_Greek_VAT_Invoices {
                 'ajax_url' => admin_url('admin-ajax.php'),
                 'nonce' => wp_create_nonce('GRVATIN_nonce'),
                 'uppercase' => get_option('GRVATIN_uppercase_fields', 'yes'),
-                'validating_text' => __('Επικύρωση...', 'greek-vat-invoices-for-woocommerce'),
-                'valid_text' => __('Έγκυρο', 'greek-vat-invoices-for-woocommerce'),
-                'invalid_text' => __('Μη έγκυρο ΑΦΜ', 'greek-vat-invoices-for-woocommerce'),
-                'error_text' => __('Σφάλμα επικύρωσης ΑΦΜ', 'greek-vat-invoices-for-woocommerce')
+                'validating_text' => __('Επικύρωση...', 'wc-greek-vat-invoices'),
+                'valid_text' => __('Έγκυρο', 'wc-greek-vat-invoices'),
+                'invalid_text' => __('Μη έγκυρο ΑΦΜ', 'wc-greek-vat-invoices'),
+                'error_text' => __('Σφάλμα επικύρωσης ΑΦΜ', 'wc-greek-vat-invoices')
             ));
         }
     }
@@ -141,26 +141,26 @@ class WC_Greek_VAT_Invoices {
             wp_localize_script('wcgvi-admin', 'GRVATIN_admin_params', array(
                 'ajax_url' => admin_url('admin-ajax.php'),
                 'nonce' => wp_create_nonce('GRVATIN_admin_nonce'),
-                'no_vat_text' => __('Παρακαλώ εισάγετε ΑΦΜ', 'greek-vat-invoices-for-woocommerce'),
-                'validating_text' => __('Επικύρωση...', 'greek-vat-invoices-for-woocommerce'),
-                'validate_text' => __('Επικύρωση ΑΦΜ', 'greek-vat-invoices-for-woocommerce'),
-                'valid_text' => __('Έγκυρο ΑΦΜ', 'greek-vat-invoices-for-woocommerce'),
-                'invalid_text' => __('Μη έγκυρο ΑΦΜ', 'greek-vat-invoices-for-woocommerce'),
-                'error_text' => __('Παρουσιάστηκε σφάλμα', 'greek-vat-invoices-for-woocommerce'),
-                'company_text' => __('Επωνυμία', 'greek-vat-invoices-for-woocommerce'),
-                'doy_text' => __('ΔΟΥ', 'greek-vat-invoices-for-woocommerce'),
-                'activity_text' => __('Επάγγελμα', 'greek-vat-invoices-for-woocommerce'),
-                'regenerate_text' => __('Αναδημιουργία Παραστατικού', 'greek-vat-invoices-for-woocommerce'),
-                'regenerate_confirm' => __('Είστε σίγουροι ότι θέλετε να αναδημιουργήσετε το παραστατικό;', 'greek-vat-invoices-for-woocommerce'),
-                'generating_text' => __('Δημιουργία...', 'greek-vat-invoices-for-woocommerce'),
-                'success_text' => __('Το παραστατικό αναδημιουργήθηκε επιτυχώς', 'greek-vat-invoices-for-woocommerce'),
-                'upload_text' => __('Ανέβασμα Παραστατικού', 'greek-vat-invoices-for-woocommerce'),
-                'uploading_text' => __('Ανέβασμα...', 'greek-vat-invoices-for-woocommerce'),
-                'upload_success_text' => __('Το παραστατικό ανέβηκε επιτυχώς', 'greek-vat-invoices-for-woocommerce'),
-                'pdf_only_text' => __('Παρακαλώ ανεβάστε μόνο αρχείο PDF', 'greek-vat-invoices-for-woocommerce'),
-                'testing_text' => __('Δοκιμή...', 'greek-vat-invoices-for-woocommerce'),
-                'test_aade_text' => __('Δοκιμή AADE', 'greek-vat-invoices-for-woocommerce'),
-                'test_vies_text' => __('Δοκιμή VIES', 'greek-vat-invoices-for-woocommerce')
+                'no_vat_text' => __('Παρακαλώ εισάγετε ΑΦΜ', 'wc-greek-vat-invoices'),
+                'validating_text' => __('Επικύρωση...', 'wc-greek-vat-invoices'),
+                'validate_text' => __('Επικύρωση ΑΦΜ', 'wc-greek-vat-invoices'),
+                'valid_text' => __('Έγκυρο ΑΦΜ', 'wc-greek-vat-invoices'),
+                'invalid_text' => __('Μη έγκυρο ΑΦΜ', 'wc-greek-vat-invoices'),
+                'error_text' => __('Παρουσιάστηκε σφάλμα', 'wc-greek-vat-invoices'),
+                'company_text' => __('Επωνυμία', 'wc-greek-vat-invoices'),
+                'doy_text' => __('ΔΟΥ', 'wc-greek-vat-invoices'),
+                'activity_text' => __('Επάγγελμα', 'wc-greek-vat-invoices'),
+                'regenerate_text' => __('Αναδημιουργία Παραστατικού', 'wc-greek-vat-invoices'),
+                'regenerate_confirm' => __('Είστε σίγουροι ότι θέλετε να αναδημιουργήσετε το παραστατικό;', 'wc-greek-vat-invoices'),
+                'generating_text' => __('Δημιουργία...', 'wc-greek-vat-invoices'),
+                'success_text' => __('Το παραστατικό αναδημιουργήθηκε επιτυχώς', 'wc-greek-vat-invoices'),
+                'upload_text' => __('Ανέβασμα Παραστατικού', 'wc-greek-vat-invoices'),
+                'uploading_text' => __('Ανέβασμα...', 'wc-greek-vat-invoices'),
+                'upload_success_text' => __('Το παραστατικό ανέβηκε επιτυχώς', 'wc-greek-vat-invoices'),
+                'pdf_only_text' => __('Παρακαλώ ανεβάστε μόνο αρχείο PDF', 'wc-greek-vat-invoices'),
+                'testing_text' => __('Δοκιμή...', 'wc-greek-vat-invoices'),
+                'test_aade_text' => __('Δοκιμή AADE', 'wc-greek-vat-invoices'),
+                'test_vies_text' => __('Δοκιμή VIES', 'wc-greek-vat-invoices')
             ));
         }
     }

@@ -80,10 +80,10 @@ class GRVATIN_Email_Handler {
         // Email subject
         $subject = sprintf(
             /* translators: 1: Site name, 2: Order number, 3: Document type (Invoice/Receipt), 4: Invoice number */
-            __('%1$s - Order #%2$s - %3$s %4$s', 'greek-vat-invoices-for-woocommerce'),
+            __('%1$s - Order #%2$s - %3$s %4$s', 'wc-greek-vat-invoices'),
             get_bloginfo('name'),
             $order->get_order_number(),
-            $invoice_type === 'invoice' ? __('Invoice', 'greek-vat-invoices-for-woocommerce') : __('Receipt', 'greek-vat-invoices-for-woocommerce'),
+            $invoice_type === 'invoice' ? __('Invoice', 'wc-greek-vat-invoices') : __('Receipt', 'wc-greek-vat-invoices'),
             $invoice_number
         );
         
@@ -107,7 +107,7 @@ class GRVATIN_Email_Handler {
             $order->add_order_note(
                 sprintf(
                     /* translators: %s: Invoice number */
-                    __('Invoice/Receipt %s sent to customer via email.', 'greek-vat-invoices-for-woocommerce'),
+                    __('Invoice/Receipt %s sent to customer via email.', 'wc-greek-vat-invoices'),
                     $invoice_number
                 )
             );

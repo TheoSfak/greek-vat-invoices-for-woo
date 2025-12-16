@@ -57,7 +57,7 @@ class GRVATIN_Admin_Settings {
      * Add settings tab
      */
     public function add_settings_tab($tabs) {
-        $tabs['greek_vat_invoices'] = __('Ελληνικά Τιμολόγια & ΦΠΑ', 'greek-vat-invoices-for-woocommerce');
+        $tabs['greek_vat_invoices'] = __('Ελληνικά Τιμολόγια & ΦΠΑ', 'wc-greek-vat-invoices');
         return $tabs;
     }
     
@@ -67,8 +67,8 @@ class GRVATIN_Admin_Settings {
     public function add_admin_menu() {
         add_submenu_page(
             'woocommerce',
-            __('Ελληνικά Τιμολόγια & ΦΠΑ', 'greek-vat-invoices-for-woocommerce'),
-            __('Ελληνικά Τιμολόγια', 'greek-vat-invoices-for-woocommerce'),
+            __('Ελληνικά Τιμολόγια & ΦΠΑ', 'wc-greek-vat-invoices'),
+            __('Ελληνικά Τιμολόγια', 'wc-greek-vat-invoices'),
             'manage_woocommerce',
             admin_url('admin.php?page=wc-settings&tab=greek_vat_invoices')
         );
@@ -95,47 +95,47 @@ class GRVATIN_Admin_Settings {
         $settings = array(
             // General Section
             array(
-                'title' => __('Γενικές Ρυθμίσεις', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Γενικές Ρυθμίσεις', 'wc-greek-vat-invoices'),
                 'type' => 'title',
-                'desc' => __('Διαμόρφωση γενικών ρυθμίσεων τιμολογίων και αποδείξεων', 'greek-vat-invoices-for-woocommerce'),
+                'desc' => __('Διαμόρφωση γενικών ρυθμίσεων τιμολογίων και αποδείξεων', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_general_settings'
             ),
             
             array(
-                'title' => __('Ενεργοποίηση Επιλογής Παραστατικού', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Επιτρέψτε στους πελάτες να επιλέξουν μεταξύ τιμολογίου και απόδειξης', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Ενεργοποίηση Επιλογής Παραστατικού', 'wc-greek-vat-invoices'),
+                'desc' => __('Επιτρέψτε στους πελάτες να επιλέξουν μεταξύ τιμολογίου και απόδειξης', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_enable_selection',
                 'default' => 'yes',
                 'type' => 'checkbox'
             ),
             
             array(
-                'title' => __('Μετατροπή σε Κεφαλαία', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Μετατροπή επωνυμίας και διεύθυνσης σε ΚΕΦΑΛΑΙΑ (απαίτηση AADE)', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Μετατροπή σε Κεφαλαία', 'wc-greek-vat-invoices'),
+                'desc' => __('Μετατροπή επωνυμίας και διεύθυνσης σε ΚΕΦΑΛΑΙΑ (απαίτηση AADE)', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_uppercase',
                 'default' => 'yes',
                 'type' => 'checkbox'
             ),
             
             array(
-                'title' => __('Θέση Πεδίου "Τύπος Παραστατικού"', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Επιλέξτε πού θα εμφανίζεται το πεδίο επιλογής τιμολογίου/απόδειξης', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Θέση Πεδίου "Τύπος Παραστατικού"', 'wc-greek-vat-invoices'),
+                'desc' => __('Επιλέξτε πού θα εμφανίζεται το πεδίο επιλογής τιμολογίου/απόδειξης', 'wc-greek-vat-invoices'),
                 'id' => 'grvatin_invoice_type_position',
                 'type' => 'select',
                 'default' => 'after_billing_email',
                 'options' => array(
-                    'top' => __('Τέρμα Πάνω (πρώτο πεδίο)', 'greek-vat-invoices-for-woocommerce'),
-                    'before_billing_first_name' => __('Πριν από το Όνομα', 'greek-vat-invoices-for-woocommerce'),
-                    'after_billing_last_name' => __('Μετά το Επίθετο', 'greek-vat-invoices-for-woocommerce'),
-                    'after_billing_phone' => __('Μετά τον Αριθμό Τηλεφώνου', 'greek-vat-invoices-for-woocommerce'),
-                    'after_billing_email' => __('Μετά το Email (προτεινόμενο)', 'greek-vat-invoices-for-woocommerce'),
-                    'after_billing_country' => __('Μετά τη Χώρα', 'greek-vat-invoices-for-woocommerce'),
-                    'after_billing_address_1' => __('Μετά τη Διεύθυνση', 'greek-vat-invoices-for-woocommerce'),
-                    'after_billing_city' => __('Μετά την Πόλη', 'greek-vat-invoices-for-woocommerce'),
-                    'after_billing_postcode' => __('Μετά τον Ταχυδρομικό Κώδικα', 'greek-vat-invoices-for-woocommerce'),
-                    'bottom' => __('Τέρμα Κάτω (τελευταίο πεδίο)', 'greek-vat-invoices-for-woocommerce')
+                    'top' => __('Τέρμα Πάνω (πρώτο πεδίο)', 'wc-greek-vat-invoices'),
+                    'before_billing_first_name' => __('Πριν από το Όνομα', 'wc-greek-vat-invoices'),
+                    'after_billing_last_name' => __('Μετά το Επίθετο', 'wc-greek-vat-invoices'),
+                    'after_billing_phone' => __('Μετά τον Αριθμό Τηλεφώνου', 'wc-greek-vat-invoices'),
+                    'after_billing_email' => __('Μετά το Email (προτεινόμενο)', 'wc-greek-vat-invoices'),
+                    'after_billing_country' => __('Μετά τη Χώρα', 'wc-greek-vat-invoices'),
+                    'after_billing_address_1' => __('Μετά τη Διεύθυνση', 'wc-greek-vat-invoices'),
+                    'after_billing_city' => __('Μετά την Πόλη', 'wc-greek-vat-invoices'),
+                    'after_billing_postcode' => __('Μετά τον Ταχυδρομικό Κώδικα', 'wc-greek-vat-invoices'),
+                    'bottom' => __('Τέρμα Κάτω (τελευταίο πεδίο)', 'wc-greek-vat-invoices')
                 ),
-                'desc_tip' => __('Καθορίζει πού θα εμφανίζεται το πεδίο "Τιμολόγιο ή Απόδειξη" στη φόρμα checkout. Προτείνεται μετά το email.', 'greek-vat-invoices-for-woocommerce')
+                'desc_tip' => __('Καθορίζει πού θα εμφανίζεται το πεδίο "Τιμολόγιο ή Απόδειξη" στη φόρμα checkout. Προτείνεται μετά το email.', 'wc-greek-vat-invoices')
             ),
             
             array(
@@ -145,28 +145,28 @@ class GRVATIN_Admin_Settings {
             
             // VAT Validation Section
             array(
-                'title' => __('Ρυθμίσεις Επικύρωσης ΑΦΜ', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Ρυθμίσεις Επικύρωσης ΑΦΜ', 'wc-greek-vat-invoices'),
                 'type' => 'title',
-                'desc' => __('Διαμόρφωση επικύρωσης ΑΦΜ μέσω AADE και VIES', 'greek-vat-invoices-for-woocommerce'),
+                'desc' => __('Διαμόρφωση επικύρωσης ΑΦΜ μέσω AADE και VIES', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_validation_settings'
             ),
             
             array(
-                'title' => __('Τρόπος Επικύρωσης Ελληνικού ΑΦΜ', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Επιλέξτε πώς θα επικυρώνεται το Ελληνικό ΑΦΜ. <strong>Σημείωση:</strong> Τα credentials του myDATA/Pylon ΔΕΝ λειτουργούν για το AADE RgWsPublic2 API.', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Τρόπος Επικύρωσης Ελληνικού ΑΦΜ', 'wc-greek-vat-invoices'),
+                'desc' => __('Επιλέξτε πώς θα επικυρώνεται το Ελληνικό ΑΦΜ. <strong>Σημείωση:</strong> Τα credentials του myDATA/Pylon ΔΕΝ λειτουργούν για το AADE RgWsPublic2 API.', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_greek_vat_validation_method',
                 'type' => 'select',
                 'default' => 'basic',
                 'options' => array(
-                    'basic' => __('Απλή Επικύρωση (Έλεγχος μορφής 9 ψηφίων) - Προτεινόμενο', 'greek-vat-invoices-for-woocommerce'),
-                    'aade' => __('Επικύρωση μέσω AADE (Απαιτεί ειδικά credentials RgWsPublic2)', 'greek-vat-invoices-for-woocommerce')
+                    'basic' => __('Απλή Επικύρωση (Έλεγχος μορφής 9 ψηφίων) - Προτεινόμενο', 'wc-greek-vat-invoices'),
+                    'aade' => __('Επικύρωση μέσω AADE (Απαιτεί ειδικά credentials RgWsPublic2)', 'wc-greek-vat-invoices')
                 ),
-                'desc_tip' => __('Απλή Επικύρωση: Ελέγχει μόνο αν το ΑΦΜ έχει σωστή μορφή (9 ψηφία). Επικύρωση AADE: Συνδέεται με το AADE RgWsPublic2 API και αντλεί αυτόματα επωνυμία, διεύθυνση, ΔΟΥ κλπ (απαιτεί ειδικά credentials - ΟΧΙ τα credentials του myDATA).', 'greek-vat-invoices-for-woocommerce')
+                'desc_tip' => __('Απλή Επικύρωση: Ελέγχει μόνο αν το ΑΦΜ έχει σωστή μορφή (9 ψηφία). Επικύρωση AADE: Συνδέεται με το AADE RgWsPublic2 API και αντλεί αυτόματα επωνυμία, διεύθυνση, ΔΟΥ κλπ (απαιτεί ειδικά credentials - ΟΧΙ τα credentials του myDATA).', 'wc-greek-vat-invoices')
             ),
             
             array(
-                'title' => __('Username (Κωδικός Εισόδου)', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Ο Κωδικός Εισόδου του Ειδικού Κωδικού από το AADE (π.χ. SFAK...)', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Username (Κωδικός Εισόδου)', 'wc-greek-vat-invoices'),
+                'desc' => __('Ο Κωδικός Εισόδου του Ειδικού Κωδικού από το AADE (π.χ. SFAK...)', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_aade_username',
                 'type' => 'text',
                 'default' => '',
@@ -174,8 +174,8 @@ class GRVATIN_Admin_Settings {
             ),
             
             array(
-                'title' => __('Password (Συνθηματικό)', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Το Συνθηματικό Χρήστη του Ειδικού Κωδικού', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Password (Συνθηματικό)', 'wc-greek-vat-invoices'),
+                'desc' => __('Το Συνθηματικό Χρήστη του Ειδικού Κωδικού', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_aade_password',
                 'type' => 'password',
                 'default' => '',
@@ -183,8 +183,8 @@ class GRVATIN_Admin_Settings {
             ),
             
             array(
-                'title' => __('Ενεργοποίηση Επικύρωσης VIES', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Επικύρωση ενδοκοινοτικών ΑΦΜ μέσω VIES API', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Ενεργοποίηση Επικύρωσης VIES', 'wc-greek-vat-invoices'),
+                'desc' => __('Επικύρωση ενδοκοινοτικών ΑΦΜ μέσω VIES API', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_vies_validation',
                 'default' => 'no',
                 'type' => 'checkbox'
@@ -197,39 +197,39 @@ class GRVATIN_Admin_Settings {
             
             // VAT Exemption Section
             array(
-                'title' => __('Ρυθμίσεις Απαλλαγής ΦΠΑ', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Ρυθμίσεις Απαλλαγής ΦΠΑ', 'wc-greek-vat-invoices'),
                 'type' => 'title',
-                'desc' => __('Διαμόρφωση αυτόματων κανόνων απαλλαγής ΦΠΑ', 'greek-vat-invoices-for-woocommerce'),
+                'desc' => __('Διαμόρφωση αυτόματων κανόνων απαλλαγής ΦΠΑ', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_exemption_settings'
             ),
             
             array(
-                'title' => __('Ενεργοποίηση Απαλλαγής VIES', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Απαλλαγή ΦΠΑ για επικυρωμένες ενδοκοινοτικές επιχειρήσεις', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Ενεργοποίηση Απαλλαγής VIES', 'wc-greek-vat-invoices'),
+                'desc' => __('Απαλλαγή ΦΠΑ για επικυρωμένες ενδοκοινοτικές επιχειρήσεις', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_vies_exemption',
                 'default' => 'yes',
                 'type' => 'checkbox'
             ),
             
             array(
-                'title' => __('Ενεργοποίηση Απαλλαγής Εκτός ΕΕ', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Απαλλαγή ΦΠΑ για εξαγωγές σε χώρες εκτός ΕΕ', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Ενεργοποίηση Απαλλαγής Εκτός ΕΕ', 'wc-greek-vat-invoices'),
+                'desc' => __('Απαλλαγή ΦΠΑ για εξαγωγές σε χώρες εκτός ΕΕ', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_non_eu_exemption',
                 'default' => 'yes',
                 'type' => 'checkbox'
             ),
             
             array(
-                'title' => __('Ενεργοποίηση Απαλλαγής Άρθρου 39α', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Εφαρμογή απαλλαγής άρθρου 39α για επιλέξιμες Ελληνικές επιχειρήσεις', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Ενεργοποίηση Απαλλαγής Άρθρου 39α', 'wc-greek-vat-invoices'),
+                'desc' => __('Εφαρμογή απαλλαγής άρθρου 39α για επιλέξιμες Ελληνικές επιχειρήσεις', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_article_39a',
                 'default' => 'no',
                 'type' => 'checkbox'
             ),
             
             array(
-                'title' => __('Κατηγορίες Προϊόντων με Απαλλαγή 39α', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Επιλέξτε τις κατηγορίες προϊόντων για τις οποίες ισχύει η απαλλαγή άρθρου 39α. Αν δεν επιλέξετε τίποτα, θα ισχύει για όλες τις κατηγορίες.', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Κατηγορίες Προϊόντων με Απαλλαγή 39α', 'wc-greek-vat-invoices'),
+                'desc' => __('Επιλέξτε τις κατηγορίες προϊόντων για τις οποίες ισχύει η απαλλαγή άρθρου 39α. Αν δεν επιλέξετε τίποτα, θα ισχύει για όλες τις κατηγορίες.', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_article_39a_categories',
                 'type' => 'multiselect',
                 'class' => 'wc-enhanced-select',
@@ -237,7 +237,7 @@ class GRVATIN_Admin_Settings {
                 'default' => array(),
                 'options' => $this->get_product_categories(),
                 'custom_attributes' => array(
-                    'data-placeholder' => __('Όλες οι κατηγορίες (προεπιλογή)', 'greek-vat-invoices-for-woocommerce')
+                    'data-placeholder' => __('Όλες οι κατηγορίες (προεπιλογή)', 'wc-greek-vat-invoices')
                 )
             ),
             
@@ -248,31 +248,31 @@ class GRVATIN_Admin_Settings {
             
             // Invoice Numbering Section
             array(
-                'title' => __('Ρυθμίσεις Αρίθμησης Παραστατικών', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Ρυθμίσεις Αρίθμησης Παραστατικών', 'wc-greek-vat-invoices'),
                 'type' => 'title',
-                'desc' => __('Διαμόρφωση μορφής και ακολουθίας αριθμών παραστατικών', 'greek-vat-invoices-for-woocommerce'),
+                'desc' => __('Διαμόρφωση μορφής και ακολουθίας αριθμών παραστατικών', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_numbering_settings'
             ),
             
             array(
-                'title' => __('Πρόθεμα Τιμολογίου', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Πρόθεμα για αριθμούς τιμολογίων (π.χ. INV, TIM)', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Πρόθεμα Τιμολογίου', 'wc-greek-vat-invoices'),
+                'desc' => __('Πρόθεμα για αριθμούς τιμολογίων (π.χ. INV, TIM)', 'wc-greek-vat-invoices'),
                 'id' => 'grvatin_invoice_prefix',
                 'type' => 'text',
                 'default' => 'INV'
             ),
             
             array(
-                'title' => __('Πρόθεμα Απόδειξης', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Πρόθεμα για αριθμούς αποδείξεων (π.χ. REC, APO)', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Πρόθεμα Απόδειξης', 'wc-greek-vat-invoices'),
+                'desc' => __('Πρόθεμα για αριθμούς αποδείξεων (π.χ. REC, APO)', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_receipt_prefix',
                 'type' => 'text',
                 'default' => 'REC'
             ),
             
             array(
-                'title' => __('Αρχικός Αριθμός', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Αρχικός αριθμός για το τρέχον έτος (εφαρμόζεται μόνο κατά την επαναφορά)', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Αρχικός Αριθμός', 'wc-greek-vat-invoices'),
+                'desc' => __('Αρχικός αριθμός για το τρέχον έτος (εφαρμόζεται μόνο κατά την επαναφορά)', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_starting_number',
                 'type' => 'number',
                 'default' => '1',
@@ -280,8 +280,8 @@ class GRVATIN_Admin_Settings {
             ),
             
             array(
-                'title' => __('Πλήθος Ψηφίων', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Αριθμός ψηφίων (π.χ. 4 = 0001)', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Πλήθος Ψηφίων', 'wc-greek-vat-invoices'),
+                'desc' => __('Αριθμός ψηφίων (π.χ. 4 = 0001)', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_number_padding',
                 'type' => 'number',
                 'default' => '4',
@@ -295,31 +295,31 @@ class GRVATIN_Admin_Settings {
             
             // Email Section
             array(
-                'title' => __('Ρυθμίσεις Email', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Ρυθμίσεις Email', 'wc-greek-vat-invoices'),
                 'type' => 'title',
-                'desc' => __('Διαμόρφωση αυτόματης αποστολής email', 'greek-vat-invoices-for-woocommerce'),
+                'desc' => __('Διαμόρφωση αυτόματης αποστολής email', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_email_settings'
             ),
             
             array(
-                'title' => __('Αυτόματη Αποστολή Παραστατικού', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Αυτόματη αποστολή παραστατικού όταν ολοκληρωθεί η παραγγελία', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Αυτόματη Αποστολή Παραστατικού', 'wc-greek-vat-invoices'),
+                'desc' => __('Αυτόματη αποστολή παραστατικού όταν ολοκληρωθεί η παραγγελία', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_auto_send_email',
                 'default' => 'yes',
                 'type' => 'checkbox'
             ),
             
             array(
-                'title' => __('Όνομα Αποστολέα Email', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Αφήστε κενό για χρήση του ονόματος του site', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Όνομα Αποστολέα Email', 'wc-greek-vat-invoices'),
+                'desc' => __('Αφήστε κενό για χρήση του ονόματος του site', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_email_from_name',
                 'type' => 'text',
                 'default' => ''
             ),
             
             array(
-                'title' => __('Διεύθυνση Email Αποστολέα', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Αφήστε κενό για χρήση του admin email', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Διεύθυνση Email Αποστολέα', 'wc-greek-vat-invoices'),
+                'desc' => __('Αφήστε κενό για χρήση του admin email', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_email_from_address',
                 'type' => 'email',
                 'default' => ''
@@ -332,73 +332,73 @@ class GRVATIN_Admin_Settings {
             
             // Company Information Section
             array(
-                'title' => __('Στοιχεία Επιχείρησης', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Στοιχεία Επιχείρησης', 'wc-greek-vat-invoices'),
                 'type' => 'title',
-                'desc' => __('Τα στοιχεία της επιχείρησής σας για τα παραστατικά', 'greek-vat-invoices-for-woocommerce'),
+                'desc' => __('Τα στοιχεία της επιχείρησής σας για τα παραστατικά', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_company_settings'
             ),
             
             array(
-                'title' => __('Λογότυπο Επιχείρησης', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Ανεβάστε το λογότυπο της επιχείρησής σας για τα παραστατικά (προτεινόμενο μέγεθος: 200x80px)', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Λογότυπο Επιχείρησης', 'wc-greek-vat-invoices'),
+                'desc' => __('Ανεβάστε το λογότυπο της επιχείρησής σας για τα παραστατικά (προτεινόμενο μέγεθος: 200x80px)', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_company_logo',
                 'type' => 'text',
                 'default' => '',
                 'css' => 'min-width:300px;',
-                'desc_tip' => __('Επιλέξτε μια εικόνα από τη Βιβλιοθήκη Πολυμέσων ή ανεβάστε μία νέα', 'greek-vat-invoices-for-woocommerce'),
+                'desc_tip' => __('Επιλέξτε μια εικόνα από τη Βιβλιοθήκη Πολυμέσων ή ανεβάστε μία νέα', 'wc-greek-vat-invoices'),
             ),
             
             array(
-                'title' => __('Επωνυμία Επιχείρησης', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Η νομική επωνυμία της επιχείρησής σας', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Επωνυμία Επιχείρησης', 'wc-greek-vat-invoices'),
+                'desc' => __('Η νομική επωνυμία της επιχείρησής σας', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_company_name',
                 'type' => 'text',
                 'default' => get_bloginfo('name')
             ),
             
             array(
-                'title' => __('Διεύθυνση Επιχείρησης', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Πλήρης διεύθυνση επιχείρησης', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Διεύθυνση Επιχείρησης', 'wc-greek-vat-invoices'),
+                'desc' => __('Πλήρης διεύθυνση επιχείρησης', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_company_address',
                 'type' => 'textarea',
                 'default' => ''
             ),
             
             array(
-                'title' => __('ΑΦΜ Επιχείρησης', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Το ΑΦΜ της επιχείρησής σας', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('ΑΦΜ Επιχείρησης', 'wc-greek-vat-invoices'),
+                'desc' => __('Το ΑΦΜ της επιχείρησής σας', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_company_vat',
                 'type' => 'text',
                 'default' => ''
             ),
             
             array(
-                'title' => __('ΔΟΥ Επιχείρησης', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Η ΔΟΥ της επιχείρησής σας', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('ΔΟΥ Επιχείρησης', 'wc-greek-vat-invoices'),
+                'desc' => __('Η ΔΟΥ της επιχείρησής σας', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_company_doy',
                 'type' => 'text',
                 'default' => ''
             ),
             
             array(
-                'title' => __('Τηλέφωνο Επιχείρησης', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Τηλέφωνο επικοινωνίας', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Τηλέφωνο Επιχείρησης', 'wc-greek-vat-invoices'),
+                'desc' => __('Τηλέφωνο επικοινωνίας', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_company_phone',
                 'type' => 'text',
                 'default' => ''
             ),
             
             array(
-                'title' => __('Email Επιχείρησης', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Διεύθυνση email επικοινωνίας', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Email Επιχείρησης', 'wc-greek-vat-invoices'),
+                'desc' => __('Διεύθυνση email επικοινωνίας', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_company_email',
                 'type' => 'email',
                 'default' => get_option('admin_email')
             ),
             
             array(
-                'title' => __('Website', 'greek-vat-invoices-for-woocommerce'),
-                'desc' => __('Η διεύθυνση του website σας', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Website', 'wc-greek-vat-invoices'),
+                'desc' => __('Η διεύθυνση του website σας', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_company_website',
                 'type' => 'text',
                 'default' => get_site_url()
@@ -411,27 +411,27 @@ class GRVATIN_Admin_Settings {
             
             // Tools Section
             array(
-                'title' => __('Εργαλεία Δοκιμής', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Εργαλεία Δοκιμής', 'wc-greek-vat-invoices'),
                 'type' => 'title',
-                'desc' => __('Δοκιμάστε τις συνδέσεις με AADE και VIES', 'greek-vat-invoices-for-woocommerce'),
+                'desc' => __('Δοκιμάστε τις συνδέσεις με AADE και VIES', 'wc-greek-vat-invoices'),
                 'id' => 'GRVATIN_tools_settings'
             ),
             
             array(
-                'title' => __('Δοκιμή Σύνδεσης AADE', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Δοκιμή Σύνδεσης AADE', 'wc-greek-vat-invoices'),
                 'type' => 'GRVATIN_test_button',
                 'id' => 'GRVATIN_test_aade_button',
-                'desc' => __('Δοκιμάστε τη σύνδεση με το AADE API', 'greek-vat-invoices-for-woocommerce'),
-                'button_text' => __('Δοκιμή AADE', 'greek-vat-invoices-for-woocommerce'),
+                'desc' => __('Δοκιμάστε τη σύνδεση με το AADE API', 'wc-greek-vat-invoices'),
+                'button_text' => __('Δοκιμή AADE', 'wc-greek-vat-invoices'),
                 'action' => 'GRVATIN_test_aade'
             ),
             
             array(
-                'title' => __('Δοκιμή Σύνδεσης VIES', 'greek-vat-invoices-for-woocommerce'),
+                'title' => __('Δοκιμή Σύνδεσης VIES', 'wc-greek-vat-invoices'),
                 'type' => 'GRVATIN_test_button',
                 'id' => 'GRVATIN_test_vies_button',
-                'desc' => __('Δοκιμάστε τη σύνδεση με το VIES API', 'greek-vat-invoices-for-woocommerce'),
-                'button_text' => __('Δοκιμή VIES', 'greek-vat-invoices-for-woocommerce'),
+                'desc' => __('Δοκιμάστε τη σύνδεση με το VIES API', 'wc-greek-vat-invoices'),
+                'button_text' => __('Δοκιμή VIES', 'wc-greek-vat-invoices'),
                 'action' => 'GRVATIN_test_vies'
             ),
             
@@ -451,7 +451,7 @@ class GRVATIN_Admin_Settings {
         check_ajax_referer('GRVATIN_admin_nonce', 'nonce');
         
         if (!current_user_can('manage_woocommerce')) {
-            wp_send_json_error(array('message' => __('Δεν έχετε δικαίωμα πρόσβασης', 'greek-vat-invoices-for-woocommerce')));
+            wp_send_json_error(array('message' => __('Δεν έχετε δικαίωμα πρόσβασης', 'wc-greek-vat-invoices')));
         }
         
         // Check if credentials are set
@@ -460,7 +460,7 @@ class GRVATIN_Admin_Settings {
         
         if (empty($username) || empty($password)) {
             wp_send_json_error(array(
-                'message' => __('Παρακαλώ ορίστε πρώτα το Username και Password για το AADE', 'greek-vat-invoices-for-woocommerce')
+                'message' => __('Παρακαλώ ορίστε πρώτα το Username και Password για το AADE', 'wc-greek-vat-invoices')
             ));
             return;
         }
@@ -469,7 +469,7 @@ class GRVATIN_Admin_Settings {
         $company_vat = get_option('GRVATIN_company_vat');
         if (empty($company_vat)) {
             wp_send_json_error(array(
-                'message' => __('Παρακαλώ ορίστε πρώτα το ΑΦΜ της εταιρείας στις γενικές ρυθμίσεις', 'greek-vat-invoices-for-woocommerce')
+                'message' => __('Παρακαλώ ορίστε πρώτα το ΑΦΜ της εταιρείας στις γενικές ρυθμίσεις', 'wc-greek-vat-invoices')
             ));
             return;
         }
@@ -480,7 +480,7 @@ class GRVATIN_Admin_Settings {
         // Validate format first
         if (strlen($company_vat) !== 9) {
             wp_send_json_error(array(
-                'message' => __('Το ΑΦΜ πρέπει να είναι 9 ψηφία', 'greek-vat-invoices-for-woocommerce')
+                'message' => __('Το ΑΦΜ πρέπει να είναι 9 ψηφία', 'wc-greek-vat-invoices')
             ));
             return;
         }
@@ -493,27 +493,27 @@ class GRVATIN_Admin_Settings {
             $address = isset($result['data']['address']) ? $result['data']['address'] : '';
             
             wp_send_json_success(array(
-                'message' => __('✓ Επιτυχής σύνδεση με το AADE!', 'greek-vat-invoices-for-woocommerce'),
+                'message' => __('✓ Επιτυχής σύνδεση με το AADE!', 'wc-greek-vat-invoices'),
                 'company' => $company_name,
                 'address' => $address
             ));
         } else {
             // Check for specific error codes
             $error_code = isset($result['error_code']) ? $result['error_code'] : '';
-            $message = isset($result['message']) ? $result['message'] : __('Αποτυχία σύνδεσης με το AADE', 'greek-vat-invoices-for-woocommerce');
+            $message = isset($result['message']) ? $result['message'] : __('Αποτυχία σύνδεσης με το AADE', 'wc-greek-vat-invoices');
             
             // Add helpful hints for common errors
             if ($error_code === 'RG_WS_PUBLIC_AFM_CALLED_BY_NOT_ALLOWED') {
-                $message .= '<br><br><strong>' . __('Συμβουλή:', 'greek-vat-invoices-for-woocommerce') . '</strong> ' . 
-                            __('Ο Ειδικός Κωδικός πρέπει να δημιουργηθεί από το TAXISnet χρησιμοποιώντας τους κωδικούς της επιχείρησής σας (όχι προσωπικούς κωδικούς).', 'greek-vat-invoices-for-woocommerce');
+                $message .= '<br><br><strong>' . __('Συμβουλή:', 'wc-greek-vat-invoices') . '</strong> ' . 
+                            __('Ο Ειδικός Κωδικός πρέπει να δημιουργηθεί από το TAXISnet χρησιμοποιώντας τους κωδικούς της επιχείρησής σας (όχι προσωπικούς κωδικούς).', 'wc-greek-vat-invoices');
             } elseif ($error_code === 'RG_WS_PUBLIC_TOKEN_USERNAME_NOT_AUTHENTICATED') {
-                $message .= '<br><br><strong>' . __('Συμβουλή:', 'greek-vat-invoices-for-woocommerce') . '</strong> ' . 
-                            __('Βεβαιωθείτε ότι αντιγράψατε σωστά τον Κωδικό Εισόδου και το Συνθηματικό Χρήστη από το TAXISnet.', 'greek-vat-invoices-for-woocommerce');
+                $message .= '<br><br><strong>' . __('Συμβουλή:', 'wc-greek-vat-invoices') . '</strong> ' . 
+                            __('Βεβαιωθείτε ότι αντιγράψατε σωστά τον Κωδικό Εισόδου και το Συνθηματικό Χρήστη από το TAXISnet.', 'wc-greek-vat-invoices');
             }
             
             // If AADE fails but VAT format is valid, show warning but not complete failure
             if (strlen($company_vat) === 9) {
-                $warning_msg = __('⚠️ Το AADE API δεν είναι διαθέσιμο αυτή τη στιγμή, αλλά η μορφή του ΑΦΜ είναι έγκυρη (9 ψηφία)', 'greek-vat-invoices-for-woocommerce');
+                $warning_msg = __('⚠️ Το AADE API δεν είναι διαθέσιμο αυτή τη στιγμή, αλλά η μορφή του ΑΦΜ είναι έγκυρη (9 ψηφία)', 'wc-greek-vat-invoices');
                 
                 // Add technical details
                 $technical_details = '';
@@ -535,7 +535,7 @@ class GRVATIN_Admin_Settings {
                     'address' => $technical_details
                 ));
             } else {
-                $error_msg = __('✗ Αποτυχία σύνδεσης με το AADE', 'greek-vat-invoices-for-woocommerce') . ': ' . $result['message'];
+                $error_msg = __('✗ Αποτυχία σύνδεσης με το AADE', 'wc-greek-vat-invoices') . ': ' . $result['message'];
                 
                 // Add debug info if available
                 if (isset($result['debug'])) {
@@ -585,7 +585,7 @@ class GRVATIN_Admin_Settings {
         check_ajax_referer('GRVATIN_admin_nonce', 'nonce');
         
         if (!current_user_can('manage_woocommerce')) {
-            wp_send_json_error(array('message' => __('Δεν έχετε δικαίωμα πρόσβασης', 'greek-vat-invoices-for-woocommerce')));
+            wp_send_json_error(array('message' => __('Δεν έχετε δικαίωμα πρόσβασης', 'wc-greek-vat-invoices')));
         }
         
         // Test VIES connection with multiple known valid VAT numbers
@@ -609,7 +609,7 @@ class GRVATIN_Admin_Settings {
                 $test_info = sprintf('%s%s (Δοκιμαστικό)', $test_vat['country'], $test_vat['vat']);
                 
                 wp_send_json_success(array(
-                    'message' => __('✓ Επιτυχής σύνδεση με το VIES!', 'greek-vat-invoices-for-woocommerce'),
+                    'message' => __('✓ Επιτυχής σύνδεση με το VIES!', 'wc-greek-vat-invoices'),
                     'company' => $company_name,
                     'address' => $test_info
                 ));
@@ -621,7 +621,7 @@ class GRVATIN_Admin_Settings {
         
         // If all tests failed
         wp_send_json_error(array(
-            'message' => __('✗ Αποτυχία σύνδεσης με το VIES', 'greek-vat-invoices-for-woocommerce') . ': ' . $last_error . ' (Το VIES μπορεί να είναι προσωρινά μη διαθέσιμο)'
+            'message' => __('✗ Αποτυχία σύνδεσης με το VIES', 'wc-greek-vat-invoices') . ': ' . $last_error . ' (Το VIES μπορεί να είναι προσωρινά μη διαθέσιμο)'
         ));
     }
 }

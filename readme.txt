@@ -1,8 +1,8 @@
 === Greek VAT & Invoices for WooCommerce ===
 Contributors: theosfak
-Tags: woocommerce, greek, vat, invoices, greece, tax, aade, vies, billing
+Tags: woocommerce, greek, vat, invoices, greece
 Requires at least: 5.0
-Tested up to: 6.7
+Tested up to: 6.9
 Requires PHP: 7.0
 Requires Plugins: woocommerce
 Stable tag: 1.0.6
