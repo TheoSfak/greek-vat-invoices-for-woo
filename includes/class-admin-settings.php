@@ -44,6 +44,7 @@ class WCGVI_Admin_Settings {
             return;
         }
         
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verification not required for read-only tab check
         if (!isset($_GET['tab']) || $_GET['tab'] !== 'greek_vat_invoices') {
             return;
         }

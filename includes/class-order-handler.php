@@ -166,6 +166,7 @@ class WCGVI_Order_Handler {
             'invoice_type' => $invoice_type,
             'invoice_date' => current_time('mysql')
         ));
+        wp_cache_delete('wcgvi_invoice_' . $order_id, 'wc_greek_vat_invoices');
     }
     
     /**

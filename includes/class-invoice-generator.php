@@ -183,6 +183,7 @@ class WCGVI_Invoice_Generator {
                     ),
                     array('%d', '%s', '%s', '%s', '%s')
                 );
+                wp_cache_delete('wcgvi_invoice_' . $order_id, 'wc_greek_vat_invoices');
                 
                 wp_send_json_success(array(
                     'message' => __('Το παραστατικό ανέβηκε επιτυχώς', 'wc-greek-vat-invoices'),
@@ -260,7 +261,9 @@ class WCGVI_Invoice_Generator {
             $file_path = $invoices_dir . '/' . $filename;
             file_put_contents($file_path, $dompdf->output());
         } catch (Exception $e) {
-            error_log('Dompdf Error: ' . $e->getMessage());
+            if (defined('WP_DEBUG') && WP_DEBUG) {
+                error_log('Dompdf Error: ' . $e->getMessage());
+            }
             return false;
         }
         
@@ -276,6 +279,7 @@ class WCGVI_Invoice_Generator {
             array('file_path' => $filename),
             array('order_id' => $order->get_id())
         );
+        wp_cache_delete('wcgvi_invoice_' . $order->get_id(), 'wc_greek_vat_invoices');
         
         return $file_path;
     }
@@ -496,22 +500,22 @@ class WCGVI_Invoice_Generator {
                     </td>
                 <?php endif; ?>
                 <td class="header-info">
-                    <h1><?php echo htmlspecialchars($company_name, ENT_QUOTES, 'UTF-8'); ?></h1>
+                    <h1><?php echo esc_html($company_name); ?></h1>
                     <?php if ($company_address): ?>
-                        <p><?php echo nl2br(htmlspecialchars($company_address, ENT_QUOTES, 'UTF-8')); ?></p>
+                        <p><?php echo wp_kses_post(nl2br(esc_html($company_address))); ?></p>
                     <?php endif; ?>
                     <?php if ($company_vat): ?>
-                        <p><strong>ΑΦΜ:</strong> <?php echo htmlspecialchars($company_vat, ENT_QUOTES, 'UTF-8'); ?><?php if ($company_doy): ?> | <strong>ΔΟΥ:</strong> <?php echo htmlspecialchars($company_doy, ENT_QUOTES, 'UTF-8'); ?><?php endif; ?></p>
+                        <p><strong>ΑΦΜ:</strong> <?php echo esc_html($company_vat); ?><?php if ($company_doy): ?> | <strong>ΔΟΥ:</strong> <?php echo esc_html($company_doy); ?><?php endif; ?></p>
                     <?php endif; ?>
                     <?php if ($company_phone || $company_email): ?>
                         <p>
-                            <?php if ($company_phone): ?><strong>Τηλ:</strong> <?php echo htmlspecialchars($company_phone, ENT_QUOTES, 'UTF-8'); ?><?php endif; ?>
+                            <?php if ($company_phone): ?><strong>Τηλ:</strong> <?php echo esc_html($company_phone); ?><?php endif; ?>
                             <?php if ($company_phone && $company_email): ?> | <?php endif; ?>
-                            <?php if ($company_email): ?><strong>Email:</strong> <?php echo htmlspecialchars($company_email, ENT_QUOTES, 'UTF-8'); ?><?php endif; ?>
+                            <?php if ($company_email): ?><strong>Email:</strong> <?php echo esc_html($company_email); ?><?php endif; ?>
                         </p>
                     <?php endif; ?>
                     <?php if ($company_website): ?>
-                        <p><strong>Web:</strong> <?php echo htmlspecialchars($company_website, ENT_QUOTES, 'UTF-8'); ?></p>
+                        <p><strong>Web:</strong> <?php echo esc_html($company_website); ?></p>
                     <?php endif; ?>
                 </td>
             </tr>
@@ -523,8 +527,8 @@ class WCGVI_Invoice_Generator {
     </div>
     
     <div class="invoice-meta">
-        <strong><?php echo htmlspecialchars($invoice_number, ENT_QUOTES, 'UTF-8'); ?></strong><br>
-        <span class="badge"><?php echo gmdate('d/m/Y', strtotime($order->get_date_created())); ?></span>
+        <strong><?php echo esc_html($invoice_number); ?></strong><br>
+        <span class="badge"><?php echo esc_html(gmdate('d/m/Y', strtotime($order->get_date_created()))); ?></span>
     </div>
     
     <div class="info-box">
@@ -532,46 +536,46 @@ class WCGVI_Invoice_Generator {
         <table class="info-table">
             <tr>
                 <td>Όνομα:</td>
-                <td><?php echo htmlspecialchars($order->get_billing_first_name() . ' ' . $order->get_billing_last_name(), ENT_QUOTES, 'UTF-8'); ?></td>
+                <td><?php echo esc_html($order->get_billing_first_name() . ' ' . $order->get_billing_last_name()); ?></td>
             </tr>
             <?php if ($invoice_type === 'invoice' && $order->get_billing_company()): ?>
                 <tr>
                     <td>Επωνυμία:</td>
-                    <td><?php echo htmlspecialchars($order->get_billing_company(), ENT_QUOTES, 'UTF-8'); ?></td>
+                    <td><?php echo esc_html($order->get_billing_company()); ?></td>
                 </tr>
             <?php endif; ?>
             <?php if ($invoice_type === 'invoice'): ?>
                 <tr>
                     <td>ΑΦΜ:</td>
-                    <td><?php echo htmlspecialchars($order->get_meta('_billing_vat_number'), ENT_QUOTES, 'UTF-8'); ?></td>
+                    <td><?php echo esc_html($order->get_meta('_billing_vat_number')); ?></td>
                 </tr>
                 <tr>
                     <td>ΔΟΥ:</td>
-                    <td><?php echo htmlspecialchars($order->get_meta('_billing_doy'), ENT_QUOTES, 'UTF-8'); ?></td>
+                    <td><?php echo esc_html($order->get_meta('_billing_doy')); ?></td>
                 </tr>
                 <tr>
                     <td>Δραστηριότητα:</td>
-                    <td><?php echo htmlspecialchars($order->get_meta('_billing_business_activity'), ENT_QUOTES, 'UTF-8'); ?></td>
+                    <td><?php echo esc_html($order->get_meta('_billing_business_activity')); ?></td>
                 </tr>
             <?php endif; ?>
             <tr>
                 <td>Διεύθυνση:</td>
-                <td><?php echo htmlspecialchars(trim($order->get_billing_address_1() . ' ' . $order->get_billing_address_2()), ENT_QUOTES, 'UTF-8'); ?></td>
+                <td><?php echo esc_html(trim($order->get_billing_address_1() . ' ' . $order->get_billing_address_2())); ?></td>
             </tr>
             <tr>
                 <td>Πόλη:</td>
-                <td><?php echo htmlspecialchars($order->get_billing_city() . ' ' . $order->get_billing_postcode(), ENT_QUOTES, 'UTF-8'); ?></td>
+                <td><?php echo esc_html($order->get_billing_city() . ' ' . $order->get_billing_postcode()); ?></td>
             </tr>
             <?php if ($order->get_billing_phone()): ?>
                 <tr>
                     <td>Τηλέφωνο:</td>
-                    <td><?php echo htmlspecialchars($order->get_billing_phone(), ENT_QUOTES, 'UTF-8'); ?></td>
+                    <td><?php echo esc_html($order->get_billing_phone()); ?></td>
                 </tr>
             <?php endif; ?>
             <?php if ($order->get_billing_email()): ?>
                 <tr>
                     <td>Email:</td>
-                    <td><?php echo htmlspecialchars($order->get_billing_email(), ENT_QUOTES, 'UTF-8'); ?></td>
+                    <td><?php echo sanitize_email($order->get_billing_email()); ?></td>
                 </tr>
             <?php endif; ?>
         </table>
@@ -591,9 +595,9 @@ class WCGVI_Invoice_Generator {
             <tbody>
                 <?php foreach ($order->get_items() as $item): ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($item->get_name(), ENT_QUOTES, 'UTF-8'); ?></td>
-                        <td class="center"><?php echo $item->get_quantity(); ?></td>
-                        <td class="right"><?php echo number_format($item->get_total() / $item->get_quantity(), 2, ',', '.') . ' €'; ?></td>
+                        <td><?php echo esc_html($item->get_name()); ?></td>
+                        <td class="center"><?php echo esc_html($item->get_quantity()); ?></td>
+                        <td class="right"><?php echo esc_html(number_format($item->get_total() / $item->get_quantity(), 2, ',', '.') . ' €'); ?></td>
                         <td class="right"><?php echo number_format($item->get_total(), 2, ',', '.') . ' €'; ?></td>
                     </tr>
                 <?php endforeach; ?>
@@ -628,12 +632,12 @@ class WCGVI_Invoice_Generator {
     
     <div class="footer">
         <p><strong>Σας ευχαριστούμε για την προτίμησή σας!</strong></p>
-        <p>Παραγγελία #<?php echo htmlspecialchars($order->get_order_number(), ENT_QUOTES, 'UTF-8'); ?> | Ημερομηνία Έκδοσης: <?php echo gmdate('d/m/Y H:i', current_time('timestamp')); ?></p>
+        <p>Παραγγελία #<?php echo esc_html($order->get_order_number()); ?> | Ημερομηνία Έκδοσης: <?php echo esc_html(gmdate('d/m/Y H:i', current_time('timestamp'))); ?></p>
         <?php if ($company_website || $company_email): ?>
             <p style="margin-top: 8px;">
-                <?php if ($company_website): ?><?php echo htmlspecialchars($company_website, ENT_QUOTES, 'UTF-8'); ?><?php endif; ?>
+                <?php if ($company_website): ?><?php echo esc_html($company_website); ?><?php endif; ?>
                 <?php if ($company_website && $company_email): ?> | <?php endif; ?>
-                <?php if ($company_email): ?><?php echo htmlspecialchars($company_email, ENT_QUOTES, 'UTF-8'); ?><?php endif; ?>
+                <?php if ($company_email): ?><?php echo esc_html($company_email); ?><?php endif; ?>
             </p>
         <?php endif; ?>
         <p style="margin-top: 10px; font-size: 7px; line-height: 1.4;">
