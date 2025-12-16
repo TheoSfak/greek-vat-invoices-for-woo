@@ -172,6 +172,7 @@ class WCGVI_Invoice_Generator {
                 $invoice_number = $order->get_meta('_invoice_number');
                 $invoice_type = $order->get_meta('_billing_invoice_type') ?: 'receipt';
                 
+                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom invoice table requires direct query
                 $wpdb->replace(
                     $table_name,
                     array(
@@ -262,6 +263,7 @@ class WCGVI_Invoice_Generator {
             file_put_contents($file_path, $dompdf->output());
         } catch (Exception $e) {
             if (defined('WP_DEBUG') && WP_DEBUG) {
+                // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Used only in debug mode for PDF generation errors
                 error_log('Dompdf Error: ' . $e->getMessage());
             }
             return false;
@@ -274,6 +276,7 @@ class WCGVI_Invoice_Generator {
         // Update database
         global $wpdb;
         $table_name = $wpdb->prefix . 'wcgvi_invoices';
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom invoice table requires direct query
         $wpdb->update(
             $table_name,
             array('file_path' => $filename),
@@ -575,7 +578,7 @@ class WCGVI_Invoice_Generator {
             <?php if ($order->get_billing_email()): ?>
                 <tr>
                     <td>Email:</td>
-                    <td><?php echo sanitize_email($order->get_billing_email()); ?></td>
+                    <td><?php echo esc_html(sanitize_email($order->get_billing_email())); ?></td>
                 </tr>
             <?php endif; ?>
         </table>

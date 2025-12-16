@@ -160,6 +160,7 @@ class WCGVI_Order_Handler {
         global $wpdb;
         $table_name = $wpdb->prefix . 'wcgvi_invoices';
         
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom invoice table requires direct query
         $wpdb->insert($table_name, array(
             'order_id' => $order_id,
             'invoice_number' => $invoice_number,
