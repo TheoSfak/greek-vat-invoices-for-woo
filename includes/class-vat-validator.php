@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WCGVI_VAT_Validator {
+class GRVATIN_VAT_Validator {
     
     private static $instance = null;
     
@@ -21,21 +21,21 @@ class WCGVI_VAT_Validator {
     
     private function __construct() {
         // AJAX handlers for VAT validation
-        add_action('wp_ajax_wcgvi_validate_vat', array($this, 'ajax_validate_vat'));
-        add_action('wp_ajax_nopriv_wcgvi_validate_vat', array($this, 'ajax_validate_vat'));
+        add_action('wp_ajax_GRVATIN_validate_vat', array($this, 'ajax_validate_vat'));
+        add_action('wp_ajax_nopriv_GRVATIN_validate_vat', array($this, 'ajax_validate_vat'));
     }
     
     /**
      * AJAX handler for VAT validation
      */
     public function ajax_validate_vat() {
-        check_ajax_referer('wcgvi_nonce', 'nonce');
+        check_ajax_referer('GRVATIN_nonce', 'nonce');
         
         $vat_number = isset($_POST['vat_number']) ? sanitize_text_field(wp_unslash($_POST['vat_number'])) : '';
         $country = isset($_POST['country']) ? sanitize_text_field(wp_unslash($_POST['country'])) : 'GR';
         
         if (empty($vat_number)) {
-            wp_send_json_error(array('message' => __('Το ΑΦΜ είναι υποχρεωτικό', 'wc-greek-vat-invoices')));
+            wp_send_json_error(array('message' => __('Το ΑΦΜ είναι υποχρεωτικό', 'greek-vat-invoices-for-woocommerce')));
         }
         
         // Clean VAT number
@@ -43,7 +43,7 @@ class WCGVI_VAT_Validator {
         
         if ($country === 'GR') {
             // Check Greek VAT validation method
-            $validation_method = get_option('wcgvi_greek_vat_validation_method', 'basic');
+            $validation_method = get_option('GRVATIN_greek_vat_validation_method', 'basic');
             
             if ($validation_method === 'aade') {
                 // Full AADE validation with company data
@@ -52,14 +52,14 @@ class WCGVI_VAT_Validator {
                 // Basic format validation only
                 $result = $this->validate_greek_vat_basic($vat_number);
             }
-        } elseif ($country !== 'GR' && get_option('wcgvi_vies_validation') === 'yes') {
+        } elseif ($country !== 'GR' && get_option('GRVATIN_vies_validation') === 'yes') {
             // EU VAT validation via VIES
             $result = $this->validate_eu_vat_vies($country, $vat_number);
         } else {
             // Basic format validation only
             $result = array(
                 'valid' => strlen($vat_number) === 9,
-                'message' => strlen($vat_number) === 9 ? __('Έγκυρη μορφή', 'wc-greek-vat-invoices') : __('Μη έγκυρη μορφή', 'wc-greek-vat-invoices')
+                'message' => strlen($vat_number) === 9 ? __('Έγκυρη μορφή', 'greek-vat-invoices-for-woocommerce') : __('Μη έγκυρη μορφή', 'greek-vat-invoices-for-woocommerce')
             );
         }
         
@@ -99,7 +99,7 @@ class WCGVI_VAT_Validator {
                 $response_data['vat_exempt'] = true;
                 $response_data['exempt_reason'] = isset($result['data']['exempt_reason']) 
                     ? $result['data']['exempt_reason'] 
-                    : __('Ενδοκοινοτική παράδοση - Απαλλαγή ΦΠΑ', 'wc-greek-vat-invoices');
+                    : __('Ενδοκοινοτική παράδοση - Απαλλαγή ΦΠΑ', 'greek-vat-invoices-for-woocommerce');
             }
             
             wp_send_json_success($response_data);
@@ -119,14 +119,14 @@ class WCGVI_VAT_Validator {
         if (strlen($vat_number) !== 9) {
             return array(
                 'valid' => false,
-                'message' => __('Το ΑΦΜ πρέπει να αποτελείται από 9 ψηφία', 'wc-greek-vat-invoices')
+                'message' => __('Το ΑΦΜ πρέπει να αποτελείται από 9 ψηφία', 'greek-vat-invoices-for-woocommerce')
             );
         }
         
         // All checks passed
         return array(
             'valid' => true,
-            'message' => __('Έγκυρη μορφή ΑΦΜ (9 ψηφία)', 'wc-greek-vat-invoices'),
+            'message' => __('Έγκυρη μορφή ΑΦΜ (9 ψηφία)', 'greek-vat-invoices-for-woocommerce'),
             'data' => array()
         );
     }
@@ -143,19 +143,19 @@ class WCGVI_VAT_Validator {
         if (strlen($vat_number) !== 9) {
             return array(
                 'valid' => false,
-                'message' => __('Το ΑΦΜ πρέπει να είναι 9 ψηφία', 'wc-greek-vat-invoices'),
+                'message' => __('Το ΑΦΜ πρέπει να είναι 9 ψηφία', 'greek-vat-invoices-for-woocommerce'),
                 'debug' => 'Invalid VAT format after cleaning: ' . $vat_number
             );
         }
         
         // Get AADE credentials from settings
-        $username = get_option('wcgvi_aade_username');
-        $password = get_option('wcgvi_aade_password');
+        $username = get_option('GRVATIN_aade_username');
+        $password = get_option('GRVATIN_aade_password');
         
         if (empty($username) || empty($password)) {
             return array(
                 'valid' => false,
-                'message' => __('Δεν έχουν οριστεί τα διαπιστευτήρια AADE (Username/Password)', 'wc-greek-vat-invoices'),
+                'message' => __('Δεν έχουν οριστεί τα διαπιστευτήρια AADE (Username/Password)', 'greek-vat-invoices-for-woocommerce'),
                 'debug' => 'Missing AADE credentials'
             );
         }
@@ -224,7 +224,7 @@ class WCGVI_VAT_Validator {
             if (is_wp_error($response)) {
                 $last_error = array(
                     'valid' => false,
-                    'message' => __('Δεν ήταν δυνατή η σύνδεση με το AADE', 'wc-greek-vat-invoices'),
+                    'message' => __('Δεν ήταν δυνατή η σύνδεση με το AADE', 'greek-vat-invoices-for-woocommerce'),
                     'error' => $response->get_error_message(),
                     'debug' => 'WP_Error with Content-Type: ' . $content_type
                 );
@@ -240,7 +240,7 @@ class WCGVI_VAT_Validator {
             
             $last_error = array(
                 'valid' => false,
-                'message' => __('AADE δεν δέχεται το format του αιτήματος', 'wc-greek-vat-invoices'),
+                'message' => __('AADE δεν δέχεται το format του αιτήματος', 'greek-vat-invoices-for-woocommerce'),
                 'debug' => 'HTTP ' . $http_code . ' with Content-Type: ' . $content_type
             );
         }
@@ -249,7 +249,7 @@ class WCGVI_VAT_Validator {
         if (!isset($response) || is_wp_error($response)) {
             return $last_error ? $last_error : array(
                 'valid' => false,
-                'message' => __('Δεν ήταν δυνατή η σύνδεση με το AADE', 'wc-greek-vat-invoices'),
+                'message' => __('Δεν ήταν δυνατή η σύνδεση με το AADE', 'greek-vat-invoices-for-woocommerce'),
                 'debug' => 'All Content-Type variations failed'
             );
         }
@@ -261,7 +261,7 @@ class WCGVI_VAT_Validator {
         if ($http_code !== 200) {
             return array(
                 'valid' => false,
-                'message' => __('Σφάλμα σύνδεσης με AADE', 'wc-greek-vat-invoices') . ' (HTTP ' . $http_code . ')',
+                'message' => __('Σφάλμα σύνδεσης με AADE', 'greek-vat-invoices-for-woocommerce') . ' (HTTP ' . $http_code . ')',
                 'debug' => 'HTTP Code: ' . $http_code,
                 'raw_response' => substr($body, 0, 1000)
             );
@@ -271,7 +271,7 @@ class WCGVI_VAT_Validator {
         if (empty($body)) {
             return array(
                 'valid' => false,
-                'message' => __('Κενή απάντηση από το AADE', 'wc-greek-vat-invoices'),
+                'message' => __('Κενή απάντηση από το AADE', 'greek-vat-invoices-for-woocommerce'),
                 'debug' => 'Empty response body',
                 'http_code' => $http_code
             );
@@ -287,7 +287,7 @@ class WCGVI_VAT_Validator {
             
             return array(
                 'valid' => false,
-                'message' => __('Μη έγκυρη απάντηση από το AADE', 'wc-greek-vat-invoices'),
+                'message' => __('Μη έγκυρη απάντηση από το AADE', 'greek-vat-invoices-for-woocommerce'),
                 'debug' => 'XML Parse Error: ' . (!empty($errors) ? $errors[0]->message : 'Unknown'),
                 'raw_response' => substr($body, 0, 500)
             );
@@ -305,7 +305,7 @@ class WCGVI_VAT_Validator {
             $faultstring = $xml->xpath('//faultstring | //soap:Reason/soap:Text | //soap11:Reason/soap11:Text');
             return array(
                 'valid' => false,
-                'message' => __('Σφάλμα AADE', 'wc-greek-vat-invoices') . ': ' . (!empty($faultstring) ? (string)$faultstring[0] : 'Unknown')
+                'message' => __('Σφάλμα AADE', 'greek-vat-invoices-for-woocommerce') . ': ' . (!empty($faultstring) ? (string)$faultstring[0] : 'Unknown')
             );
         }
         
@@ -316,13 +316,13 @@ class WCGVI_VAT_Validator {
             $error_descr = $xml->xpath('//rg:error_descr | //rg2:error_descr');
             
             $error_code_str = !empty($error_code) ? (string)$error_code[0] : '';
-            $error_message = !empty($error_descr) ? (string)$error_descr[0] : __('Μη έγκυρο ΑΦΜ', 'wc-greek-vat-invoices');
+            $error_message = !empty($error_descr) ? (string)$error_descr[0] : __('Μη έγκυρο ΑΦΜ', 'greek-vat-invoices-for-woocommerce');
             
             // Enhanced error messages for specific cases
             if ($error_code_str === 'RG_WS_PUBLIC_TOKEN_TAXPAYER_NOT_AUTHENTICATED') {
-                $error_message = __('Σφάλμα AADE: Ο Ειδικός Κωδικός που χρησιμοποιείτε δεν έχει εκδοθεί από επιχειρηματικό ΑΦΜ. Παρακαλώ δημιουργήστε νέο Ειδικό Κωδικό από το TAXISnet της επιχείρησής σας.', 'wc-greek-vat-invoices');
+                $error_message = __('Σφάλμα AADE: Ο Ειδικός Κωδικός που χρησιμοποιείτε δεν έχει εκδοθεί από επιχειρηματικό ΑΦΜ. Παρακαλώ δημιουργήστε νέο Ειδικό Κωδικό από το TAXISnet της επιχείρησής σας.', 'greek-vat-invoices-for-woocommerce');
             } elseif ($error_code_str === 'RG_WS_PUBLIC_TOKEN_USERNAME_NOT_AUTHENTICATED') {
-                $error_message = __('Σφάλμα AADE: Μη έγκυροι κωδικοί πρόσβασης. Ελέγξτε το Όνομα Χρήστη και τον Κωδικό στις ρυθμίσεις.', 'wc-greek-vat-invoices');
+                $error_message = __('Σφάλμα AADE: Μη έγκυροι κωδικοί πρόσβασης. Ελέγξτε το Όνομα Χρήστη και τον Κωδικό στις ρυθμίσεις.', 'greek-vat-invoices-for-woocommerce');
             }
             
             return array(
@@ -365,7 +365,7 @@ class WCGVI_VAT_Validator {
         
         return array(
             'valid' => true,
-            'message' => __('Έγκυρο ΑΦΜ', 'wc-greek-vat-invoices'),
+            'message' => __('Έγκυρο ΑΦΜ', 'greek-vat-invoices-for-woocommerce'),
             'data' => array(
                 'company' => $company_name,
                 'doy' => $doy,
@@ -406,7 +406,7 @@ class WCGVI_VAT_Validator {
         if (is_wp_error($response)) {
             return array(
                 'valid' => false,
-                'message' => __('Δεν ήταν δυνατή η σύνδεση με το VIES', 'wc-greek-vat-invoices'),
+                'message' => __('Δεν ήταν δυνατή η σύνδεση με το VIES', 'greek-vat-invoices-for-woocommerce'),
                 'error' => $response->get_error_message()
             );
         }
@@ -418,7 +418,7 @@ class WCGVI_VAT_Validator {
         if ($xml === false) {
             return array(
                 'valid' => false,
-                'message' => __('Μη έγκυρη απάντηση από το VIES', 'wc-greek-vat-invoices')
+                'message' => __('Μη έγκυρη απάντηση από το VIES', 'greek-vat-invoices-for-woocommerce')
             );
         }
         
@@ -432,7 +432,7 @@ class WCGVI_VAT_Validator {
         if (!$is_valid) {
             return array(
                 'valid' => false,
-                'message' => __('Μη έγκυρο ενδοκοινοτικό ΑΦΜ', 'wc-greek-vat-invoices')
+                'message' => __('Μη έγκυρο ενδοκοινοτικό ΑΦΜ', 'greek-vat-invoices-for-woocommerce')
             );
         }
         
@@ -442,7 +442,7 @@ class WCGVI_VAT_Validator {
         
         return array(
             'valid' => true,
-            'message' => __('Έγκυρο ενδοκοινοτικό ΑΦΜ', 'wc-greek-vat-invoices'),
+            'message' => __('Έγκυρο ενδοκοινοτικό ΑΦΜ', 'greek-vat-invoices-for-woocommerce'),
             'vies_validated' => true,
             'data' => array(
                 'company_name' => !empty($name) ? (string)$name[0] : '',
@@ -460,13 +460,13 @@ class WCGVI_VAT_Validator {
         $vies_validated = $order->get_meta('_vies_validated');
         
         // VIES VAT exemption
-        if (get_option('wcgvi_vat_exempt_eu') === 'yes' && $vies_validated && $country !== 'GR') {
+        if (get_option('GRVATIN_vat_exempt_eu') === 'yes' && $vies_validated && $country !== 'GR') {
             return true;
         }
         
         // Non-EU VAT exemption
         $eu_countries = array('AT', 'BE', 'BG', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GR', 'HR', 'HU', 'IE', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK');
-        if (get_option('wcgvi_vat_exempt_non_eu') === 'yes' && !in_array($country, $eu_countries)) {
+        if (get_option('GRVATIN_vat_exempt_non_eu') === 'yes' && !in_array($country, $eu_countries)) {
             return true;
         }
         

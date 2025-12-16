@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WCGVI_Invoice_Generator {
+class grvatin_invoice_Generator {
     
     private static $instance = null;
     
@@ -22,7 +22,7 @@ class WCGVI_Invoice_Generator {
     private function __construct() {
         // Add generate invoice button to admin order page
         add_action('woocommerce_order_actions', array($this, 'add_order_action'));
-        add_action('woocommerce_order_action_wcgvi_generate_invoice', array($this, 'generate_invoice_action'));
+        add_action('woocommerce_order_action_GRVATIN_generate_invoice', array($this, 'generate_invoice_action'));
         
         // Add download link in order admin
         add_action('woocommerce_admin_order_data_after_order_details', array($this, 'add_download_link'));
@@ -31,30 +31,30 @@ class WCGVI_Invoice_Generator {
         add_filter('woocommerce_my_account_my_orders_actions', array($this, 'add_customer_download_link'), 10, 2);
         
         // AJAX handlers for admin
-        add_action('wp_ajax_wcgvi_regenerate_invoice', array($this, 'ajax_regenerate_invoice'));
-        add_action('wp_ajax_wcgvi_upload_invoice', array($this, 'ajax_upload_invoice'));
+        add_action('wp_ajax_GRVATIN_regenerate_invoice', array($this, 'ajax_regenerate_invoice'));
+        add_action('wp_ajax_GRVATIN_upload_invoice', array($this, 'ajax_upload_invoice'));
     }
     
     /**
      * AJAX handler for regenerating invoice
      */
     public function ajax_regenerate_invoice() {
-        check_ajax_referer('wcgvi_admin_nonce', 'nonce');
+        check_ajax_referer('GRVATIN_admin_nonce', 'nonce');
         
         if (!current_user_can('edit_shop_orders')) {
-            wp_send_json_error(array('message' => __('Δεν έχετε δικαίωμα πρόσβασης', 'wc-greek-vat-invoices')));
+            wp_send_json_error(array('message' => __('Δεν έχετε δικαίωμα πρόσβασης', 'greek-vat-invoices-for-woocommerce')));
         }
         
         $order_id = isset($_POST['order_id']) ? intval($_POST['order_id']) : 0;
         
         if (!$order_id) {
-            wp_send_json_error(array('message' => __('Μη έγκυρο ID παραγγελίας', 'wc-greek-vat-invoices')));
+            wp_send_json_error(array('message' => __('Μη έγκυρο ID παραγγελίας', 'greek-vat-invoices-for-woocommerce')));
         }
         
         $order = wc_get_order($order_id);
         
         if (!$order) {
-            wp_send_json_error(array('message' => __('Η παραγγελία δεν βρέθηκε', 'wc-greek-vat-invoices')));
+            wp_send_json_error(array('message' => __('Η παραγγελία δεν βρέθηκε', 'greek-vat-invoices-for-woocommerce')));
         }
         
         // Delete old invoice file if exists
@@ -73,11 +73,11 @@ class WCGVI_Invoice_Generator {
         if ($result) {
             $invoice_number = $order->get_meta('_invoice_number');
             wp_send_json_success(array(
-                'message' => __('Το παραστατικό αναδημιουργήθηκε επιτυχώς', 'wc-greek-vat-invoices'),
+                'message' => __('Το παραστατικό αναδημιουργήθηκε επιτυχώς', 'greek-vat-invoices-for-woocommerce'),
                 'invoice_number' => $invoice_number
             ));
         } else {
-            wp_send_json_error(array('message' => __('Αποτυχία αναδημιουργίας παραστατικού', 'wc-greek-vat-invoices')));
+            wp_send_json_error(array('message' => __('Αποτυχία αναδημιουργίας παραστατικού', 'greek-vat-invoices-for-woocommerce')));
         }
     }
     
@@ -85,27 +85,27 @@ class WCGVI_Invoice_Generator {
      * AJAX handler for uploading custom invoice
      */
     public function ajax_upload_invoice() {
-        check_ajax_referer('wcgvi_admin_nonce', 'nonce');
+        check_ajax_referer('GRVATIN_admin_nonce', 'nonce');
         
         if (!current_user_can('edit_shop_orders')) {
-            wp_send_json_error(array('message' => __('Δεν έχετε δικαίωμα πρόσβασης', 'wc-greek-vat-invoices')));
+            wp_send_json_error(array('message' => __('Δεν έχετε δικαίωμα πρόσβασης', 'greek-vat-invoices-for-woocommerce')));
         }
         
         $order_id = isset($_POST['order_id']) ? intval($_POST['order_id']) : 0;
         
         if (!$order_id) {
-            wp_send_json_error(array('message' => __('Μη έγκυρο ID παραγγελίας', 'wc-greek-vat-invoices')));
+            wp_send_json_error(array('message' => __('Μη έγκυρο ID παραγγελίας', 'greek-vat-invoices-for-woocommerce')));
         }
         
         $order = wc_get_order($order_id);
         
         if (!$order) {
-            wp_send_json_error(array('message' => __('Η παραγγελία δεν βρέθηκε', 'wc-greek-vat-invoices')));
+            wp_send_json_error(array('message' => __('Η παραγγελία δεν βρέθηκε', 'greek-vat-invoices-for-woocommerce')));
         }
         
         // Check if file was uploaded
         if (!isset($_FILES['invoice_file']) || !isset($_FILES['invoice_file']['error']) || $_FILES['invoice_file']['error'] !== UPLOAD_ERR_OK) {
-            wp_send_json_error(array('message' => __('Δεν επιλέχθηκε αρχείο ή υπήρξε σφάλμα κατά το ανέβασμα', 'wc-greek-vat-invoices')));
+            wp_send_json_error(array('message' => __('Δεν επιλέχθηκε αρχείο ή υπήρξε σφάλμα κατά το ανέβασμα', 'greek-vat-invoices-for-woocommerce')));
         }
         
         $file = $_FILES['invoice_file']; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
@@ -115,7 +115,7 @@ class WCGVI_Invoice_Generator {
         $file_type = wp_check_filetype($file['name'], array('pdf' => 'application/pdf'));
         
         if (!in_array($file['type'], $allowed_types) && $file_type['ext'] !== 'pdf') {
-            wp_send_json_error(array('message' => __('Μόνο PDF αρχεία επιτρέπονται', 'wc-greek-vat-invoices')));
+            wp_send_json_error(array('message' => __('Μόνο PDF αρχεία επιτρέπονται', 'greek-vat-invoices-for-woocommerce')));
         }
         
         // Create upload directory
@@ -167,7 +167,7 @@ class WCGVI_Invoice_Generator {
             
                 // Update database
                 global $wpdb;
-                $table_name = $wpdb->prefix . 'wcgvi_invoices';
+                $table_name = $wpdb->prefix . 'grvatin_invoices';
                 
                 $invoice_number = $order->get_meta('_invoice_number');
                 $invoice_type = $order->get_meta('_billing_invoice_type') ?: 'receipt';
@@ -184,17 +184,17 @@ class WCGVI_Invoice_Generator {
                     ),
                     array('%d', '%s', '%s', '%s', '%s')
                 );
-                wp_cache_delete('wcgvi_invoice_' . $order_id, 'wc_greek_vat_invoices');
+                wp_cache_delete('grvatin_invoice_' . $order_id, 'greek_vat_invoices_wc');
                 
                 wp_send_json_success(array(
-                    'message' => __('Το παραστατικό ανέβηκε επιτυχώς', 'wc-greek-vat-invoices'),
+                    'message' => __('Το παραστατικό ανέβηκε επιτυχώς', 'greek-vat-invoices-for-woocommerce'),
                     'filename' => $filename
                 ));
             } else {
-                wp_send_json_error(array('message' => __('Αποτυχία μεταφοράς αρχείου', 'wc-greek-vat-invoices')));
+                wp_send_json_error(array('message' => __('Αποτυχία μεταφοράς αρχείου', 'greek-vat-invoices-for-woocommerce')));
             }
         } else {
-            wp_send_json_error(array('message' => __('Σφάλμα κατά το ανέβασμα', 'wc-greek-vat-invoices')));
+            wp_send_json_error(array('message' => __('Σφάλμα κατά το ανέβασμα', 'greek-vat-invoices-for-woocommerce')));
         }
     }
     
@@ -202,7 +202,7 @@ class WCGVI_Invoice_Generator {
      * Add generate invoice action
      */
     public function add_order_action($actions) {
-        $actions['wcgvi_generate_invoice'] = __('Δημιουργία Παραστατικού (PDF)', 'wc-greek-vat-invoices');
+        $actions['GRVATIN_generate_invoice'] = __('Δημιουργία Παραστατικού (PDF)', 'greek-vat-invoices-for-woocommerce');
         return $actions;
     }
     
@@ -226,7 +226,7 @@ class WCGVI_Invoice_Generator {
         
         if (!$invoice_number) {
             // Generate invoice number if not exists
-            WCGVI_Order_Handler::get_instance()->generate_invoice_number($order->get_id());
+            GRVATIN_Order_Handler::get_instance()->generate_invoice_number($order->get_id());
             $invoice_number = $order->get_meta('_invoice_number');
         }
         
@@ -275,14 +275,14 @@ class WCGVI_Invoice_Generator {
         
         // Update database
         global $wpdb;
-        $table_name = $wpdb->prefix . 'wcgvi_invoices';
+        $table_name = $wpdb->prefix . 'grvatin_invoices';
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom invoice table requires direct query
         $wpdb->update(
             $table_name,
             array('file_path' => $filename),
             array('order_id' => $order->get_id())
         );
-        wp_cache_delete('wcgvi_invoice_' . $order->get_id(), 'wc_greek_vat_invoices');
+        wp_cache_delete('grvatin_invoice_' . $order->get_id(), 'greek_vat_invoices_wc');
         
         return $file_path;
     }
@@ -291,14 +291,14 @@ class WCGVI_Invoice_Generator {
      * Generate HTML invoice content
      */
     private function get_invoice_html($order, $invoice_type, $invoice_number) {
-        $company_name = get_option('wcgvi_company_name', get_bloginfo('name'));
-        $company_address = get_option('wcgvi_company_address', '');
-        $company_vat = get_option('wcgvi_company_vat', '');
-        $company_doy = get_option('wcgvi_company_doy', '');
-        $company_phone = get_option('wcgvi_company_phone', '');
-        $company_email = get_option('wcgvi_company_email', '');
-        $company_website = get_option('wcgvi_company_website', '');
-        $company_logo = get_option('wcgvi_company_logo', '');
+        $company_name = get_option('GRVATIN_company_name', get_bloginfo('name'));
+        $company_address = get_option('GRVATIN_company_address', '');
+        $company_vat = get_option('GRVATIN_company_vat', '');
+        $company_doy = get_option('GRVATIN_company_doy', '');
+        $company_phone = get_option('GRVATIN_company_phone', '');
+        $company_email = get_option('GRVATIN_company_email', '');
+        $company_website = get_option('GRVATIN_company_website', '');
+        $company_logo = get_option('GRVATIN_company_logo', '');
         
         ob_start();
         ?>
@@ -670,10 +670,10 @@ class WCGVI_Invoice_Generator {
         $order_id = $order->get_id();
         
         echo '<div class="wcgvi-admin-invoice-section" style="margin: 20px 0; padding: 15px; background: #f9f9f9; border: 1px solid #ddd;">';
-        echo '<h4>' . esc_html__('Παραστατικό', 'wc-greek-vat-invoices') . '</h4>';
+        echo '<h4>' . esc_html__('Παραστατικό', 'greek-vat-invoices-for-woocommerce') . '</h4>';
         
         if ($invoice_number) {
-            echo '<p><strong>' . esc_html__('Αριθμός:', 'wc-greek-vat-invoices') . '</strong> ' . esc_html($invoice_number) . '</p>';
+            echo '<p><strong>' . esc_html__('Αριθμός:', 'greek-vat-invoices-for-woocommerce') . '</strong> ' . esc_html($invoice_number) . '</p>';
         }
         
         echo '<p class="wcgvi-admin-buttons">';
@@ -684,18 +684,18 @@ class WCGVI_Invoice_Generator {
             $file_url = $upload_dir['baseurl'] . '/wcgvi-invoices/' . $file_path;
             echo '<a href="' . esc_url($file_url) . '" class="button button-primary" target="_blank" style="margin-right: 10px;">';
             echo '<span class="dashicons dashicons-download" style="vertical-align: middle; margin-top: 3px;"></span> ';
-            echo esc_html__('Λήψη Παραστατικού', 'wc-greek-vat-invoices') . '</a>';
+            echo esc_html__('Λήψη Παραστατικού', 'greek-vat-invoices-for-woocommerce') . '</a>';
         }
         
         // Regenerate button
         echo '<button type="button" class="button wcgvi-regenerate-invoice" data-order-id="' . esc_attr($order_id) . '" style="margin-right: 10px;">';
         echo '<span class="dashicons dashicons-update" style="vertical-align: middle; margin-top: 3px;"></span> ';
-        echo esc_html__('Αναδημιουργία', 'wc-greek-vat-invoices') . '</button>';
+        echo esc_html__('Αναδημιουργία', 'greek-vat-invoices-for-woocommerce') . '</button>';
         
         // Upload button
         echo '<button type="button" class="button wcgvi-upload-invoice-btn" data-order-id="' . esc_attr($order_id) . '">';
         echo '<span class="dashicons dashicons-upload" style="vertical-align: middle; margin-top: 3px;"></span> ';
-        echo esc_html__('Ανέβασμα PDF', 'wc-greek-vat-invoices') . '</button>';;
+        echo esc_html__('Ανέβασμα PDF', 'greek-vat-invoices-for-woocommerce') . '</button>';;
         
         echo '</p>';
         
@@ -717,7 +717,7 @@ class WCGVI_Invoice_Generator {
             
             $actions['download_invoice'] = array(
                 'url' => $file_url,
-                'name' => __('Λήψη Παραστατικού', 'wc-greek-vat-invoices')
+                'name' => __('Λήψη Παραστατικού', 'greek-vat-invoices-for-woocommerce')
             );
         }
         

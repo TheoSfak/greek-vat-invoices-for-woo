@@ -1,7 +1,7 @@
 jQuery(document).ready(function($) {
     'use strict';
     
-    var wcgviAdmin = {
+    var grvatinAdmin = {
         
         /**
          * Initialize
@@ -17,32 +17,32 @@ jQuery(document).ready(function($) {
          */
         bindEvents: function() {
             // Manual VAT validation button
-            $(document).on('click', '.wcgvi-validate-vat-btn', function(e) {
+            $(document).on('click', '.grvatin-validate-vat-btn', function(e) {
                 e.preventDefault();
-                wcgviAdmin.validateVAT($(this));
+                grvatinAdmin.validateVAT($(this));
             });
             
             // Regenerate invoice button
-            $(document).on('click', '.wcgvi-regenerate-invoice', function(e) {
+            $(document).on('click', '.grvatin-regenerate-invoice', function(e) {
                 e.preventDefault();
-                wcgviAdmin.regenerateInvoice($(this));
+                grvatinAdmin.regenerateInvoice($(this));
             });
             
             // Upload invoice button
-            $(document).on('click', '.wcgvi-upload-invoice-btn', function(e) {
+            $(document).on('click', '.grvatin-upload-invoice-btn', function(e) {
                 e.preventDefault();
-                wcgviAdmin.uploadInvoice($(this));
+                grvatinAdmin.uploadInvoice($(this));
             });
             
             // Test connection buttons
-            $(document).on('click', '.wcgvi-test-connection', function(e) {
+            $(document).on('click', '.grvatin-test-connection', function(e) {
                 e.preventDefault();
-                wcgviAdmin.testConnection($(this));
+                grvatinAdmin.testConnection($(this));
             });
             
             // Greek VAT validation method change
-            $(document).on('change', '#wcgvi_greek_vat_validation_method', function() {
-                wcgviAdmin.toggleAADECredentials();
+            $(document).on('change', '#grvatin_greek_vat_validation_method', function() {
+                grvatinAdmin.toggleAADECredentials();
             });
         },
         
@@ -50,9 +50,9 @@ jQuery(document).ready(function($) {
          * Toggle AADE credentials visibility
          */
         toggleAADECredentials: function() {
-            var method = $('#wcgvi_greek_vat_validation_method').val();
-            var $usernameRow = $('#wcgvi_aade_username').closest('tr');
-            var $passwordRow = $('#wcgvi_aade_password').closest('tr');
+            var method = $('#grvatin_greek_vat_validation_method').val();
+            var $usernameRow = $('#grvatin_aade_username').closest('tr');
+            var $passwordRow = $('#grvatin_aade_password').closest('tr');
             
             if (method === 'aade') {
                 $usernameRow.show();
@@ -67,19 +67,19 @@ jQuery(document).ready(function($) {
          * Initialize password toggle (show/hide)
          */
         initPasswordToggle: function() {
-            var $passwordField = $('#wcgvi_aade_password');
+            var $passwordField = $('#grvatin_aade_password');
             
             if ($passwordField.length && $passwordField.attr('type') === 'password') {
                 // Check if already wrapped
-                if ($passwordField.parent().hasClass('wcgvi-password-wrapper')) {
+                if ($passwordField.parent().hasClass('grvatin-password-wrapper')) {
                     return;
                 }
                 
                 // Wrap field and add toggle button
-                var $wrapper = $('<div class="wcgvi-password-wrapper"></div>');
+                var $wrapper = $('<div class="grvatin-password-wrapper"></div>');
                 $passwordField.wrap($wrapper);
                 
-                var $toggleBtn = $('<button type="button" class="wcgvi-toggle-password" aria-label="Εμφάνιση κωδικού">' +
+                var $toggleBtn = $('<button type="button" class="grvatin-toggle-password" aria-label="Εμφάνιση κωδικού">' +
                     '<span class="dashicons dashicons-visibility"></span>' +
                     '</button>');
                 
@@ -113,29 +113,29 @@ jQuery(document).ready(function($) {
             var country = $('#_billing_country').val();
             
             if (!vatNumber) {
-                alert(wcgvi_admin_params.no_vat_text);
+                alert(grvatin_admin_params.no_vat_text);
                 return;
             }
             
-            $btn.prop('disabled', true).text(wcgvi_admin_params.validating_text);
+            $btn.prop('disabled', true).text(grvatin_admin_params.validating_text);
             
             $.ajax({
-                url: wcgvi_admin_params.ajax_url,
+                url: grvatin_admin_params.ajax_url,
                 type: 'POST',
                 data: {
-                    action: 'wcgvi_validate_vat',
+                    action: 'grvatin_validate_vat',
                     vat_number: vatNumber,
                     country: country,
-                    nonce: wcgvi_admin_params.nonce
+                    nonce: grvatin_admin_params.nonce
                 },
                 success: function(response) {
-                    $btn.prop('disabled', false).text(wcgvi_admin_params.validate_text);
+                    $btn.prop('disabled', false).text(grvatin_admin_params.validate_text);
                     
                     if (response.success) {
-                        alert(wcgvi_admin_params.valid_text + '\n\n' + 
-                              (response.data.company_name ? wcgvi_admin_params.company_text + ': ' + response.data.company_name + '\n' : '') +
-                              (response.data.doy ? wcgvi_admin_params.doy_text + ': ' + response.data.doy + '\n' : '') +
-                              (response.data.activity ? wcgvi_admin_params.activity_text + ': ' + response.data.activity : ''));
+                        alert(grvatin_admin_params.valid_text + '\n\n' + 
+                              (response.data.company_name ? grvatin_admin_params.company_text + ': ' + response.data.company_name + '\n' : '') +
+                              (response.data.doy ? grvatin_admin_params.doy_text + ': ' + response.data.doy + '\n' : '') +
+                              (response.data.activity ? grvatin_admin_params.activity_text + ': ' + response.data.activity : ''));
                         
                         // Update fields
                         if (response.data.company_name && !$('#_billing_company').val()) {
@@ -148,12 +148,12 @@ jQuery(document).ready(function($) {
                             $('#_billing_business_activity').val(response.data.activity);
                         }
                     } else {
-                        alert(wcgvi_admin_params.invalid_text + '\n\n' + response.data.message);
+                        alert(grvatin_admin_params.invalid_text + '\n\n' + response.data.message);
                     }
                 },
                 error: function() {
-                    $btn.prop('disabled', false).text(wcgvi_admin_params.validate_text);
-                    alert(wcgvi_admin_params.error_text);
+                    $btn.prop('disabled', false).text(grvatin_admin_params.validate_text);
+                    alert(grvatin_admin_params.error_text);
                 }
             });
         },
@@ -162,34 +162,34 @@ jQuery(document).ready(function($) {
          * Regenerate invoice
          */
         regenerateInvoice: function($btn) {
-            if (!confirm(wcgvi_admin_params.regenerate_confirm)) {
+            if (!confirm(grvatin_admin_params.regenerate_confirm)) {
                 return;
             }
             
             var orderId = $btn.data('order-id');
-            $btn.prop('disabled', true).text(wcgvi_admin_params.generating_text);
+            $btn.prop('disabled', true).text(grvatin_admin_params.generating_text);
             
             $.ajax({
-                url: wcgvi_admin_params.ajax_url,
+                url: grvatin_admin_params.ajax_url,
                 type: 'POST',
                 data: {
-                    action: 'wcgvi_regenerate_invoice',
+                    action: 'grvatin_regenerate_invoice',
                     order_id: orderId,
-                    nonce: wcgvi_admin_params.nonce
+                    nonce: grvatin_admin_params.nonce
                 },
                 success: function(response) {
-                    $btn.prop('disabled', false).text(wcgvi_admin_params.regenerate_text);
+                    $btn.prop('disabled', false).text(grvatin_admin_params.regenerate_text);
                     
                     if (response.success) {
-                        alert(wcgvi_admin_params.success_text);
+                        alert(grvatin_admin_params.success_text);
                         location.reload();
                     } else {
-                        alert(wcgvi_admin_params.error_text + '\n\n' + response.data.message);
+                        alert(grvatin_admin_params.error_text + '\n\n' + response.data.message);
                     }
                 },
                 error: function() {
-                    $btn.prop('disabled', false).text(wcgvi_admin_params.regenerate_text);
-                    alert(wcgvi_admin_params.error_text);
+                    $btn.prop('disabled', false).text(grvatin_admin_params.regenerate_text);
+                    alert(grvatin_admin_params.error_text);
                 }
             });
         },
@@ -199,7 +199,7 @@ jQuery(document).ready(function($) {
          */
         uploadInvoice: function($btn) {
             var orderId = $btn.data('order-id');
-            var $fileInput = $('#wcgvi-invoice-upload-' + orderId);
+            var $fileInput = $('#grvatin-invoice-upload-' + orderId);
             
             // Trigger file input click
             $fileInput.off('change').on('change', function() {
@@ -222,15 +222,15 @@ jQuery(document).ready(function($) {
                 }
                 
                 var formData = new FormData();
-                formData.append('action', 'wcgvi_upload_invoice');
+                formData.append('action', 'grvatin_upload_invoice');
                 formData.append('order_id', orderId);
                 formData.append('invoice_file', file);
-                formData.append('nonce', wcgvi_admin_params.nonce);
+                formData.append('nonce', grvatin_admin_params.nonce);
                 
                 $btn.prop('disabled', true).html('<span class="dashicons dashicons-update" style="vertical-align: middle; margin-top: 3px; animation: rotation 1s infinite linear;"></span> Ανέβασμα...');
                 
                 $.ajax({
-                    url: wcgvi_admin_params.ajax_url,
+                    url: grvatin_admin_params.ajax_url,
                     type: 'POST',
                     data: formData,
                     processData: false,
@@ -260,7 +260,7 @@ jQuery(document).ready(function($) {
          */
         testConnection: function($btn) {
             var action = $btn.data('action');
-            var $result = $btn.siblings('.wcgvi-test-result');
+            var $result = $btn.siblings('.grvatin-test-result');
             var originalText = $btn.text();
             
             // Show loading state
@@ -268,11 +268,11 @@ jQuery(document).ready(function($) {
             $result.html('<span style="color: #999;">⏳ Αναμονή...</span>');
             
             $.ajax({
-                url: wcgvi_admin_params.ajax_url,
+                url: grvatin_admin_params.ajax_url,
                 type: 'POST',
                 data: {
                     action: action,
-                    nonce: wcgvi_admin_params.nonce
+                    nonce: grvatin_admin_params.nonce
                 },
                 success: function(response) {
                     $btn.prop('disabled', false).text(originalText);
@@ -311,5 +311,5 @@ jQuery(document).ready(function($) {
     };
     
     // Initialize
-    wcgviAdmin.init();
+    grvatinAdmin.init();
 });

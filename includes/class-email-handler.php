@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WCGVI_Email_Handler {
+class GRVATIN_Email_Handler {
     
     private static $instance = null;
     
@@ -34,7 +34,7 @@ class WCGVI_Email_Handler {
      * Auto-send invoice when order is completed
      */
     public function auto_send_invoice($order_id) {
-        $auto_send = get_option('wcgvi_auto_send_email', 'yes');
+        $auto_send = get_option('GRVATIN_auto_send_email', 'yes');
         
         if ($auto_send !== 'yes') {
             return;
@@ -50,7 +50,7 @@ class WCGVI_Email_Handler {
         
         if (!$file_path) {
             // Generate invoice first
-            WCGVI_Invoice_Generator::get_instance()->generate_pdf($order);
+            grvatin_invoice_Generator::get_instance()->generate_pdf($order);
             $file_path = $order->get_meta('_invoice_file_path');
         }
         
@@ -80,10 +80,10 @@ class WCGVI_Email_Handler {
         // Email subject
         $subject = sprintf(
             /* translators: 1: Site name, 2: Order number, 3: Document type (Invoice/Receipt), 4: Invoice number */
-            __('%1$s - Order #%2$s - %3$s %4$s', 'wc-greek-vat-invoices'),
+            __('%1$s - Order #%2$s - %3$s %4$s', 'greek-vat-invoices-for-woocommerce'),
             get_bloginfo('name'),
             $order->get_order_number(),
-            $invoice_type === 'invoice' ? __('Invoice', 'wc-greek-vat-invoices') : __('Receipt', 'wc-greek-vat-invoices'),
+            $invoice_type === 'invoice' ? __('Invoice', 'greek-vat-invoices-for-woocommerce') : __('Receipt', 'greek-vat-invoices-for-woocommerce'),
             $invoice_number
         );
         
@@ -107,7 +107,7 @@ class WCGVI_Email_Handler {
             $order->add_order_note(
                 sprintf(
                     /* translators: %s: Invoice number */
-                    __('Invoice/Receipt %s sent to customer via email.', 'wc-greek-vat-invoices'),
+                    __('Invoice/Receipt %s sent to customer via email.', 'greek-vat-invoices-for-woocommerce'),
                     $invoice_number
                 )
             );
@@ -200,7 +200,7 @@ class WCGVI_Email_Handler {
                 
                 <div class="footer">
                     <p><?php echo esc_html(get_bloginfo('name')); ?></p>
-                    <p><?php echo esc_html(get_option('wcgvi_company_address', '')); ?></p>
+                    <p><?php echo esc_html(get_option('GRVATIN_company_address', '')); ?></p>
                     <p>Email: <?php echo esc_html(get_option('admin_email')); ?></p>
                 </div>
             </div>

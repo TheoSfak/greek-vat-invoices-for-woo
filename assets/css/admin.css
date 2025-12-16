@@ -1,18 +1,18 @@
 /* WooCommerce Greek VAT & Invoices - Admin Styles */
 
 /* Password Toggle */
-.wcgvi-password-wrapper {
+.grvatin-password-wrapper {
     position: relative;
     display: inline-flex;
     align-items: center;
     gap: 5px;
 }
 
-.wcgvi-password-wrapper input {
+.grvatin-password-wrapper input {
     flex: 1;
 }
 
-.wcgvi-toggle-password {
+.grvatin-toggle-password {
     background: transparent;
     border: none;
     cursor: pointer;
@@ -24,18 +24,18 @@
     justify-content: center;
 }
 
-.wcgvi-toggle-password:hover {
+.grvatin-toggle-password:hover {
     color: #2271b1;
 }
 
-.wcgvi-toggle-password .dashicons {
+.grvatin-toggle-password .dashicons {
     width: 20px;
     height: 20px;
     font-size: 20px;
 }
 
 /* Invoice Section in Order Admin */
-.wcgvi-admin-section {
+.grvatin-admin-section {
     background: #fff;
     padding: 15px;
     border: 1px solid #ddd;
@@ -43,7 +43,7 @@
     margin: 15px 0;
 }
 
-.wcgvi-admin-section h3 {
+.grvatin-admin-section h3 {
     margin-top: 0;
     font-size: 16px;
     color: #333;
@@ -53,28 +53,28 @@
 }
 
 /* Invoice Details Table */
-.wcgvi-invoice-details {
+.grvatin-invoice-details {
     width: 100%;
     border-collapse: collapse;
 }
 
-.wcgvi-invoice-details td {
+.grvatin-invoice-details td {
     padding: 8px 10px;
     border-bottom: 1px solid #f0f0f0;
 }
 
-.wcgvi-invoice-details td:first-child {
+.grvatin-invoice-details td:first-child {
     font-weight: 600;
     width: 180px;
     color: #555;
 }
 
-.wcgvi-invoice-details td:last-child {
+.grvatin-invoice-details td:last-child {
     color: #333;
 }
 
 /* VAT Exemption Badge */
-.wcgvi-vat-exempt-badge {
+.grvatin-vat-exempt-badge {
     display: inline-block;
     background: #fff3cd;
     color: #856404;
@@ -86,58 +86,58 @@
 }
 
 /* Action Buttons */
-.wcgvi-action-buttons {
+.grvatin-action-buttons {
     margin-top: 15px;
     padding-top: 15px;
     border-top: 1px solid #f0f0f0;
 }
 
-.wcgvi-action-buttons .button {
+.grvatin-action-buttons .button {
     margin-right: 10px;
     margin-bottom: 5px;
 }
 
-.wcgvi-validate-vat-btn {
+.grvatin-validate-vat-btn {
     background: #0073aa;
     border-color: #0073aa;
     color: #fff;
 }
 
-.wcgvi-validate-vat-btn:hover,
-.wcgvi-validate-vat-btn:focus {
+.grvatin-validate-vat-btn:hover,
+.grvatin-validate-vat-btn:focus {
     background: #005a87;
     border-color: #005a87;
     color: #fff;
 }
 
-.wcgvi-regenerate-invoice {
+.grvatin-regenerate-invoice {
     background: #00a32a;
     border-color: #00a32a;
     color: #fff;
 }
 
-.wcgvi-regenerate-invoice:hover,
-.wcgvi-regenerate-invoice:focus {
+.grvatin-regenerate-invoice:hover,
+.grvatin-regenerate-invoice:focus {
     background: #008a20;
     border-color: #008a20;
     color: #fff;
 }
 
-.wcgvi-upload-invoice-btn {
+.grvatin-upload-invoice-btn {
     background: #f0c33c;
     border-color: #f0c33c;
     color: #333;
 }
 
-.wcgvi-upload-invoice-btn:hover,
-.wcgvi-upload-invoice-btn:focus {
+.grvatin-upload-invoice-btn:hover,
+.grvatin-upload-invoice-btn:focus {
     background: #daa520;
     border-color: #daa520;
     color: #333;
 }
 
 /* Download Invoice Link */
-.wcgvi-download-link {
+.grvatin-download-link {
     display: inline-block;
     padding: 8px 15px;
     background: #2271b1;
@@ -148,19 +148,19 @@
     margin: 10px 0;
 }
 
-.wcgvi-download-link:hover,
-.wcgvi-download-link:focus {
+.grvatin-download-link:hover,
+.grvatin-download-link:focus {
     background: #135e96;
     color: #fff;
 }
 
-.wcgvi-download-link:before {
+.grvatin-download-link:before {
     content: '📄 ';
     margin-right: 5px;
 }
 
 /* Upload Interface */
-.wcgvi-upload-interface {
+.grvatin-upload-interface {
     padding: 15px;
     background: #f9f9f9;
     border: 2px dashed #ddd;
@@ -169,49 +169,49 @@
     margin: 15px 0;
 }
 
-.wcgvi-upload-interface.dragover {
+.grvatin-upload-interface.dragover {
     border-color: #2271b1;
     background: #f0f6fc;
 }
 
 /* Settings Page */
-.wcgvi-settings-intro {
+.grvatin-settings-intro {
     background: #fff;
     border-left: 4px solid #2271b1;
     padding: 15px;
     margin: 20px 0;
 }
 
-.wcgvi-settings-intro h2 {
+.grvatin-settings-intro h2 {
     margin-top: 0;
 }
 
-.wcgvi-settings-intro p {
+.grvatin-settings-intro p {
     margin-bottom: 0;
 }
 
 /* Order List Column */
-.wcgvi-invoice-column {
+.grvatin-invoice-column {
     font-weight: 600;
     color: #2271b1;
 }
 
-.wcgvi-invoice-column .dashicons {
+.grvatin-invoice-column .dashicons {
     vertical-align: middle;
 }
 
 /* Loading State */
-.wcgvi-loading-spinner {
+.grvatin-loading-spinner {
     display: inline-block;
     width: 16px;
     height: 16px;
     border: 2px solid #f3f3f3;
     border-top: 2px solid #2271b1;
     border-radius: 50%;
-    animation: wcgvi-admin-spin 1s linear infinite;
+    animation: grvatin-admin-spin 1s linear infinite;
 }
 
-@keyframes wcgvi-admin-spin {
+@keyframes grvatin-admin-spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
@@ -227,14 +227,14 @@
 
 /* Responsive */
 @media (max-width: 782px) {
-    .wcgvi-action-buttons .button {
+    .grvatin-action-buttons .button {
         display: block;
         width: 100%;
         margin-right: 0;
         text-align: center;
     }
     
-    .wcgvi-invoice-details td:first-child {
+    .grvatin-invoice-details td:first-child {
         width: auto;
     }
 }

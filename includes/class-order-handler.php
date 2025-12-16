@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WCGVI_Order_Handler {
+class GRVATIN_Order_Handler {
     
     private static $instance = null;
     
@@ -55,7 +55,7 @@ class WCGVI_Order_Handler {
         $should_exempt = false;
         
         // Check VIES exemption (EU but not Greece)
-        if ($country !== 'GR' && get_option('wcgvi_vat_exempt_eu') === 'yes') {
+        if ($country !== 'GR' && get_option('GRVATIN_vat_exempt_eu') === 'yes') {
             // Nonce is verified by WooCommerce checkout process
             $vies_validated = isset($_POST['vies_validated']) && sanitize_text_field(wp_unslash($_POST['vies_validated'])) === 'true'; // phpcs:ignore WordPress.Security.NonceVerification.Missing
             if ($vies_validated) {
@@ -66,18 +66,18 @@ class WCGVI_Order_Handler {
         
         // Check non-EU exemption
         $eu_countries = array('AT', 'BE', 'BG', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GR', 'HR', 'HU', 'IE', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK');
-        if (!in_array($country, $eu_countries) && get_option('wcgvi_vat_exempt_non_eu') === 'yes') {
+        if (!in_array($country, $eu_countries) && get_option('GRVATIN_vat_exempt_non_eu') === 'yes') {
             $should_exempt = true;
             $order->add_meta_data('_vat_exempt_reason', 'Third country export');
         }
         
         // Check Article 39a exemption (Greek businesses only)
-        if ($country === 'GR' && get_option('wcgvi_article_39a') === 'yes') {
+        if ($country === 'GR' && get_option('GRVATIN_article_39a') === 'yes') {
             // Nonce is verified by WooCommerce checkout process
             $exempt_39a = isset($_POST['vat_exempt_39a']) && sanitize_text_field(wp_unslash($_POST['vat_exempt_39a'])) === 'true'; // phpcs:ignore WordPress.Security.NonceVerification.Missing
             if ($exempt_39a) {
                 // Check if products are in allowed categories
-                $allowed_categories = get_option('wcgvi_article_39a_categories', array());
+                $allowed_categories = get_option('GRVATIN_article_39a_categories', array());
                 
                 if ($this->check_article_39a_eligible($order, $allowed_categories)) {
                     $should_exempt = true;
@@ -141,9 +141,9 @@ class WCGVI_Order_Handler {
         }
         
         // Get next invoice number
-        $prefix = get_option('wcgvi_invoice_prefix', 'INV');
+        $prefix = get_option('grvatin_invoice_prefix', 'INV');
         $year = gmdate('Y');
-        $counter_key = 'wcgvi_invoice_counter_' . $year;
+        $counter_key = 'grvatin_invoice_counter_' . $year;
         
         $counter = get_option($counter_key, 0);
         $counter++;
@@ -158,7 +158,7 @@ class WCGVI_Order_Handler {
         
         // Save to database
         global $wpdb;
-        $table_name = $wpdb->prefix . 'wcgvi_invoices';
+        $table_name = $wpdb->prefix . 'grvatin_invoices';
         
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom invoice table requires direct query
         $wpdb->insert($table_name, array(
@@ -167,7 +167,7 @@ class WCGVI_Order_Handler {
             'invoice_type' => $invoice_type,
             'invoice_date' => current_time('mysql')
         ));
-        wp_cache_delete('wcgvi_invoice_' . $order_id, 'wc_greek_vat_invoices');
+        wp_cache_delete('grvatin_invoice_' . $order_id, 'greek_vat_invoices_wc');
     }
     
     /**
@@ -188,7 +188,7 @@ class WCGVI_Order_Handler {
         if ($invoice_number) {
             echo '<div class="wcgvi-invoice-info">';
             echo '<p class="form-field form-field-wide">';
-            echo '<strong>' . esc_html__('Invoice Number:', 'wc-greek-vat-invoices') . '</strong> ';
+            echo '<strong>' . esc_html__('Invoice Number:', 'greek-vat-invoices-for-woocommerce') . '</strong> ';
             echo esc_html($invoice_number);
             if ($invoice_date) {
                 echo ' (' . esc_html(date_i18n(get_option('date_format'), strtotime($invoice_date))) . ')';
@@ -199,8 +199,8 @@ class WCGVI_Order_Handler {
             if ($vat_exempt === 'yes') {
                 $reason = $order->get_meta('_vat_exempt_reason');
                 echo '<p class="form-field form-field-wide">';
-                echo '<strong>' . esc_html__('VAT Status:', 'wc-greek-vat-invoices') . '</strong> ';
-                echo '<span style="color: #46b450;">' . esc_html__('Exempted', 'wc-greek-vat-invoices') . '</span>';
+                echo '<strong>' . esc_html__('VAT Status:', 'greek-vat-invoices-for-woocommerce') . '</strong> ';
+                echo '<span style="color: #46b450;">' . esc_html__('Exempted', 'greek-vat-invoices-for-woocommerce') . '</span>';
                 if ($reason) {
                     echo ' - ' . esc_html($reason);
                 }

@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WCGVI_Checkout_Fields {
+class GRVATIN_Checkout_Fields {
     
     private static $instance = null;
     
@@ -51,7 +51,7 @@ class WCGVI_Checkout_Fields {
      */
     public function add_invoice_fields($fields) {
         // Get the position setting
-        $position = get_option('wcgvi_invoice_type_position', 'after_billing_email');
+        $position = get_option('grvatin_invoice_type_position', 'after_billing_email');
         
         // Map position to priority
         $priority_map = array(
@@ -72,20 +72,20 @@ class WCGVI_Checkout_Fields {
         // Add document type selection
         $fields['billing']['billing_invoice_type'] = array(
             'type' => 'radio',
-            'label' => __('Τύπος Παραστατικού', 'wc-greek-vat-invoices'),
+            'label' => __('Τύπος Παραστατικού', 'greek-vat-invoices-for-woocommerce'),
             'required' => true,
             'class' => array('form-row-wide', 'wcgvi-invoice-type-field'),
             'priority' => $invoice_type_priority,
             'options' => array(
-                'receipt' => __('Απόδειξη', 'wc-greek-vat-invoices'),
-                'invoice' => __('Τιμολόγιο', 'wc-greek-vat-invoices')
+                'receipt' => __('Απόδειξη', 'greek-vat-invoices-for-woocommerce'),
+                'invoice' => __('Τιμολόγιο', 'greek-vat-invoices-for-woocommerce')
             ),
             'default' => 'receipt'
         );
         
         // Company name - configure existing WooCommerce field
-        $fields['billing']['billing_company']['label'] = __('Επωνυμία Επιχείρησης', 'wc-greek-vat-invoices');
-        $fields['billing']['billing_company']['placeholder'] = __('π.χ. ΚΩΝΣΤΑΝΤΙΝΟΣ ΠΑΠΑΔΟΠΟΥΛΟΣ & ΣΙΑ ΟΕ', 'wc-greek-vat-invoices');
+        $fields['billing']['billing_company']['label'] = __('Επωνυμία Επιχείρησης', 'greek-vat-invoices-for-woocommerce');
+        $fields['billing']['billing_company']['placeholder'] = __('π.χ. ΚΩΝΣΤΑΝΤΙΝΟΣ ΠΑΠΑΔΟΠΟΥΛΟΣ & ΣΙΑ ΟΕ', 'greek-vat-invoices-for-woocommerce');
         if (!isset($fields['billing']['billing_company']['class'])) {
             $fields['billing']['billing_company']['class'] = array();
         }
@@ -101,8 +101,8 @@ class WCGVI_Checkout_Fields {
         // VAT Number (AFM)
         $fields['billing']['billing_vat_number'] = array(
             'type' => 'text',
-            'label' => __('ΑΦΜ', 'wc-greek-vat-invoices'),
-            'placeholder' => __('π.χ. 123456789', 'wc-greek-vat-invoices'),
+            'label' => __('ΑΦΜ', 'greek-vat-invoices-for-woocommerce'),
+            'placeholder' => __('π.χ. 123456789', 'greek-vat-invoices-for-woocommerce'),
             'required' => false,
             'class' => array('form-row-first', 'wcgvi-invoice-fields', 'wcgvi-vat-number'),
             'priority' => $invoice_type_priority + 2,
@@ -116,8 +116,8 @@ class WCGVI_Checkout_Fields {
         // Tax Office (DOY)
         $fields['billing']['billing_doy'] = array(
             'type' => 'text',
-            'label' => __('ΔΟΥ', 'wc-greek-vat-invoices'),
-            'placeholder' => __('π.χ. Α\' ΑΘΗΝΩΝ', 'wc-greek-vat-invoices'),
+            'label' => __('ΔΟΥ', 'greek-vat-invoices-for-woocommerce'),
+            'placeholder' => __('π.χ. Α\' ΑΘΗΝΩΝ', 'greek-vat-invoices-for-woocommerce'),
             'required' => false,
             'class' => array('form-row-last', 'wcgvi-invoice-fields'),
             'priority' => $invoice_type_priority + 3
@@ -126,15 +126,15 @@ class WCGVI_Checkout_Fields {
         // Business Activity
         $fields['billing']['billing_business_activity'] = array(
             'type' => 'text',
-            'label' => __('Επάγγελμα', 'wc-greek-vat-invoices'),
-            'placeholder' => __('π.χ. ΛΙΑΝΙΚΟ ΕΜΠΟΡΙΟ', 'wc-greek-vat-invoices'),
+            'label' => __('Επάγγελμα', 'greek-vat-invoices-for-woocommerce'),
+            'placeholder' => __('π.χ. ΛΙΑΝΙΚΟ ΕΜΠΟΡΙΟ', 'greek-vat-invoices-for-woocommerce'),
             'required' => false,
             'class' => array('form-row-wide', 'wcgvi-invoice-fields'),
             'priority' => $invoice_type_priority + 4
         );
         
         // Hidden field for Article 39a (will be controlled by custom checkbox)
-        if (get_option('wcgvi_article_39a') === 'yes') {
+        if (get_option('GRVATIN_article_39a') === 'yes') {
             $fields['billing']['vat_exempt_39a'] = array(
                 'type' => 'hidden',
                 'default' => 'false',
@@ -149,12 +149,12 @@ class WCGVI_Checkout_Fields {
      * Add Article 39a checkbox after billing form
      */
     public function add_article_39a_checkbox($checkout) {
-        if (get_option('wcgvi_article_39a') !== 'yes') {
+        if (get_option('GRVATIN_article_39a') !== 'yes') {
             return;
         }
         
         // Get allowed categories
-        $allowed_categories = get_option('wcgvi_article_39a_categories', array());
+        $allowed_categories = get_option('GRVATIN_article_39a_categories', array());
         $categories_text = '';
         
         if (!empty($allowed_categories)) {
@@ -166,28 +166,28 @@ class WCGVI_Checkout_Fields {
                 }
             }
             if (!empty($category_names)) {
-                $categories_text = '<li>📦 ' . esc_html__('Ισχύει για τις κατηγορίες:', 'wc-greek-vat-invoices') . ' <strong>' . esc_html(implode(', ', $category_names)) . '</strong></li>';
+                $categories_text = '<li>📦 ' . esc_html__('Ισχύει για τις κατηγορίες:', 'greek-vat-invoices-for-woocommerce') . ' <strong>' . esc_html(implode(', ', $category_names)) . '</strong></li>';
             }
         } else {
-            $categories_text = '<li>✓ ' . esc_html__('Ισχύει για όλες τις κατηγορίες προϊόντων/υπηρεσιών', 'wc-greek-vat-invoices') . '</li>';
+            $categories_text = '<li>✓ ' . esc_html__('Ισχύει για όλες τις κατηγορίες προϊόντων/υπηρεσιών', 'greek-vat-invoices-for-woocommerce') . '</li>';
         }
         
         echo '<div class="wcgvi-article-39a-wrapper wcgvi-invoice-fields" style="display:none;">';
         echo '<div class="wcgvi-article-39a-checkbox-field">';
         echo '<label class="wcgvi-article-39a-label">';
-        echo '<input type="checkbox" id="wcgvi_article_39a_checkbox" name="wcgvi_article_39a_checkbox" value="1" />';
-        echo '<span class="wcgvi-article-39a-text">' . esc_html__('Απαλλαγή Άρθρου 39α (ΠΟΛ.1150/2017)', 'wc-greek-vat-invoices') . '</span>';
+        echo '<input type="checkbox" id="GRVATIN_article_39a_checkbox" name="GRVATIN_article_39a_checkbox" value="1" />';
+        echo '<span class="wcgvi-article-39a-text">' . esc_html__('Απαλλαγή Άρθρου 39α (ΠΟΛ.1150/2017)', 'greek-vat-invoices-for-woocommerce') . '</span>';
         echo '</label>';
         echo '<div class="wcgvi-article-39a-notice">';
-        echo '<p><strong>' . esc_html__('Προϋποθέσεις Απαλλαγής:', 'wc-greek-vat-invoices') . '</strong></p>';
+        echo '<p><strong>' . esc_html__('Προϋποθέσεις Απαλλαγής:', 'greek-vat-invoices-for-woocommerce') . '</strong></p>';
         echo '<ul>';
-        echo '<li>✓ ' . esc_html__('Ελληνική επιχείρηση με έδρα στην Ελλάδα', 'wc-greek-vat-invoices') . '</li>';
-        echo '<li>✓ ' . esc_html__('Ετήσιος τζίρος μικρότερος των 10.000€', 'wc-greek-vat-invoices') . '</li>';
-        echo '<li>✓ ' . esc_html__('Μη υπέρβαση ορίου κατά το τρέχον έτος', 'wc-greek-vat-invoices') . '</li>';
+        echo '<li>✓ ' . esc_html__('Ελληνική επιχείρηση με έδρα στην Ελλάδα', 'greek-vat-invoices-for-woocommerce') . '</li>';
+        echo '<li>✓ ' . esc_html__('Ετήσιος τζίρος μικρότερος των 10.000€', 'greek-vat-invoices-for-woocommerce') . '</li>';
+        echo '<li>✓ ' . esc_html__('Μη υπέρβαση ορίου κατά το τρέχον έτος', 'greek-vat-invoices-for-woocommerce') . '</li>';
         echo wp_kses_post($categories_text);
         echo '</ul>';
         echo '<p class="wcgvi-article-39a-warning">';
-        echo '<em>' . esc_html__('⚠️ Η επιλογή αυτής της απαλλαγής είναι ευθύνη της επιχείρησης. Βεβαιωθείτε ότι πληροίτε τις προϋποθέσεις πριν την επιλέξετε.', 'wc-greek-vat-invoices') . '</em>';
+        echo '<em>' . esc_html__('⚠️ Η επιλογή αυτής της απαλλαγής είναι ευθύνη της επιχείρησης. Βεβαιωθείτε ότι πληροίτε τις προϋποθέσεις πριν την επιλέξετε.', 'greek-vat-invoices-for-woocommerce') . '</em>';
         echo '</p>';
         echo '</div>';
         echo '</div>';
@@ -204,21 +204,21 @@ class WCGVI_Checkout_Fields {
         if ($invoice_type === 'invoice') {
             // Validate required fields for invoice
             if (empty($_POST['billing_company'])) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
-                $errors->add('billing_company', __('Η επωνυμία είναι υποχρεωτική για την έκδοση τιμολογίου.', 'wc-greek-vat-invoices'));
+                $errors->add('billing_company', __('Η επωνυμία είναι υποχρεωτική για την έκδοση τιμολογίου.', 'greek-vat-invoices-for-woocommerce'));
             }
             
             if (empty($_POST['billing_vat_number'])) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
-                $errors->add('billing_vat_number', __('Το ΑΦΜ είναι υποχρεωτικό για την έκδοση τιμολογίου.', 'wc-greek-vat-invoices'));
+                $errors->add('billing_vat_number', __('Το ΑΦΜ είναι υποχρεωτικό για την έκδοση τιμολογίου.', 'greek-vat-invoices-for-woocommerce'));
             } elseif (isset($_POST['billing_vat_number']) && !preg_match('/^[0-9]{9}$/', sanitize_text_field(wp_unslash($_POST['billing_vat_number'])))) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
-                $errors->add('billing_vat_number', __('Το ΑΦΜ πρέπει να είναι 9 ψηφία.', 'wc-greek-vat-invoices'));
+                $errors->add('billing_vat_number', __('Το ΑΦΜ πρέπει να είναι 9 ψηφία.', 'greek-vat-invoices-for-woocommerce'));
             }
             
             if (empty($_POST['billing_doy'])) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
-                $errors->add('billing_doy', __('Η ΔΟΥ είναι υποχρεωτική για την έκδοση τιμολογίου.', 'wc-greek-vat-invoices'));
+                $errors->add('billing_doy', __('Η ΔΟΥ είναι υποχρεωτική για την έκδοση τιμολογίου.', 'greek-vat-invoices-for-woocommerce'));
             }
             
             if (empty($_POST['billing_business_activity'])) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
-                $errors->add('billing_business_activity', __('Το επάγγελμα είναι υποχρεωτικό για την έκδοση τιμολογίου.', 'wc-greek-vat-invoices'));
+                $errors->add('billing_business_activity', __('Το επάγγελμα είναι υποχρεωτικό για την έκδοση τιμολογίου.', 'greek-vat-invoices-for-woocommerce'));
             }
         }
     }
@@ -234,7 +234,7 @@ class WCGVI_Checkout_Fields {
         
         if (isset($_POST['billing_vat_number'])) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
             $vat = sanitize_text_field(wp_unslash($_POST['billing_vat_number'])); // phpcs:ignore WordPress.Security.NonceVerification.Missing
-            if (get_option('wcgvi_uppercase_fields') === 'yes') {
+            if (get_option('GRVATIN_uppercase_fields') === 'yes') {
                 $vat = strtoupper($vat);
             }
             update_post_meta($order_id, '_billing_vat_number', $vat);
@@ -242,7 +242,7 @@ class WCGVI_Checkout_Fields {
         
         if (isset($_POST['billing_doy'])) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
             $doy = sanitize_text_field(wp_unslash($_POST['billing_doy'])); // phpcs:ignore WordPress.Security.NonceVerification.Missing
-            if (get_option('wcgvi_uppercase_fields') === 'yes') {
+            if (get_option('GRVATIN_uppercase_fields') === 'yes') {
                 $doy = strtoupper($doy);
             }
             update_post_meta($order_id, '_billing_doy', $doy);
@@ -250,7 +250,7 @@ class WCGVI_Checkout_Fields {
         
         if (isset($_POST['billing_business_activity'])) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
             $activity = sanitize_text_field(wp_unslash($_POST['billing_business_activity'])); // phpcs:ignore WordPress.Security.NonceVerification.Missing
-            if (get_option('wcgvi_uppercase_fields') === 'yes') {
+            if (get_option('GRVATIN_uppercase_fields') === 'yes') {
                 $activity = strtoupper($activity);
             }
             update_post_meta($order_id, '_billing_business_activity', $activity);
@@ -267,7 +267,7 @@ class WCGVI_Checkout_Fields {
         
         if (isset($data['billing_vat_number']) && !empty($data['billing_vat_number'])) {
             $vat = sanitize_text_field($data['billing_vat_number']);
-            if (get_option('wcgvi_uppercase_fields') === 'yes') {
+            if (get_option('GRVATIN_uppercase_fields') === 'yes') {
                 $vat = strtoupper($vat);
             }
             $customer->update_meta_data('billing_vat_number', $vat);
@@ -275,7 +275,7 @@ class WCGVI_Checkout_Fields {
         
         if (isset($data['billing_doy']) && !empty($data['billing_doy'])) {
             $doy = sanitize_text_field($data['billing_doy']);
-            if (get_option('wcgvi_uppercase_fields') === 'yes') {
+            if (get_option('GRVATIN_uppercase_fields') === 'yes') {
                 $doy = strtoupper($doy);
             }
             $customer->update_meta_data('billing_doy', $doy);
@@ -283,7 +283,7 @@ class WCGVI_Checkout_Fields {
         
         if (isset($data['billing_business_activity']) && !empty($data['billing_business_activity'])) {
             $activity = sanitize_text_field($data['billing_business_activity']);
-            if (get_option('wcgvi_uppercase_fields') === 'yes') {
+            if (get_option('GRVATIN_uppercase_fields') === 'yes') {
                 $activity = strtoupper($activity);
             }
             $customer->update_meta_data('billing_business_activity', $activity);
@@ -302,27 +302,27 @@ class WCGVI_Checkout_Fields {
         
         if ($invoice_type === 'invoice') {
             echo '<div class="wcgvi-admin-invoice-fields">';
-            echo '<h3>' . esc_html__('Στοιχεία Τιμολογίου', 'wc-greek-vat-invoices') . '</h3>';
+            echo '<h3>' . esc_html__('Στοιχεία Τιμολογίου', 'greek-vat-invoices-for-woocommerce') . '</h3>';
             
             if ($company) {
-                echo '<p><strong>' . esc_html__('Επωνυμία:', 'wc-greek-vat-invoices') . '</strong> ' . esc_html($company) . '</p>';
+                echo '<p><strong>' . esc_html__('Επωνυμία:', 'greek-vat-invoices-for-woocommerce') . '</strong> ' . esc_html($company) . '</p>';
             }
             
             if ($vat_number) {
-                echo '<p><strong>' . esc_html__('ΑΦΜ:', 'wc-greek-vat-invoices') . '</strong> ' . esc_html($vat_number) . '</p>';
+                echo '<p><strong>' . esc_html__('ΑΦΜ:', 'greek-vat-invoices-for-woocommerce') . '</strong> ' . esc_html($vat_number) . '</p>';
             }
             
             if ($doy) {
-                echo '<p><strong>' . esc_html__('ΔΟΥ:', 'wc-greek-vat-invoices') . '</strong> ' . esc_html($doy) . '</p>';
+                echo '<p><strong>' . esc_html__('ΔΟΥ:', 'greek-vat-invoices-for-woocommerce') . '</strong> ' . esc_html($doy) . '</p>';
             }
             
             if ($activity) {
-                echo '<p><strong>' . esc_html__('Επάγγελμα:', 'wc-greek-vat-invoices') . '</strong> ' . esc_html($activity) . '</p>';
+                echo '<p><strong>' . esc_html__('Επάγγελμα:', 'greek-vat-invoices-for-woocommerce') . '</strong> ' . esc_html($activity) . '</p>';
             }
             
             echo '</div>';
         } else {
-            echo '<p><strong>' . esc_html__('Document Type:', 'wc-greek-vat-invoices') . '</strong> ' . esc_html__('Receipt', 'wc-greek-vat-invoices') . '</p>';
+            echo '<p><strong>' . esc_html__('Document Type:', 'greek-vat-invoices-for-woocommerce') . '</strong> ' . esc_html__('Receipt', 'greek-vat-invoices-for-woocommerce') . '</p>';
         }
     }
     
@@ -336,23 +336,23 @@ class WCGVI_Checkout_Fields {
             $company = $order->get_billing_company();
             if ($company) {
                 $fields['billing_company'] = array(
-                    'label' => __('Επωνυμία', 'wc-greek-vat-invoices'),
+                    'label' => __('Επωνυμία', 'greek-vat-invoices-for-woocommerce'),
                     'value' => $company
                 );
             }
             
             $fields['billing_vat_number'] = array(
-                'label' => __('ΑΦΜ', 'wc-greek-vat-invoices'),
+                'label' => __('ΑΦΜ', 'greek-vat-invoices-for-woocommerce'),
                 'value' => $order->get_meta('_billing_vat_number')
             );
             
             $fields['billing_doy'] = array(
-                'label' => __('ΔΟΥ', 'wc-greek-vat-invoices'),
+                'label' => __('ΔΟΥ', 'greek-vat-invoices-for-woocommerce'),
                 'value' => $order->get_meta('_billing_doy')
             );
             
             $fields['billing_business_activity'] = array(
-                'label' => __('Επάγγελμα', 'wc-greek-vat-invoices'),
+                'label' => __('Επάγγελμα', 'greek-vat-invoices-for-woocommerce'),
                 'value' => $order->get_meta('_billing_business_activity')
             );
         }

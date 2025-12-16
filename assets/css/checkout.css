@@ -1,11 +1,11 @@
 /* WooCommerce Greek VAT & Invoices - Checkout Styles */
 
 /* Invoice Type Selection */
-.wcgvi-invoice-type-field {
+.grvatin-invoice-type-field {
     margin-bottom: 20px;
 }
 
-.wcgvi-invoice-type-field > label {
+.grvatin-invoice-type-field > label {
     font-weight: 600;
     margin-bottom: 15px;
     display: block;
@@ -13,7 +13,7 @@
 }
 
 /* Radio Button Styling */
-.wcgvi-invoice-type-field ul {
+.grvatin-invoice-type-field ul {
     list-style: none !important;
     padding: 0 !important;
     margin: 0 !important;
@@ -22,18 +22,18 @@
     gap: 12px;
 }
 
-.wcgvi-invoice-type-field ul li {
+.grvatin-invoice-type-field ul li {
     margin: 0 !important;
     padding: 0 !important;
 }
 
-.wcgvi-invoice-type-field input[type="radio"] {
+.grvatin-invoice-type-field input[type="radio"] {
     position: absolute;
     opacity: 0;
     pointer-events: none;
 }
 
-.wcgvi-invoice-type-field label {
+.grvatin-invoice-type-field label {
     display: inline-block;
     padding: 10px 24px;
     background: #f5f5f5;
@@ -47,38 +47,38 @@
     text-align: center;
 }
 
-.wcgvi-invoice-type-field input[type="radio"]:checked + label {
+.grvatin-invoice-type-field input[type="radio"]:checked + label {
     background: #0071a1;
     color: white;
     border-color: #0071a1;
     box-shadow: 0 2px 8px rgba(0, 113, 161, 0.3);
 }
 
-.wcgvi-invoice-type-field label:hover {
+.grvatin-invoice-type-field label:hover {
     border-color: #0071a1;
     background: #f0f8ff;
 }
 
-.wcgvi-invoice-type-field input[type="radio"]:checked + label:hover {
+.grvatin-invoice-type-field input[type="radio"]:checked + label:hover {
     background: #005a82;
     border-color: #005a82;
 }
 
 /* Invoice Fields Container - Force hide on load */
-.wcgvi-invoice-fields,
-#billing_company_field.wcgvi-invoice-fields,
-.woocommerce-billing-fields #billing_company_field.wcgvi-invoice-fields,
+.grvatin-invoice-fields,
+#billing_company_field.grvatin-invoice-fields,
+.woocommerce-billing-fields #billing_company_field.grvatin-invoice-fields,
 #billing_company_field.hidden-by-default {
     display: none !important;
 }
 
-.wcgvi-invoice-fields.visible,
-#billing_company_field.wcgvi-invoice-fields.visible,
+.grvatin-invoice-fields.visible,
+#billing_company_field.grvatin-invoice-fields.visible,
 #billing_company_field.visible {
     display: block !important;
 }
 
-.wcgvi-invoice-fields h3 {
+.grvatin-invoice-fields h3 {
     margin-top: 0;
     font-size: 16px;
     color: #333;
@@ -88,19 +88,19 @@
 }
 
 /* VAT Number Field with Validation */
-.wcgvi-vat-field-wrapper {
+.grvatin-vat-field-wrapper {
     position: relative;
 }
 
-.wcgvi-vat-field-wrapper input {
+.grvatin-vat-field-wrapper input {
     padding-right: 100px;
 }
 
 /* Validation Messages */
-.wcgvi-loading,
-.wcgvi-valid,
-.wcgvi-invalid,
-.wcgvi-error {
+.grvatin-loading,
+.grvatin-valid,
+.grvatin-invalid,
+.grvatin-error {
     display: inline-block;
     margin-left: 10px;
     font-size: 13px;
@@ -108,12 +108,12 @@
     border-radius: 3px;
 }
 
-.wcgvi-loading {
+.grvatin-loading {
     color: #666;
     background: #f0f0f0;
 }
 
-.wcgvi-loading:before {
+.grvatin-loading:before {
     content: '';
     display: inline-block;
     width: 12px;
@@ -122,35 +122,35 @@
     border-top-color: transparent;
     border-radius: 50%;
     margin-right: 5px;
-    animation: wcgvi-spin 0.8s linear infinite;
+    animation: grvatin-spin 0.8s linear infinite;
 }
 
-@keyframes wcgvi-spin {
+@keyframes grvatin-spin {
     to { transform: rotate(360deg); }
 }
 
-.wcgvi-valid {
+.grvatin-valid {
     color: #0a7e07;
     background: #d4edda;
 }
 
-.wcgvi-invalid,
-.wcgvi-error {
+.grvatin-invalid,
+.grvatin-error {
     color: #d8000c;
     background: #ffd2d2;
 }
 
 /* Field Validation State */
-input.wcgvi-field-valid {
+input.grvatin-field-valid {
     border-color: #0a7e07 !important;
 }
 
-input.wcgvi-field-invalid {
+input.grvatin-field-invalid {
     border-color: #d8000c !important;
 }
 
 /* VAT Exemption Notice */
-.wcgvi-exemption-notice {
+.grvatin-exemption-notice {
     background: #fff3cd;
     border-left: 4px solid #ffc107;
     padding: 12px 15px;
@@ -158,20 +158,20 @@ input.wcgvi-field-invalid {
     font-size: 14px;
 }
 
-.wcgvi-exemption-notice:before {
+.grvatin-exemption-notice:before {
     content: 'ℹ️ ';
     font-size: 16px;
     margin-right: 5px;
 }
 
 /* Article 39a Wrapper */
-.wcgvi-article-39a-wrapper {
+.grvatin-article-39a-wrapper {
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
 /* Article 39a Checkbox Field */
-.wcgvi-article-39a-checkbox-field {
+.grvatin-article-39a-checkbox-field {
     background: #f8f9fa;
     border: 2px solid #17a2b8;
     border-radius: 8px;
@@ -179,7 +179,7 @@ input.wcgvi-field-invalid {
     margin-bottom: 0;
 }
 
-.wcgvi-article-39a-label {
+.grvatin-article-39a-label {
     display: flex;
     align-items: flex-start;
     cursor: pointer;
@@ -189,11 +189,11 @@ input.wcgvi-field-invalid {
     margin-bottom: 12px;
 }
 
-.wcgvi-article-39a-label:hover {
+.grvatin-article-39a-label:hover {
     color: #17a2b8;
 }
 
-.wcgvi-article-39a-label input[type="checkbox"] {
+.grvatin-article-39a-label input[type="checkbox"] {
     width: 20px;
     height: 20px;
     margin-right: 10px;
@@ -202,12 +202,12 @@ input.wcgvi-field-invalid {
     flex-shrink: 0;
 }
 
-.wcgvi-article-39a-text {
+.grvatin-article-39a-text {
     line-height: 1.4;
 }
 
 /* Article 39a Notice (Conditions) */
-.wcgvi-article-39a-notice {
+.grvatin-article-39a-notice {
     background: #e7f3f5;
     border-left: 4px solid #17a2b8;
     padding: 15px;
@@ -216,28 +216,28 @@ input.wcgvi-field-invalid {
     font-size: 13px;
 }
 
-.wcgvi-article-39a-notice p {
+.grvatin-article-39a-notice p {
     margin: 0 0 10px 0;
 }
 
-.wcgvi-article-39a-notice strong {
+.grvatin-article-39a-notice strong {
     color: #0c5460;
     font-size: 14px;
 }
 
-.wcgvi-article-39a-notice ul {
+.grvatin-article-39a-notice ul {
     list-style: none;
     padding-left: 0;
     margin: 10px 0;
 }
 
-.wcgvi-article-39a-notice ul li {
+.grvatin-article-39a-notice ul li {
     padding: 6px 0;
     color: #0c5460;
     line-height: 1.5;
 }
 
-.wcgvi-article-39a-warning {
+.grvatin-article-39a-warning {
     background: #fff3cd;
     border: 1px solid #ffc107;
     border-radius: 4px;
@@ -247,14 +247,14 @@ input.wcgvi-field-invalid {
     color: #856404;
 }
 
-.wcgvi-article-39a-warning em {
+.grvatin-article-39a-warning em {
     font-style: normal;
     font-size: 12px;
     line-height: 1.5;
 }
 
 /* Live Exemption Notice */
-.wcgvi-article-39a-live-notice {
+.grvatin-article-39a-live-notice {
     background: #d1ecf1;
     border-left: 4px solid #17a2b8;
     padding: 12px 15px;
@@ -263,20 +263,20 @@ input.wcgvi-field-invalid {
 }
 
 /* Hidden Fields */
-.wcgvi-hidden-field {
+.grvatin-hidden-field {
     display: none !important;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .wcgvi-invoice-fields {
+    .grvatin-invoice-fields {
         padding: 15px;
     }
     
-    .wcgvi-loading,
-    .wcgvi-valid,
-    .wcgvi-invalid,
-    .wcgvi-error {
+    .grvatin-loading,
+    .grvatin-valid,
+    .grvatin-invalid,
+    .grvatin-error {
         display: block;
         margin-left: 0;
         margin-top: 5px;
