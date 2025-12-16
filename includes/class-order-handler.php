@@ -188,7 +188,7 @@ class GRVATIN_Order_Handler {
         if ($invoice_number) {
             echo '<div class="wcgvi-invoice-info">';
             echo '<p class="form-field form-field-wide">';
-            echo '<strong>' . esc_html__('Invoice Number:', 'wc-greek-vat-invoices') . '</strong> ';
+            echo '<strong>' . esc_html__('Invoice Number:', 'greek-vat-invoices-for-woocommerce') . '</strong> ';
             echo esc_html($invoice_number);
             if ($invoice_date) {
                 echo ' (' . esc_html(date_i18n(get_option('date_format'), strtotime($invoice_date))) . ')';
@@ -199,8 +199,8 @@ class GRVATIN_Order_Handler {
             if ($vat_exempt === 'yes') {
                 $reason = $order->get_meta('_vat_exempt_reason');
                 echo '<p class="form-field form-field-wide">';
-                echo '<strong>' . esc_html__('VAT Status:', 'wc-greek-vat-invoices') . '</strong> ';
-                echo '<span style="color: #46b450;">' . esc_html__('Exempted', 'wc-greek-vat-invoices') . '</span>';
+                echo '<strong>' . esc_html__('VAT Status:', 'greek-vat-invoices-for-woocommerce') . '</strong> ';
+                echo '<span style="color: #46b450;">' . esc_html__('Exempted', 'greek-vat-invoices-for-woocommerce') . '</span>';
                 if ($reason) {
                     echo ' - ' . esc_html($reason);
                 }

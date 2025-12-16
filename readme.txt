@@ -42,7 +42,7 @@ Full support for EU VAT rules including VIES validation, intra-community supplie
 
 == Installation ==
 
-1. Upload the plugin files to `/wp-content/plugins/wc-greek-vat-invoices/` or install through WordPress plugins screen
+1. Upload the plugin files to `/wp-content/plugins/greek-vat-invoices-for-woocommerce/` or install through WordPress plugins screen
 2. Activate the plugin through the 'Plugins' screen in WordPress
 3. Make sure WooCommerce is installed and activated
 4. Go to WooCommerce > Settings > Greek VAT & Invoices to configure the plugin
@@ -145,7 +145,7 @@ This plugin validates VAT numbers through external services (AADE and VIES) whic
 == Support ==
 
 For support, feature requests, or bug reports, please visit:
-https://github.com/TheoSfak/wc-greek-vat-invoices/issues
+https://github.com/TheoSfak/greek-vat-invoices-for-woocommerce/issues
 
 == Donations ==
 

@@ -6,7 +6,7 @@
  * Version: 1.0.6
  * Author: Theodore Sfakianakis
  * Author URI: https://www.paypal.com/paypalme/TheodoreSfakianakis
- * Text Domain: wc-greek-vat-invoices
+ * Text Domain: greek-vat-invoices-for-woocommerce
  * Domain Path: /languages
  * Requires at least: 5.0
  * Requires PHP: 7.0
@@ -31,7 +31,7 @@ define('GRVATIN_PLUGIN_BASENAME', plugin_basename(__FILE__));
 // Check if WooCommerce is active
 if (!in_array('woocommerce/woocommerce.php', apply_filters('GRVATIN_active_plugins', get_option('active_plugins')))) {
     add_action('admin_notices', function() {
-        echo '<div class="error"><p><strong>' . esc_html__('Greek VAT & Invoices for WooCommerce', 'wc-greek-vat-invoices') . '</strong> ' . esc_html__('απαιτεί το WooCommerce να είναι εγκατεστημένο και ενεργοποιημένο.', 'wc-greek-vat-invoices') . '</p></div>';
+        echo '<div class="error"><p><strong>' . esc_html__('Greek VAT & Invoices for WooCommerce', 'greek-vat-invoices-for-woocommerce') . '</strong> ' . esc_html__('απαιτεί το WooCommerce να είναι εγκατεστημένο και ενεργοποιημένο.', 'greek-vat-invoices-for-woocommerce') . '</p></div>';
     });
     return;
 }
@@ -122,10 +122,10 @@ class WC_Greek_VAT_Invoices {
                 'ajax_url' => admin_url('admin-ajax.php'),
                 'nonce' => wp_create_nonce('GRVATIN_nonce'),
                 'uppercase' => get_option('GRVATIN_uppercase_fields', 'yes'),
-                'validating_text' => __('Επικύρωση...', 'wc-greek-vat-invoices'),
-                'valid_text' => __('Έγκυρο', 'wc-greek-vat-invoices'),
-                'invalid_text' => __('Μη έγκυρο ΑΦΜ', 'wc-greek-vat-invoices'),
-                'error_text' => __('Σφάλμα επικύρωσης ΑΦΜ', 'wc-greek-vat-invoices')
+                'validating_text' => __('Επικύρωση...', 'greek-vat-invoices-for-woocommerce'),
+                'valid_text' => __('Έγκυρο', 'greek-vat-invoices-for-woocommerce'),
+                'invalid_text' => __('Μη έγκυρο ΑΦΜ', 'greek-vat-invoices-for-woocommerce'),
+                'error_text' => __('Σφάλμα επικύρωσης ΑΦΜ', 'greek-vat-invoices-for-woocommerce')
             ));
         }
     }
@@ -141,10 +141,10 @@ class WC_Greek_VAT_Invoices {
             wp_localize_script('wcgvi-admin', 'GRVATIN_admin_params', array(
                 'ajax_url' => admin_url('admin-ajax.php'),
                 'nonce' => wp_create_nonce('GRVATIN_admin_nonce'),
-                'no_vat_text' => __('Παρακαλώ εισάγετε ΑΦΜ', 'wc-greek-vat-invoices'),
-                'validating_text' => __('Επικύρωση...', 'wc-greek-vat-invoices'),
-                'validate_text' => __('Επικύρωση ΑΦΜ', 'wc-greek-vat-invoices'),
-                'valid_text' => __('Έγκυρο ΑΦΜ', 'wc-greek-vat-invoices'),
+                'no_vat_text' => __('Παρακαλώ εισάγετε ΑΦΜ', 'greek-vat-invoices-for-woocommerce'),
+                'validating_text' => __('Επικύρωση...', 'greek-vat-invoices-for-woocommerce'),
+                'validate_text' => __('Επικύρωση ΑΦΜ', 'greek-vat-invoices-for-woocommerce'),
+                'valid_text' => __('Έγκυρο ΑΦΜ', 'greek-vat-invoices-for-woocommerce'),
                 'invalid_text' => __('Μη έγκυρο ΑΦΜ', 'wc-greek-vat-invoices'),
                 'error_text' => __('Παρουσιάστηκε σφάλμα', 'wc-greek-vat-invoices'),
                 'company_text' => __('Επωνυμία', 'wc-greek-vat-invoices'),

@@ -126,7 +126,7 @@ Complete Greek invoicing solution for WooCommerce with AADE & VIES validation, a
 
 ### Μέθοδος 2: FTP
 1. Κατεβάστε και αποσυμπιέστε το plugin
-2. Ανεβάστε τον φάκελο `wc-greek-vat-invoices` στο `/wp-content/plugins/`
+2. Ανεβάστε τον φάκελο `greek-vat-invoices-for-woocommerce` στο `/wp-content/plugins/`
 3. Ενεργοποιήστε το plugin από το WordPress Admin → Plugins
 
 ### Μέθοδος 3: Git
@@ -366,16 +366,16 @@ chmod 755 wp-content/uploads/wcgvi-invoices/
 
 ## 🌐 Translation
 
-Plugin is translation-ready with `wc-greek-vat-invoices` text domain.
+Plugin is translation-ready with `greek-vat-invoices-for-woocommerce` text domain.
 
 ### Available Languages
 - 🇬🇷 Greek (Ελληνικά) - Built-in
 - 🇬🇧 English - Built-in
 
 ### Add Your Language
-1. Copy `languages/wc-greek-vat-invoices.pot`
+1. Copy `languages/greek-vat-invoices-for-woocommerce.pot`
 2. Translate with Poedit
-3. Save as `wc-greek-vat-invoices-{locale}.mo`
+3. Save as `greek-vat-invoices-for-woocommerce-{locale}.mo`
 4. Place in `wp-content/languages/plugins/`
 
 ## 📝 Changelog
