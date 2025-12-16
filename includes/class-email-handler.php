@@ -128,6 +128,11 @@ class GRVATIN_Email_Handler {
         <html>
         <head>
             <meta charset="UTF-8">
+            <?php
+            // Note: Inline styles are required for email HTML templates.
+            // Email clients don't support external stylesheets, so inline CSS is necessary.
+            // These styles are not for web pages and cannot use wp_enqueue_style().
+            ?>
             <style>
                 body {
                     font-family: Arial, sans-serif;

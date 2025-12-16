@@ -306,6 +306,11 @@ class grvatin_invoice_Generator {
 <html>
 <head>
     <meta charset="UTF-8">
+    <?php
+    // Note: Inline styles are required here for PDF generation via dompdf library.
+    // These styles are not for web pages and cannot use wp_enqueue_style().
+    // The HTML+CSS is converted to PDF and never rendered in a browser.
+    ?>
     <style>
         body { 
             font-family: 'DejaVu Sans', sans-serif; 

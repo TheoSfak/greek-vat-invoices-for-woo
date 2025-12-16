@@ -3,6 +3,11 @@
  * Simple autoloader for mPDF
  */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 spl_autoload_register(function ($class) {
     // Only handle Mpdf classes
     if (strpos($class, 'Mpdf\\') !== 0) {

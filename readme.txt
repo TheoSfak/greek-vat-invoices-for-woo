@@ -1,5 +1,5 @@
 === Greek VAT & Invoices for WooCommerce ===
-Contributors: theosfak
+Contributors: irmaiden
 Tags: woocommerce, greek, vat, invoices, greece
 Requires at least: 5.0
 Tested up to: 6.9
@@ -137,6 +137,53 @@ Major update with improved WordPress.org compliance, updated dependencies, and e
 
 = 1.0.5 =
 Bug fixes and security improvements. Update recommended.
+
+== External Services ==
+
+This plugin connects to external third-party services to validate VAT numbers and retrieve company information. Below is a detailed disclosure of all external services used:
+
+**1. VIES (VAT Information Exchange System) - EU Commission**
+
+* **Service**: EU VAT Number Validation Service
+* **Provider**: European Commission
+* **When Used**: When customers enter EU VAT numbers during checkout or when validating EU VAT numbers in admin
+* **Data Sent**: 
+  - EU country code (e.g., DE, FR, IT)
+  - VAT number
+  - IP address (automatically by the service)
+* **Purpose**: Validates EU VAT numbers for intra-community transactions and determines VAT exemption eligibility
+* **Service URL**: http://ec.europa.eu/taxation_customs/vies/services/checkVatService
+* **Terms of Service**: https://ec.europa.eu/taxation_customs/vies/
+* **Privacy Policy**: https://ec.europa.eu/info/privacy-policy_en
+* **Data Retention**: The EU Commission may log requests for operational purposes
+
+**2. AADE (Independent Authority for Public Revenue) - Greek Tax Authority**
+
+* **Service**: Greek VAT (ΑΦΜ) Validation and Company Information Retrieval
+* **Provider**: Greek Tax Authority (AADE - Ανεξάρτητη Αρχή Δημοσίων Εσόδων)
+* **When Used**: When customers enter Greek VAT numbers (ΑΦΜ) during checkout or when validating in admin
+* **Data Sent**:
+  - Greek VAT number (ΑΦΜ - Αριθμός Φορολογικού Μητρώου)
+  - AADE credentials (username/password configured by store owner)
+  - IP address (automatically by the service)
+* **Purpose**: Validates Greek VAT numbers and retrieves official company information (name, address, DOY, business activity)
+* **Service URLs**:
+  - Production: https://www1.gsis.gr/webtax/wspublicreg and https://www1.gsis.gr/wspublicreg
+  - Alternative: https://www1.gsis.gr/wsaade/RgWsPublic2/RgWsPublic2
+  - Test: https://test.gsis.gr/wsaade/RgWsPublic2/RgWsPublic2
+* **Terms of Service**: https://www.aade.gr/oroi-xrisis
+* **Privacy Policy**: https://www.aade.gr/politiki-aporritou
+* **Authentication**: Requires AADE credentials (optional - can be configured by store owner)
+* **Data Retention**: AADE may log all API requests for security and audit purposes
+
+**Important Notes:**
+
+* VIES validation is automatic for all EU VAT numbers and cannot be disabled
+* AADE validation requires optional configuration of AADE credentials
+* Both services are official government services for tax compliance
+* No customer data beyond VAT numbers and company information is transmitted
+* All connections use secure HTTPS (except VIES SOAP endpoint which uses HTTP)
+* You should include information about these services in your store's privacy policy
 
 == Privacy Policy ==
 
