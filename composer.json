@@ -1,0 +1,48 @@
+{
+    "name": "theosfak/greek-vat-invoices-for-woocommerce",
+    "description": "Complete Greek invoicing solution for WooCommerce with AADE & VIES validation, automatic VAT exemptions, and professional invoice generation",
+    "type": "wordpress-plugin",
+    "keywords": [
+        "wordpress",
+        "woocommerce",
+        "greek",
+        "vat",
+        "invoices",
+        "aade",
+        "vies",
+        "tax",
+        "greece"
+    ],
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Theodore Sfakianakis",
+            "homepage": "https://www.paypal.com/paypalme/TheodoreSfakianakis"
+        }
+    ],
+    "homepage": "https://github.com/TheoSfak/wc-greek-vat-invoices",
+    "require": {
+        "php": ">=7.0",
+        "dompdf/dompdf": "^3.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0",
+        "wp-coding-standards/wpcs": "^3.0"
+    },
+    "autoload": {
+        "classmap": [
+            "includes/"
+        ]
+    },
+    "support": {
+        "issues": "https://github.com/TheoSfak/wc-greek-vat-invoices/issues",
+        "source": "https://github.com/TheoSfak/wc-greek-vat-invoices"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}

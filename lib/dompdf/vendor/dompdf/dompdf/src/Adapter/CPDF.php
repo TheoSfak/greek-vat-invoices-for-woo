@@ -186,6 +186,10 @@ class CPDF implements Canvas
         $this->_pdf->addInfo("CreationDate", "D:$time");
         $this->_pdf->addInfo("ModDate", "D:$time");
 
+        if ($this->_dompdf->getOptions()->isPdfAEnabled()) {
+            $this->_pdf->enablePdfACompliance();
+        }
+
         $this->_width = $size[2] - $size[0];
         $this->_height = $size[3] - $size[1];
 
@@ -616,7 +620,9 @@ class CPDF implements Canvas
                 $filename = "$tmp_name.png";
 
                 imagepng($im, $filename);
-                imagedestroy($im);
+                if (PHP_MAJOR_VERSION < 8) {
+                    imagedestroy($im);
+                }
             } else {
                 $filename = null;
             }
@@ -967,7 +973,6 @@ class CPDF implements Canvas
         $debug = !$options['compress'];
         $tmp = ltrim($this->_pdf->output($debug));
 
-        header("Cache-Control: private");
         header("Content-Type: application/pdf");
         header("Content-Length: " . mb_strlen($tmp, "8bit"));
 
