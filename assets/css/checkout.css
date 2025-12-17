@@ -65,10 +65,10 @@
 }
 
 /* Invoice Fields Container - Force hide on load */
-.grvatin-invoice-fields,
-#billing_company_field.grvatin-invoice-fields,
-.woocommerce-billing-fields #billing_company_field.grvatin-invoice-fields,
-#billing_company_field.hidden-by-default {
+.grvatin-invoice-fields:not(.visible),
+#billing_company_field.grvatin-invoice-fields:not(.visible),
+.woocommerce-billing-fields #billing_company_field.grvatin-invoice-fields:not(.visible),
+#billing_company_field.hidden-by-default:not(.visible) {
     display: none !important;
 }
 
@@ -282,3 +282,4 @@ input.grvatin-field-invalid {
         margin-top: 5px;
     }
 }
+
