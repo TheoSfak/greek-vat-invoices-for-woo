@@ -1,0 +1,53 @@
+PLUGIN ICON SPECIFICATIONS
+==========================
+
+Create TWO icon files:
+
+1. icon-128x128.png
+   - Dimensions: 128 x 128 pixels (EXACT)
+   - Format: PNG with transparency
+   - File size: Under 100KB
+
+2. icon-256x256.png
+   - Dimensions: 256 x 256 pixels (EXACT)
+   - Format: PNG with transparency
+   - File size: Under 200KB
+
+DESIGN IDEAS:
+-------------
+
+Option 1: Greek Flag + Document
+- Blue circle background (#0D5EAF)
+- White document/invoice icon in center
+- Add "ΑΦΜ" text on document
+
+Option 2: Shopping Cart + Flag
+- Shopping cart outline
+- Small Greek flag in corner
+- Simple, clean design
+
+Option 3: Invoice Symbol
+- Stylized invoice/receipt icon
+- Greek flag colors (blue & white)
+- Modern, minimal design
+
+STYLE GUIDELINES:
+-----------------
+✓ Simple and recognizable at small sizes
+✓ Use Greek flag colors (blue #0D5EAF, white)
+✓ Flat design (avoid gradients on icon)
+✓ Clear contrast for visibility
+✓ Professional appearance
+✓ Square format (fits circle crop)
+
+QUICK CANVA TEMPLATE:
+---------------------
+1. Go to canva.com
+2. Create 256x256px custom size
+3. Search "app icon" templates
+4. Customize with Greek colors
+5. Download as PNG
+6. Resize copy to 128x128px
+
+Remember: The icon will be displayed in circles on WordPress.org,
+so make sure important elements are in the center!

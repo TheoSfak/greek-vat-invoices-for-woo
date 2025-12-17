@@ -1,0 +1,97 @@
+PLUGIN SCREENSHOT SPECIFICATIONS
+================================
+
+Create THREE screenshots showing plugin features:
+
+GENERAL SPECS:
+--------------
+- Format: PNG
+- Size: Any width, but keep under 2MB each
+- Recommended: 1280px width or actual browser width
+- Quality: High resolution, clear text
+- Language: Show Greek text for authenticity
+
+REQUIRED SCREENSHOTS:
+---------------------
+
+1. screenshot-1.png - CHECKOUT PAGE
+   What to capture:
+   ✓ Invoice/Receipt selection radio buttons
+   ✓ VAT field (ΑΦΜ) with validation message
+   ✓ DOY field (ΔΟΥ)
+   ✓ Company name field (Επωνυμία)
+   ✓ Business activity field (Επάγγελμα)
+   ✓ Smart field visibility when Invoice is selected
+   
+   Caption for readme.txt:
+   "Checkout page with Invoice/Receipt selection and Greek VAT fields"
+
+2. screenshot-2.png - ADMIN SETTINGS
+   What to capture:
+   ✓ WooCommerce → Settings → Ελληνικά Τιμολόγια
+   ✓ Beautiful gradient header with Greek flag 🇬🇷
+   ✓ Three settings (Enable, Uppercase, Position)
+   ✓ Author info box with GitHub link
+   ✓ PayPal donate button
+   
+   Caption for readme.txt:
+   "Admin settings page with gradient header and donate button"
+
+3. screenshot-3.png - ORDER DETAILS
+   What to capture:
+   ✓ WooCommerce → Orders → Single order view
+   ✓ "Στοιχεία Τιμολογίου" section
+   ✓ Customer VAT (ΑΦΜ)
+   ✓ DOY, Company name, Business activity displayed
+   
+   Caption for readme.txt:
+   "Order details showing customer VAT and business information"
+
+HOW TO TAKE SCREENSHOTS:
+-------------------------
+
+Windows:
+1. Press Win + Shift + S (Snipping Tool)
+2. Select area to capture
+3. Paste in Paint or image editor
+4. Save as PNG
+
+Chrome/Firefox:
+1. Right-click → Inspect
+2. Press Ctrl + Shift + P
+3. Type "screenshot" → "Capture full size screenshot"
+4. Saves automatically
+
+Better Tool - ShareX (Free):
+1. Download from https://getsharex.com
+2. Capture region or full window
+3. Auto-saves as PNG
+4. Built-in editor for annotations
+
+SCREENSHOT TIPS:
+----------------
+✓ Use clean test data (realistic Greek names/addresses)
+✓ Show actual functionality, not empty forms
+✓ Include browser chrome for context (optional)
+✓ Crop to focus on plugin features
+✓ Ensure Greek text is clearly visible
+✓ Use real VAT numbers format (999999999)
+✓ Show validation in action if possible
+
+PREPARATION STEPS:
+------------------
+1. Create test order with invoice selected
+2. Fill all VAT fields with Greek data
+3. Go to admin settings - ensure gradient header visible
+4. Open order details to show VAT info
+5. Take screenshots in order (1, 2, 3)
+6. Name exactly: screenshot-1.png, screenshot-2.png, screenshot-3.png
+
+AFTER CREATING SCREENSHOTS:
+---------------------------
+Screenshots will be uploaded to SVN /assets folder along with icons
+and banners. They'll appear on the WordPress.org plugin page in the
+"Screenshots" section with captions from readme.txt.
+
+Remember: Good screenshots = more downloads!
+Show the plugin doing what it promises.

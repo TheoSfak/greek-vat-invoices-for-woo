@@ -1,0 +1,72 @@
+PLUGIN BANNER SPECIFICATIONS
+============================
+
+Create TWO banner files:
+
+1. banner-772x250.png
+   - Dimensions: 772 x 250 pixels (EXACT)
+   - Format: PNG
+   - File size: Under 500KB
+
+2. banner-1544x500.png (Retina)
+   - Dimensions: 1544 x 500 pixels (EXACT - 2x the first)
+   - Format: PNG
+   - File size: Under 1MB
+
+DESIGN LAYOUT:
+--------------
+
+Left Side (60%):
+- Plugin name: "Greek VAT & Invoices"
+- Subtitle: "for WooCommerce"
+- Tagline: "Simple VAT fields for Greek e-commerce"
+
+Right Side (40%):
+- Greek flag or architectural element
+- OR shopping cart with Greek elements
+- OR document/invoice icon
+
+DESIGN IDEAS:
+-------------
+
+Option 1: Gradient Background
+- Purple gradient (#667eea → #764ba2) - matches admin page
+- White text (plugin name)
+- Greek flag icon on right
+- Clean, modern look
+
+Option 2: Greek Flag Background
+- Blue (#0D5EAF) background with white stripes
+- White text overlay
+- Shopping cart or invoice icon
+- Patriotic, recognizable
+
+Option 3: Split Design
+- Left: Purple/blue gradient with text
+- Right: White section with Greek flag
+- Professional, balanced layout
+
+TEXT CONTENT:
+-------------
+Main Title: "Greek VAT & Invoices for WooCommerce"
+Subtitle: "Απλή λύση ΑΦΜ για ελληνικά e-shops"
+or: "Simple VAT fields for Greek e-commerce"
+
+TYPOGRAPHY:
+-----------
+- Title font: Bold, sans-serif (Montserrat, Roboto)
+- Size: 48-60px (banner-772) / 96-120px (banner-1544)
+- Subtitle: 18-24px (banner-772) / 36-48px (banner-1544)
+- Color: White with slight shadow for contrast
+
+QUICK CANVA WORKFLOW:
+---------------------
+1. canva.com → Custom size 1544x500px
+2. Add gradient/flag background
+3. Add plugin name (bold, white)
+4. Add Greek elements (flag, icons)
+5. Download as PNG
+6. Resize copy to 772x250px
+
+Remember: Banner appears on plugin page header, make it attractive
+but professional - it's the first impression!
