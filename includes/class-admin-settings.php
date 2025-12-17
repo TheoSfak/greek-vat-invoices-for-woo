@@ -213,7 +213,7 @@ class GRVATIN_Admin_Settings {
                 'title' => __('Αυτόματη Αποστολή Παραστατικού', 'greek-vat-invoices-for-woocommerce'),
                 'desc' => __('Αυτόματη αποστολή παραστατικού όταν ολοκληρωθεί η παραγγελία', 'greek-vat-invoices-for-woocommerce'),
                 'id' => 'GRVATIN_auto_send_email',
-                'default' => 'yes',
+                'default' => 'no',
                 'type' => 'checkbox'
             ),
             
