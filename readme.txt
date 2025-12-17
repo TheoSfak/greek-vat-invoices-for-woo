@@ -1,208 +1,176 @@
 === Greek VAT & Invoices for WooCommerce ===
-Contributors: irmaiden
-Tags: woocommerce, greek, vat, invoices, greece
+Contributors: theodoresfakianakis
+Tags: woocommerce, greece, vat, invoices, greek, checkout, tax
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 7.0
-Requires Plugins: woocommerce
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Complete Greek invoicing solution for WooCommerce with AADE & VIES validation, automatic VAT exemptions, and professional PDF invoice generation.
+Add Greek VAT, DOY and Invoice/Receipt selection to WooCommerce checkout. Simple and lightweight solution for Greek e-commerce.
 
 == Description ==
 
-Greek VAT & Invoices for WooCommerce is a comprehensive plugin that adds Greek tax compliance features to your WooCommerce store. It provides professional invoice generation, real-time VAT validation through AADE (Greek Tax Authority) and VIES (EU VAT Information Exchange System), and automatic VAT exemption handling.
+🇬🇷 **Simple Greek VAT fields for WooCommerce checkout**
 
-**Key Features:**
+Add essential Greek tax fields (ΑΦΜ, ΔΟΥ, Business Info) and Invoice/Receipt selection to your WooCommerce checkout. Clean, lightweight, and easy to use.
 
-* **Professional PDF Invoices** - Generate beautiful, compliant Greek invoices and receipts
-* **Real-time VAT Validation** - Validate Greek VAT numbers (ΑΦΜ) through AADE
-* **EU VIES Integration** - Validate EU VAT numbers for intra-community transactions
-* **Automatic VAT Exemptions** - Smart handling of EU and non-EU VAT exemptions
-* **Customizable Fields** - Add Greek-specific billing fields (ΑΦΜ, ΔΟΥ, Business Activity)
-* **Invoice/Receipt Selection** - Let customers choose between invoice or receipt
-* **Email Integration** - Automatically attach invoices to order emails
-* **Uppercase Fields** - Optional automatic uppercase conversion for Greek characters
-* **Article 39a Support** - Special handling for intra-community supply exemptions
-* **Admin Management** - Complete invoice management from WooCommerce order pages
+= Key Features =
 
-**Perfect for Greek Businesses:**
+* **Invoice/Receipt Selection** - Let customers choose between "Τιμολόγιο" or "Απόδειξη"
+* **VAT Number (ΑΦΜ)** - Required for invoices, numeric only with 9-digit validation
+* **Tax Office (ΔΟΥ)** - Customer's tax office field
+* **Company Name** - Business name for invoices
+* **Business Activity** - Type of business activity
+* **Real-time Validation** - Instant error messages for invalid VAT format
+* **Smart Field Visibility** - Fields appear/hide based on invoice/receipt selection
+* **Uppercase Conversion** - Auto-convert to CAPITALS (AADE requirement)
+* **Mobile Responsive** - Works perfectly on all devices
 
-Whether you're running a B2B or B2C e-commerce store in Greece, this plugin handles all the tax compliance requirements, from VAT validation to professional invoice generation that meets Greek tax authority standards.
+= Admin Settings =
 
-**AADE Integration:**
+* Enable/Disable invoice selection feature
+* Uppercase conversion toggle
+* Customizable field position in checkout
+* Beautiful, modern admin interface with gradient styling
 
-Connect directly to the Greek Tax Authority (AADE) services to validate VAT numbers in real-time, retrieve company information automatically, and ensure compliance with Greek tax regulations.
+= Coming Soon Features =
 
-**EU VAT Compliance:**
+Future versions will include:
 
-Full support for EU VAT rules including VIES validation, intra-community supplies, and automatic VAT exemption when applicable.
+* 🔍 **AADE Integration** - Real-time VAT validation via AADE API with auto-complete
+* 🇪🇺 **VIES Validation** - EU VAT number verification
+* 📄 **PDF Invoice Generation** - Professional invoice PDFs with email delivery
+* 💰 **VAT Exemptions** - Article 39α, VIES-based EU, and non-EU export exemptions
+* 📊 **Invoice Numbering** - Automatic invoice numbering with annual counter
+* 📧 **Email Integration** - Custom email templates and automatic sending
+
+Support development to help prioritize these features! [Donate via PayPal](https://www.paypal.com/donate?business=theodore.sfakianakis@gmail.com)
+
+= Fully Translated =
+
+* Greek (Ελληνικά) - Native language support
+* English - Full English translation
+
+= Privacy & Security =
+
+* No external API calls in current version
+* Data stored locally in WooCommerce order meta
+* GDPR compliant
+* No third-party tracking
+* Proper input sanitization and validation
 
 == Installation ==
 
-1. Upload the plugin files to `/wp-content/plugins/greek-vat-invoices-for-woocommerce/` or install through WordPress plugins screen
-2. Activate the plugin through the 'Plugins' screen in WordPress
-3. Make sure WooCommerce is installed and activated
-4. Go to WooCommerce > Settings > Greek VAT & Invoices to configure the plugin
-5. Enter your company details and configure your preferences
-6. (Optional) Configure AADE credentials for real-time VAT validation
-7. (Optional) Enable VIES validation for EU VAT numbers
+= Method 1: WordPress Admin (Recommended) =
+
+1. Go to Plugins → Add New
+2. Click "Upload Plugin"
+3. Choose the downloaded ZIP file
+4. Click "Install Now"
+5. Activate the plugin
+
+= Method 2: FTP Upload =
+
+1. Extract the ZIP file
+2. Upload `greek-vat-invoices-for-woocommerce` folder to `/wp-content/plugins/`
+3. Go to Plugins menu and activate
+
+= After Activation =
+
+1. Go to WooCommerce → Settings → Ελληνικά Τιμολόγια
+2. Enable Invoice Selection
+3. Configure field position (recommended: after email field)
+4. Enable Uppercase Conversion (recommended for AADE compliance)
 
 == Frequently Asked Questions ==
 
-= Does this plugin require WooCommerce? =
+= Do I need AADE credentials? =
 
-Yes, this plugin is specifically designed for WooCommerce and requires it to be installed and activated.
+No, the current version (1.0.8) does not require AADE credentials. AADE integration is planned for future versions.
 
-= Can I validate Greek VAT numbers automatically? =
+= Does it validate VAT numbers in real-time? =
 
-Yes! The plugin supports real-time VAT validation through AADE (Greek Tax Authority). You can configure your AADE credentials in the settings.
+The plugin validates VAT format (9 digits, numeric only) in real-time at checkout. Full AADE/VIES validation is coming in future versions.
 
-= Does it support EU VAT validation? =
+= Can I customize which fields are shown? =
 
-Yes, the plugin includes VIES integration for validating EU VAT numbers for intra-community transactions.
+Yes, fields automatically show/hide based on customer's invoice/receipt selection. You can also control field positioning in admin settings.
 
-= Can customers choose between invoice and receipt? =
+= Is it compatible with my theme? =
 
-Yes, customers can select their preference during checkout. You can configure where this option appears in the checkout form.
+The plugin uses standard WooCommerce hooks and styling, making it compatible with most themes. If you experience styling issues, please report them.
 
-= Are the invoices compliant with Greek tax regulations? =
+= Does it support HPOS (High-Performance Order Storage)? =
 
-Yes, the generated PDF invoices follow Greek tax authority requirements and include all necessary information (ΑΦΜ, ΔΟΥ, etc.).
+Yes, the plugin is fully compatible with WooCommerce HPOS.
 
-= Can I customize the invoice template? =
+= Can customers download invoices? =
 
-The plugin generates professional invoices with your company logo and details. Advanced customization can be done through WordPress filters and actions.
+PDF invoice generation is planned for future versions. Currently, VAT and company information is stored in order meta and visible in My Account.
 
-= Does it automatically apply VAT exemptions? =
+= How do I see customer VAT information? =
 
-Yes, the plugin can automatically apply VAT exemptions for EU and non-EU customers based on your settings and validated VAT numbers.
+Go to WooCommerce → Orders, open any order, and view the VAT and business details in the order meta section.
 
-= What about Article 39a exemptions? =
+= Why are some features missing? =
 
-The plugin includes support for Article 39a of the Greek VAT Code for intra-community supply exemptions with appropriate checkbox and notices.
+Version 1.0.8 is a simplified release focusing on core functionality. Advanced features (AADE, VIES, PDFs) are being reengineered and will be added in future updates.
 
-= Can I regenerate invoices? =
+= How can I support development? =
 
-Yes, you can regenerate invoices from the WooCommerce order page at any time.
-
-= Does it work with Greek language? =
-
-Absolutely! The plugin is fully translatable and includes Greek language support throughout the interface and generated documents.
+You can donate via PayPal to help fund future features: [https://www.paypal.com/donate?business=theodore.sfakianakis@gmail.com](https://www.paypal.com/donate?business=theodore.sfakianakis@gmail.com)
 
 == Screenshots ==
 
-1. Checkout page with Greek VAT fields and invoice/receipt selection
-2. Real-time VAT validation during checkout
-3. Professional PDF invoice with Greek tax compliance
-4. Admin settings page for company configuration
-5. Order management with invoice actions
-6. AADE and VIES validation settings
+1. Checkout page with Invoice/Receipt selection
+2. Invoice fields (ΑΦΜ, ΔΟΥ, Company Name, Activity)
+3. Real-time VAT validation
+4. Admin settings page
+5. Order meta with VAT information
 
 == Changelog ==
 
+= 1.0.8 (2025-01-17) =
+* Simplified plugin for WordPress.org release
+* Added real-time VAT validation (9 digits)
+* Added numeric-only input filter for VAT field
+* Beautified admin settings page with gradient styling
+* Added author information and donate button
+* Improved checkout JavaScript for better field toggle
+* Enhanced mobile responsiveness
+* Removed advanced features temporarily (moved to roadmap)
+* Updated documentation
+
 = 1.0.7 =
-* WordPress.org review compliance fixes
-* Changed contributor to correct WordPress.org username (irmaiden)
-* Added composer.json for dompdf library documentation
-* Added comprehensive External Services documentation (VIES & AADE)
-* Added ABSPATH security check to lib/autoload.php
-* Added explanatory comments for inline styles in PDF/email generation
-
-= 1.0.6 =
-* Major refactoring for WordPress.org compliance
-* Changed all prefixes from WCGVI/wcgvi to GRVATIN/grvatin for uniqueness
-* Updated text domain to match plugin slug: greek-vat-invoices-for-woocommerce
-* Added "Requires Plugins: woocommerce" header
-* Updated Dompdf library to version 3.1.4
-* Added composer.json for dependency management
-* Fixed all WordPress coding standards issues
-* Improved output escaping security
-* Added proper cache handling for database queries
-
-= 1.0.5 =
-* Fixed menu slug consistency issue
-* Improved security with proper nonce verification
-* Enhanced error handling for PDF generation
-* Updated coding standards compliance
+* Fixed checkout field toggle functionality
+* Improved CSS styling
+* Bug fixes and performance improvements
 
 = 1.0.0 =
 * Initial release
-* PDF invoice and receipt generation
-* AADE VAT validation integration
-* VIES EU VAT validation
-* Customizable checkout fields
-* Automatic VAT exemption handling
-* Email integration
-* Article 39a support
+* Basic invoice/receipt selection
+* Greek VAT fields (ΑΦΜ, ΔΟΥ)
+* Company information fields
 
 == Upgrade Notice ==
 
-= 1.0.6 =
-Major update with improved WordPress.org compliance, updated dependencies, and enhanced security. Recommended for all users.
+= 1.0.8 =
+Simplified version with improved validation and beautiful admin interface. Advanced features (AADE, VIES, PDFs) coming in future updates.
 
-= 1.0.5 =
-Bug fixes and security improvements. Update recommended.
+== Developer ==
 
-== External Services ==
+**Theodore Sfakianakis (irmaiden)**
 
-This plugin connects to external third-party services to validate VAT numbers and retrieve company information. Below is a detailed disclosure of all external services used:
-
-**1. VIES (VAT Information Exchange System) - EU Commission**
-
-* **Service**: EU VAT Number Validation Service
-* **Provider**: European Commission
-* **When Used**: When customers enter EU VAT numbers during checkout or when validating EU VAT numbers in admin
-* **Data Sent**: 
-  - EU country code (e.g., DE, FR, IT)
-  - VAT number
-  - IP address (automatically by the service)
-* **Purpose**: Validates EU VAT numbers for intra-community transactions and determines VAT exemption eligibility
-* **Service URL**: http://ec.europa.eu/taxation_customs/vies/services/checkVatService
-* **Terms of Service**: https://ec.europa.eu/taxation_customs/vies/
-* **Privacy Policy**: https://ec.europa.eu/info/privacy-policy_en
-* **Data Retention**: The EU Commission may log requests for operational purposes
-
-**2. AADE (Independent Authority for Public Revenue) - Greek Tax Authority**
-
-* **Service**: Greek VAT (ΑΦΜ) Validation and Company Information Retrieval
-* **Provider**: Greek Tax Authority (AADE - Ανεξάρτητη Αρχή Δημοσίων Εσόδων)
-* **When Used**: When customers enter Greek VAT numbers (ΑΦΜ) during checkout or when validating in admin
-* **Data Sent**:
-  - Greek VAT number (ΑΦΜ - Αριθμός Φορολογικού Μητρώου)
-  - AADE credentials (username/password configured by store owner)
-  - IP address (automatically by the service)
-* **Purpose**: Validates Greek VAT numbers and retrieves official company information (name, address, DOY, business activity)
-* **Service URLs**:
-  - Production: https://www1.gsis.gr/webtax/wspublicreg and https://www1.gsis.gr/wspublicreg
-  - Alternative: https://www1.gsis.gr/wsaade/RgWsPublic2/RgWsPublic2
-  - Test: https://test.gsis.gr/wsaade/RgWsPublic2/RgWsPublic2
-* **Terms of Service**: https://www.aade.gr/oroi-xrisis
-* **Privacy Policy**: https://www.aade.gr/politiki-aporritou
-* **Authentication**: Requires AADE credentials (optional - can be configured by store owner)
-* **Data Retention**: AADE may log all API requests for security and audit purposes
-
-**Important Notes:**
-
-* VIES validation is automatic for all EU VAT numbers and cannot be disabled
-* AADE validation requires optional configuration of AADE credentials
-* Both services are official government services for tax compliance
-* No customer data beyond VAT numbers and company information is transmitted
-* All connections use secure HTTPS (except VIES SOAP endpoint which uses HTTP)
-* You should include information about these services in your store's privacy policy
-
-== Privacy Policy ==
-
-This plugin validates VAT numbers through external services (AADE and VIES) which may process customer data including VAT numbers and company information. Please ensure your privacy policy reflects this data processing.
+* GitHub: [https://github.com/TheoSfak](https://github.com/TheoSfak)
+* Email: theodore.sfakianakis@gmail.com
+* Donate: [https://www.paypal.com/donate?business=theodore.sfakianakis@gmail.com](https://www.paypal.com/donate?business=theodore.sfakianakis@gmail.com)
 
 == Support ==
 
-For support, feature requests, or bug reports, please visit:
-https://github.com/TheoSfak/greek-vat-invoices-for-woo/issues
+* Bug Reports: [GitHub Issues](https://github.com/TheoSfak/greek-vat-invoices-for-woo/issues)
+* Questions: [GitHub Discussions](https://github.com/TheoSfak/greek-vat-invoices-for-woo/discussions)
+* Email: theodore.sfakianakis@gmail.com
 
-== Donations ==
-
-If you find this plugin helpful, consider supporting development:
-https://www.paypal.com/paypalme/TheodoreSfakianakis
+Made with ❤️ in Greece 🇬🇷
