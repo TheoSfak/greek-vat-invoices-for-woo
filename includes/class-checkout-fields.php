@@ -294,6 +294,11 @@ class GRVATIN_Checkout_Fields {
      * Display invoice fields in admin order page
      */
     public function display_invoice_fields_admin($order) {
+        // Block checkout: WooCommerce displays additional fields automatically
+        if (get_option('grvatin_checkout_type', 'classic') === 'block') {
+            return;
+        }
+
         $invoice_type = $order->get_meta('_billing_invoice_type');
         $vat_number = $order->get_meta('_billing_vat_number');
         $doy = $order->get_meta('_billing_doy');
@@ -330,6 +335,11 @@ class GRVATIN_Checkout_Fields {
      * Display invoice fields in emails
      */
     public function display_invoice_fields_email($fields, $sent_to_admin, $order) {
+        // Block checkout: WooCommerce displays additional fields in emails automatically
+        if (get_option('grvatin_checkout_type', 'classic') === 'block') {
+            return $fields;
+        }
+
         $invoice_type = $order->get_meta('_billing_invoice_type');
         
         if ($invoice_type === 'invoice') {

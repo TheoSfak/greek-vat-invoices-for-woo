@@ -3,7 +3,7 @@
  * Plugin Name: Greek VAT & Invoices for WooCommerce
  * Plugin URI: https://github.com/TheoSfak/greek-vat-invoices-for-woo
  * Description: Add Greek VAT, DOY and Invoice/Receipt selection to WooCommerce checkout. Simple and lightweight solution for Greek e-commerce.
- * Version: 1.0.8
+ * Version: 1.1.0
  * Author: Theodore Sfakianakis (irmaiden)
  * Author URI: https://www.paypal.com/donate?business=theodore.sfakianakis@gmail.com
  * Text Domain: greek-vat-invoices-for-woocommerce
@@ -12,7 +12,7 @@
  * Requires PHP: 7.0
  * Requires Plugins: woocommerce
  * WC requires at least: 3.0
- * WC tested up to: 9.0
+ * WC tested up to: 10.6
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -23,7 +23,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('GRVATIN_VERSION', '1.0.8');
+define('GRVATIN_VERSION', '1.1.0');
 define('GRVATIN_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('GRVATIN_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('GRVATIN_PLUGIN_BASENAME', plugin_basename(__FILE__));
@@ -81,6 +81,7 @@ class GRVATIN_Greek_VAT_Invoices {
         require_once GRVATIN_PLUGIN_DIR . 'includes/class-admin-settings.php';
         // require_once GRVATIN_PLUGIN_DIR . 'includes/class-email-handler.php'; // Disabled in v1.0.8 - Coming in future version
         require_once GRVATIN_PLUGIN_DIR . 'includes/class-order-handler.php';
+        require_once GRVATIN_PLUGIN_DIR . 'includes/class-block-checkout.php';
     }
     
     /**
@@ -92,8 +93,17 @@ class GRVATIN_Greek_VAT_Invoices {
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
         add_action('woocommerce_admin_field_GRVATIN_test_button', array($this, 'output_test_button_field'));
         
-        // Initialize components
+        // Initialize components based on checkout type
+        $checkout_type = get_option('grvatin_checkout_type', 'classic');
+
+        // Always load Checkout_Fields — it handles admin order display and email display
+        // regardless of checkout type. Classic checkout hooks won't fire on block checkout.
         GRVATIN_Checkout_Fields::get_instance();
+
+        if ($checkout_type === 'block') {
+            GRVATIN_Block_Checkout::get_instance();
+        }
+
         GRVATIN_VAT_Validator::get_instance();
         // grvatin_invoice_Generator::get_instance(); // Disabled in v1.0.8 - Coming in future version
         GRVATIN_Admin_Settings::get_instance();

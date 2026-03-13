@@ -166,6 +166,28 @@ class GRVATIN_Admin_Settings {
         echo '</div>';
         
         woocommerce_admin_fields($this->get_settings());
+
+        // JS to toggle position dropdowns based on checkout type
+        ?>
+        <script type="text/javascript">
+        jQuery(function($) {
+            function togglePositionFields() {
+                var type = $('#grvatin_checkout_type').val();
+                var classicRow = $('#grvatin_invoice_type_position').closest('tr');
+                var blockRow = $('#grvatin_block_position').closest('tr');
+                if (type === 'block') {
+                    classicRow.hide();
+                    blockRow.show();
+                } else {
+                    classicRow.show();
+                    blockRow.hide();
+                }
+            }
+            togglePositionFields();
+            $('#grvatin_checkout_type').on('change', togglePositionFields);
+        });
+        </script>
+        <?php
         
         // Footer with author and donate button
         echo '<div class="grvatin-footer-box">';
@@ -221,11 +243,25 @@ class GRVATIN_Admin_Settings {
             ),
             
             array(
+                'title' => __('Τύπος Checkout', 'greek-vat-invoices-for-woocommerce'),
+                'desc' => __('Επιλέξτε τον τύπο checkout που χρησιμοποιεί το κατάστημά σας', 'greek-vat-invoices-for-woocommerce'),
+                'id' => 'grvatin_checkout_type',
+                'type' => 'select',
+                'default' => 'classic',
+                'options' => array(
+                    'classic' => __('Classic Checkout (shortcode)', 'greek-vat-invoices-for-woocommerce'),
+                    'block'   => __('Block Checkout (WooCommerce Blocks)', 'greek-vat-invoices-for-woocommerce'),
+                ),
+                'desc_tip' => __('Το Block Checkout χρησιμοποιεί το νέο σύστημα blocks του WooCommerce. Αν δεν είστε σίγουροι, επιλέξτε Classic.', 'greek-vat-invoices-for-woocommerce'),
+            ),
+
+            array(
                 'title' => __('Θέση Πεδίου "Τύπος Παραστατικού"', 'greek-vat-invoices-for-woocommerce'),
                 'desc' => __('Επιλέξτε πού θα εμφανίζεται το πεδίο επιλογής τιμολογίου/απόδειξης', 'greek-vat-invoices-for-woocommerce'),
                 'id' => 'grvatin_invoice_type_position',
                 'type' => 'select',
                 'default' => 'after_billing_email',
+                'class' => 'grvatin-position-classic',
                 'options' => array(
                     'top' => __('Τέρμα Πάνω (πρώτο πεδίο)', 'greek-vat-invoices-for-woocommerce'),
                     'before_billing_first_name' => __('Πριν από το Όνομα', 'greek-vat-invoices-for-woocommerce'),
@@ -239,6 +275,20 @@ class GRVATIN_Admin_Settings {
                     'bottom' => __('Τέρμα Κάτω (τελευταίο πεδίο)', 'greek-vat-invoices-for-woocommerce')
                 ),
                 'desc_tip' => __('Καθορίζει πού θα εμφανίζεται το πεδίο "Τιμολόγιο ή Απόδειξη" στη φόρμα checkout. Προτείνεται μετά το email.', 'greek-vat-invoices-for-woocommerce')
+            ),
+
+            array(
+                'title' => __('Θέση Πεδίου "Τύπος Παραστατικού" (Block)', 'greek-vat-invoices-for-woocommerce'),
+                'desc' => __('Επιλέξτε πού θα εμφανίζονται τα πεδία στο Block Checkout', 'greek-vat-invoices-for-woocommerce'),
+                'id' => 'grvatin_block_position',
+                'type' => 'select',
+                'default' => 'contact',
+                'class' => 'grvatin-position-block',
+                'options' => array(
+                    'contact' => __('Πάνω — Στοιχεία Επικοινωνίας (μετά το email)', 'greek-vat-invoices-for-woocommerce'),
+                    'order'   => __('Κάτω — Επιπλέον Πληροφορίες Παραγγελίας (πριν το "Υποβολή")', 'greek-vat-invoices-for-woocommerce'),
+                ),
+                'desc_tip' => __('Στο Block Checkout τα πεδία μπορούν να εμφανίζονται στην ενότητα "Στοιχεία Επικοινωνίας" (πάνω) ή "Πληροφορίες Παραγγελίας" (κάτω).', 'greek-vat-invoices-for-woocommerce'),
             ),
             
             array(

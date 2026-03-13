@@ -1,6 +1,6 @@
 # Greek VAT & Invoices for WooCommerce
 
-![Version](https://img.shields.io/badge/version-1.0.8-blue.svg)
+![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)
 ![WordPress](https://img.shields.io/badge/wordpress-5.0%2B-blue.svg)
 ![WooCommerce](https://img.shields.io/badge/woocommerce-3.0%2B-purple.svg)
 ![License](https://img.shields.io/badge/license-GPL--2.0-green.svg)
@@ -21,10 +21,21 @@ Add essential Greek tax fields (ΑΦΜ, ΔΟΥ, Business Info) and Invoice/Recei
 - ✅ **Business Activity** - Type of business activity
 - ✅ **Real-time Validation** - Instant error messages for invalid VAT format
 
+### 🧱 WooCommerce Block (Gutenberg) Checkout
+- ✅ **Block Checkout Compatible** - Full support for WooCommerce's Gutenberg-based checkout
+- ✅ **Additional Checkout Fields API** - Uses WooCommerce's official API for maximum compatibility
+- ✅ **Checkout Type Selection** - Choose between Classic or Block checkout in admin settings
+- ✅ **Field Position Control** - Place fields in Contact Information or Order section
+- ✅ **Conditional Visibility** - Invoice fields dynamically show/hide in block checkout
+- ✅ **Native Display** - Fields appear automatically in admin orders and emails
+- ✅ **Server-side Validation** - VAT, DOY, Company validated when invoice type is selected
+
 ### ⚙️ Admin Settings
 - ✅ **Enable/Disable** - Toggle invoice selection feature
+- ✅ **Checkout Type** - Select Classic or Block (Gutenberg) checkout
+- ✅ **Classic Field Position** - 10 position options for classic checkout
+- ✅ **Block Field Position** - Contact Information or Order section for block checkout
 - ✅ **Uppercase Conversion** - Auto-convert to CAPITAL LETTERS (AADE requirement)
-- ✅ **Field Position** - Choose where invoice type field appears in checkout
 - ✅ **Beautiful Settings Page** - Clean, modern admin interface
 
 ### 🎨 User Experience
@@ -177,6 +188,16 @@ Navigate to **WooCommerce → Settings → Ελληνικά Τιμολόγια**
 ---
 
 ## 📝 Changelog
+
+### Version 1.1.0 (2026-03-13)
+- ✅ Added WooCommerce Block Checkout support (Additional Checkout Fields API)
+- ✅ Added checkout type setting (Classic / Block) in admin
+- ✅ Added block checkout position setting (Contact / Order section)
+- ✅ Conditional field visibility in block checkout
+- ✅ Company name field for block checkout
+- ✅ VAT number (ΑΦΜ) now mandatory for invoices
+- ✅ Native admin order and email display for block checkout
+- ✅ Code quality improvements
 
 ### Version 1.0.8 (2025-01-17)
 - ✅ Simplified plugin for WordPress.org release

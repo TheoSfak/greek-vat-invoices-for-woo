@@ -2,7 +2,7 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Greek VAT & Invoices for WooCommerce 1.0.8\n"
+"Project-Id-Version: Greek VAT & Invoices for WooCommerce 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/TheoSfak/greek-vat-invoices-for-woo/issues\n"
 "POT-Creation-Date: 2025-12-17 00:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
