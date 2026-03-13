@@ -1,10 +1,10 @@
 === Greek VAT & Invoices for WooCommerce ===
-Contributors: irmaiden
-Tags: woocommerce, timologia, timologio, greek, checkout
+Contributors: theodoresfakianakis
+Tags: woocommerce, timologia, vat, greek, checkout
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 1.1.0
+Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,24 +28,11 @@ Add essential Greek tax fields (ΑΦΜ, ΔΟΥ, Business Info) and Invoice/Recei
 * **Uppercase Conversion** - Auto-convert to CAPITALS (AADE requirement)
 * **Mobile Responsive** - Works perfectly on all devices
 
-= WooCommerce Block (Gutenberg) Checkout Support =
-
-Full support for the new WooCommerce Block-based Checkout using the official Additional Checkout Fields API:
-
-* **Block Checkout Compatible** - Works with the Gutenberg-based checkout page
-* **Checkout Type Selection** - Choose between Classic or Block checkout in admin settings
-* **Field Position Control** - Place invoice fields in the Contact Information or Order section
-* **Conditional Visibility** - Invoice fields dynamically show/hide in block checkout just like classic
-* **Native Admin & Email Display** - Fields appear automatically in order details and emails via WooCommerce's built-in rendering
-* **Server-side Validation** - VAT, DOY, Company, and Activity validated on the server when invoice type is selected
-
 = Admin Settings =
 
 * Enable/Disable invoice selection feature
-* Checkout type: Classic checkout or Block (Gutenberg) checkout
-* Field position for classic checkout (10 positions available)
-* Field position for block checkout (Contact Information or Order section)
 * Uppercase conversion toggle
+* Customizable field position in checkout
 * Beautiful, modern admin interface with gradient styling
 
 = Coming Soon Features =
@@ -94,15 +81,26 @@ Support development to help prioritize these features! [Donate via PayPal](https
 
 1. Go to WooCommerce → Settings → Ελληνικά Τιμολόγια
 2. Enable Invoice Selection
-3. Select your Checkout Type (Classic or Block)
-4. Configure field position based on your checkout type
-5. Enable Uppercase Conversion (recommended for AADE compliance)
+3. Configure field position (recommended: after email field)
+4. Enable Uppercase Conversion (recommended for AADE compliance)
+
+== Important Notice ==
+
+**This is a free, open-source plugin provided "as is" without any warranty of any kind.** By installing or updating this plugin you accept full responsibility for any outcome.
+
+**Before installing or upgrading on a live/production site:**
+
+1. **Always test first on a staging or clone environment** — Never install or update directly on your production shop without testing first.
+2. **Create a full backup** — Back up your database and files before any plugin installation or update.
+3. **Verify checkout functionality** — After updating, place a test order to confirm everything works correctly.
+
+The author(s) assume no liability for any issues, data loss, lost revenue, or disruptions caused by this plugin. Use at your own risk.
 
 == Frequently Asked Questions ==
 
 = Do I need AADE credentials? =
 
-No, the current version (1.1.0) does not require AADE credentials. AADE integration is planned for future versions.
+No, the current version (1.0.8) does not require AADE credentials. AADE integration is planned for future versions.
 
 = Does it validate VAT numbers in real-time? =
 
@@ -120,10 +118,6 @@ The plugin uses standard WooCommerce hooks and styling, making it compatible wit
 
 Yes, the plugin is fully compatible with WooCommerce HPOS.
 
-= Does it work with the WooCommerce Block (Gutenberg) Checkout? =
-
-Yes! Since version 1.1.0, the plugin fully supports the WooCommerce Block Checkout using the official Additional Checkout Fields API. Go to WooCommerce → Settings → Ελληνικά Τιμολόγια and select "Block (Checkout Block)" as checkout type.
-
 = Can customers download invoices? =
 
 PDF invoice generation is planned for future versions. Currently, VAT and company information is stored in order meta and visible in My Account.
@@ -134,7 +128,7 @@ Go to WooCommerce → Orders, open any order, and view the VAT and business deta
 
 = Why are some features missing? =
 
-Version 1.1.0 added WooCommerce Block Checkout support. Core functionality remains simple and lightweight. Advanced features (AADE, VIES, PDFs) are being reengineered and will be added in future updates.
+Version 1.0.8 is a simplified release focusing on core functionality. Advanced features (AADE, VIES, PDFs) are being reengineered and will be added in future updates.
 
 = How can I support development? =
 
@@ -149,16 +143,6 @@ You can donate via PayPal to help fund future features: [https://www.paypal.com/
 5. Order meta with VAT information
 
 == Changelog ==
-
-= 1.1.0 (2026-03-13) =
-* Added WooCommerce Block Checkout support via Additional Checkout Fields API
-* Added checkout type setting (Classic / Block) in admin
-* Added block checkout position setting (Contact / Order section)
-* Added conditional field visibility in block checkout (show/hide based on invoice type)
-* Added company name field for block checkout
-* Made VAT number (ΑΦΜ) mandatory
-* Block checkout fields display natively in admin orders and emails
-* Improved code quality and validation
 
 = 1.0.8 (2025-01-17) =
 * Simplified plugin for WordPress.org release
@@ -183,9 +167,6 @@ You can donate via PayPal to help fund future features: [https://www.paypal.com/
 * Company information fields
 
 == Upgrade Notice ==
-
-= 1.1.0 =
-New: WooCommerce Block Checkout support! Choose between Classic and Block checkout in settings. VAT number is now mandatory for invoices.
 
 = 1.0.8 =
 Simplified version with improved validation and beautiful admin interface. Advanced features (AADE, VIES, PDFs) coming in future updates.
