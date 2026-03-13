@@ -1,0 +1,106 @@
+============================================================
+ Greek VAT & Invoices for WooCommerce - What's New
+============================================================
+
+Version 1.1.0 (2026-03-13)
+------------------------------------------------------------
+
+ ★ WooCommerce Block (Gutenberg) Checkout Support
+
+   Full support for the new WooCommerce Block-based checkout
+   page using the official Additional Checkout Fields API.
+
+   New files:
+   • includes/class-block-checkout.php
+   • assets/js/block-checkout.js
+
+   What it does:
+   • Registers 5 checkout fields via woocommerce_register_additional_checkout_field():
+     - Invoice Type (Τύπος Παραστατικού) — select: Απόδειξη / Τιμολόγιο
+     - Company Name (Επωνυμία Επιχείρησης) — text
+     - VAT Number (ΑΦΜ) — text, mandatory
+     - Tax Office (ΔΟΥ) — text
+     - Business Activity (Επάγγελμα) — text
+   • Conditional field visibility: Company, VAT, DOY, Activity fields
+     dynamically show/hide when the customer selects Τιμολόγιο or Απόδειξη
+   • Server-side validation: VAT, DOY, Company, and Activity are
+     validated as required only when invoice type is "invoice"
+   • Field data saved to order meta using the same keys as classic checkout
+     (_billing_invoice_type, _billing_vat_number, _billing_doy,
+      _billing_business_activity, billing_company via set_billing_company)
+   • Native admin order display — WooCommerce renders the fields
+     automatically in the order edit screen (no duplicates)
+   • Native email display — WooCommerce includes the fields in order
+     emails automatically via WC_Emails::additional_checkout_fields()
+   • JavaScript uses MutationObserver with 50ms debounce to detect
+     DOM changes and toggle field visibility in the block checkout
+
+ ★ New Admin Settings
+
+   Modified file: includes/class-admin-settings.php
+
+   • Checkout Type setting: Choose between "Classic (Shortcode)" and
+     "Block (Checkout Block)" — saved as option 'grvatin_checkout_type'
+   • Block Position setting: Choose where invoice fields appear in
+     the block checkout — "Contact Information (top)" or
+     "Additional Order Information (bottom)"
+     Saved as option 'grvatin_block_position'
+   • Classic Position setting: The existing 10-position dropdown,
+     now only shown when Classic checkout type is selected
+   • Admin JavaScript toggles visibility of the position dropdowns
+     based on the selected checkout type
+
+ ★ VAT Number (ΑΦΜ) Now Mandatory
+
+   The VAT number field is now required (was optional before).
+   In block checkout, server-side validation enforces this when
+   invoice type is selected.
+
+ ★ Smart Component Loading
+
+   Modified file: greek-vat-invoices-for-woocommerce.php
+
+   • GRVATIN_Checkout_Fields is always loaded (needed for admin
+     order display and email hooks in both modes)
+   • GRVATIN_Block_Checkout is loaded additionally when checkout
+     type is set to "block"
+   • In block mode, the classic display hooks (display_invoice_fields_admin
+     and display_invoice_fields_email) return early to avoid duplicate
+     display — WooCommerce handles rendering natively
+
+ ★ Code Quality Improvements
+
+   • Removed dead code: eliminated unused billing_address key check
+     in get_submitted_invoice_type()
+   • Added MutationObserver debounce (50ms) to prevent excessive
+     DOM processing in block-checkout.js
+   • Proper early returns in display hooks to prevent duplicate
+     field rendering in admin orders and emails
+
+------------------------------------------------------------
+
+Version 1.0.8 (2025-01-17)
+------------------------------------------------------------
+   • Simplified plugin for WordPress.org release
+   • Added real-time VAT validation (9 digits)
+   • Added numeric-only input filter for VAT field
+   • Beautified admin settings page with gradient styling
+   • Added author information and donate button
+   • Improved checkout JavaScript for better field toggle
+   • Enhanced mobile responsiveness
+   • Removed advanced features temporarily (moved to roadmap)
+
+Version 1.0.7
+------------------------------------------------------------
+   • Fixed checkout field toggle functionality
+   • Improved CSS styling
+   • Bug fixes and performance improvements
+
+Version 1.0.0
+------------------------------------------------------------
+   • Initial release
+   • Basic invoice/receipt selection
+   • Greek VAT fields (ΑΦΜ, ΔΟΥ)
+   • Company information fields
+
+============================================================
