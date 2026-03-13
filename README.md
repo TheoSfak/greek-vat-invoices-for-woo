@@ -54,6 +54,20 @@ Add essential Greek tax fields (ΑΦΜ, ΔΟΥ, Business Info) and Invoice/Recei
 
 ---
 
+## ⚠️ Important Notice
+
+**This is a free, open-source plugin provided "as is" without any warranty of any kind.** By installing or updating this plugin you accept full responsibility for any outcome.
+
+**Before installing or upgrading on a live/production site:**
+
+1. **Always test first on a staging or clone environment** — Never install or update directly on your production shop without testing first.
+2. **Create a full backup** — Back up your database and files before any plugin installation or update.
+3. **Verify checkout functionality** — After updating, place a test order to confirm everything works correctly.
+
+The author(s) assume no liability for any issues, data loss, lost revenue, or disruptions caused by this plugin. Use at your own risk.
+
+---
+
 ## 🚀 Installation
 
 ### Method 1: WordPress Admin (Recommended)
@@ -72,20 +86,6 @@ Add essential Greek tax fields (ΑΦΜ, ΔΟΥ, Business Info) and Invoice/Recei
 cd wp-content/plugins
 git clone https://github.com/TheoSfak/greek-vat-invoices-for-woo.git greek-vat-invoices-for-woocommerce
 ```
-
----
-
-## ⚠️ Important Notice
-
-**This is a free, open-source plugin provided "as is" without any warranty of any kind.** By installing or updating this plugin you accept full responsibility for any outcome.
-
-**Before installing or upgrading on a live/production site:**
-
-1. **Always test first on a staging or clone environment** — Never install or update directly on your production shop without testing first.
-2. **Create a full backup** — Back up your database and files before any plugin installation or update.
-3. **Verify checkout functionality** — After updating, place a test order to confirm everything works correctly.
-
-The author(s) assume no liability for any issues, data loss, lost revenue, or disruptions caused by this plugin. Use at your own risk.
 
 ---
 
