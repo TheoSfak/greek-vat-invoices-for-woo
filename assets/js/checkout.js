@@ -143,8 +143,11 @@ jQuery(document).ready(function($) {
                     console.log('grvatin: response.data keys:', Object.keys(response.data));
                     
                     if (response.success) {
-                        // Valid VAT
-                        $vatField.after('<span class="grvatin-valid">✓ ' + grvatin_params.valid_text + '</span>');
+                        // Show the server's own message — it correctly distinguishes
+                        // "correct format" (basic mode, the default) from a genuine
+                        // AADE-verified result, instead of a blanket "Valid" claim.
+                        var validMessage = (response.data && response.data.message) ? response.data.message : grvatin_params.valid_text;
+                        $vatField.after('<span class="grvatin-valid">✓ ' + validMessage + '</span>');
                         $vatField.addClass('grvatin-field-valid');
                         
                         console.log('grvatin: Company Name:', response.data.company_name);

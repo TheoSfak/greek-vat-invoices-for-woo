@@ -2,6 +2,35 @@
  Greek VAT & Invoices for WooCommerce - What's New
 ============================================================
 
+Version 1.2.2 (2026-09-10)
+------------------------------------------------------------
+
+ ★ Clarified: Checkout ΑΦΜ "Valid" Message Was Misleading
+
+   At checkout, typing any well-formed 9-digit number showed a
+   green "✓ Έγκυρο" ("Valid") message — indistinguishable from a
+   real verification, even though the plugin only checks digit
+   count by default (no AADE lookup is performed unless a
+   separate, not-yet-exposed AADE validation mode is manually
+   enabled). A customer could see "Valid" for a made-up number,
+   and there was no way for the store owner to tell the
+   difference afterwards.
+
+   The message now explicitly says the format is correct but the
+   number has not been verified as real. Same wording change
+   applied to the plugin's readme.txt FAQ, so this limitation is
+   clear before installing, not just after.
+
+   Modified files:
+   • includes/class-vat-validator.php — basic-mode success
+     message now states "correct format" instead of implying a
+     genuine validation
+   • assets/js/checkout.js — checkout now displays the server's
+     actual per-mode message instead of a hardcoded generic
+     "Valid" label
+
+------------------------------------------------------------
+
 Version 1.2.1 (2026-09-01)
 ------------------------------------------------------------
 

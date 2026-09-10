@@ -1,6 +1,6 @@
 # Greek VAT & Invoices for WooCommerce
 
-![Version](https://img.shields.io/badge/version-1.2.1-blue.svg)
+![Version](https://img.shields.io/badge/version-1.2.2-blue.svg)
 ![WordPress](https://img.shields.io/badge/wordpress-5.0%2B-blue.svg)
 ![WooCommerce](https://img.shields.io/badge/woocommerce-3.0%2B-purple.svg)
 ![License](https://img.shields.io/badge/license-GPL--2.0-green.svg)
@@ -207,6 +207,10 @@ Navigate to **WooCommerce → Settings → Ελληνικά Τιμολόγια**
 ---
 
 ## 📝 Changelog
+
+### Version 1.2.2 (2026-09-10)
+- ✅ Clarified the checkout ΑΦΜ "Valid" message — it now explicitly says only the 9-digit format was checked, not that the number is a real, AADE-registered VAT number
+- ✅ Updated the FAQ to state the same limitation plainly
 
 ### Version 1.2.1 (2026-09-01)
 - ✅ Fixed Block Checkout: selecting "Απόδειξη" (Receipt) still required the hidden Company Name, ΑΦΜ, ΔΟΥ, and Business Activity fields, blocking the order

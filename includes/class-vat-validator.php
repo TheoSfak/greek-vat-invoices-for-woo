@@ -56,10 +56,10 @@ class GRVATIN_VAT_Validator {
             // EU VAT validation via VIES
             $result = $this->validate_eu_vat_vies($country, $vat_number);
         } else {
-            // Basic format validation only
+            // Basic format validation only — no registry lookup for this country/setting combo
             $result = array(
                 'valid' => strlen($vat_number) === 9,
-                'message' => strlen($vat_number) === 9 ? __('Έγκυρη μορφή', 'greek-vat-invoices-for-woocommerce') : __('Μη έγκυρη μορφή', 'greek-vat-invoices-for-woocommerce')
+                'message' => strlen($vat_number) === 9 ? __('Σωστή μορφή (9 ψηφία) — δεν έχει επαληθευτεί ότι είναι πραγματικός αριθμός ΦΠΑ', 'greek-vat-invoices-for-woocommerce') : __('Μη έγκυρη μορφή', 'greek-vat-invoices-for-woocommerce')
             );
         }
         
@@ -123,10 +123,10 @@ class GRVATIN_VAT_Validator {
             );
         }
         
-        // All checks passed
+        // Format is correct, but this is NOT a real AADE lookup — only digit-count is checked
         return array(
             'valid' => true,
-            'message' => __('Έγκυρη μορφή ΑΦΜ (9 ψηφία)', 'greek-vat-invoices-for-woocommerce'),
+            'message' => __('Σωστή μορφή (9 ψηφία) — δεν έχει επαληθευτεί ότι είναι πραγματικό ΑΦΜ', 'greek-vat-invoices-for-woocommerce'),
             'data' => array()
         );
     }

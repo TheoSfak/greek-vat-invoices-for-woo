@@ -4,7 +4,7 @@ Tags: woocommerce, timologia, timologio, greek, checkout
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -114,11 +114,11 @@ The author(s) assume no liability for any issues, data loss, lost revenue, or di
 
 = Do I need AADE credentials? =
 
-No, the current version (1.1.0) does not require AADE credentials. AADE integration is planned for future versions.
+No, AADE credentials are not required to use the plugin. AADE integration is planned for a future version.
 
 = Does it validate VAT numbers in real-time? =
 
-The plugin validates VAT format (9 digits, numeric only) in real-time at checkout. Full AADE/VIES validation is coming in future versions.
+The plugin checks that the ΑΦΜ has the correct format — exactly 9 numeric digits — in real-time at checkout. **This is a format check only: it does not confirm the number is a real, registered VAT number.** The green checkmark shown at checkout means "correct format," not "verified with AADE." Full AADE/VIES lookup validation is planned for a future version.
 
 = Can I customize which fields are shown? =
 
@@ -161,6 +161,10 @@ You can donate via PayPal to help fund future features: [https://paypal.me/Theod
 5. Order meta with VAT information
 
 == Changelog ==
+
+= 1.2.2 (2026-09-10) =
+* Clarified the checkout ΑΦΜ "Valid" message: it now explicitly states that only the 9-digit format was checked, not that the number is a real, AADE-registered VAT number. Previously it showed a bare "Valid" for any well-formed 9-digit number, which could be read as a genuine verification.
+* Updated the FAQ to state the same thing plainly for store owners evaluating the plugin.
 
 = 1.2.1 (2026-09-01) =
 * Fixed Block Checkout: selecting "Απόδειξη" (Receipt) still required Company Name, ΑΦΜ, ΔΟΥ, and Business Activity even though those fields are correctly hidden — the customer could not complete the order
@@ -205,6 +209,9 @@ You can donate via PayPal to help fund future features: [https://paypal.me/Theod
 * Company information fields
 
 == Upgrade Notice ==
+
+= 1.2.2 =
+Clarifies the checkout ΑΦΜ "Valid" message so it accurately says "correct format," not "verified" — the plugin only checks digit count by default and does not confirm a number is real. No settings change; text-only.
 
 = 1.2.1 =
 Fixes a bug where Block Checkout customers selecting "Απόδειξη" (Receipt) could not complete their order — the hidden invoice fields were still being treated as required. Update recommended if you use Block Checkout.
