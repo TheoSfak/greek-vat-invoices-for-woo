@@ -4,7 +4,7 @@ Tags: woocommerce, timologia, timologio, greek, checkout
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -162,6 +162,9 @@ You can donate via PayPal to help fund future features: [https://paypal.me/Theod
 
 == Changelog ==
 
+= 1.2.3 (2026-09-12) =
+* Fixed two PHP notices on newer WordPress/WooCommerce versions: "Function _load_textdomain_just_in_time was called incorrectly" (WordPress 6.7+) and "Function woocommerce_register_additional_checkout_field was called incorrectly" (WooCommerce 11.0+). Both traced to Block Checkout field registration running on the `woocommerce_blocks_loaded` hook, which fires before `init`; it now runs on `woocommerce_init` instead, as WooCommerce's own guidance recommends. No functional change — fields register and behave identically, just without the notices.
+
 = 1.2.2 (2026-09-10) =
 * Clarified the checkout ΑΦΜ "Valid" message: it now explicitly states that only the 9-digit format was checked, not that the number is a real, AADE-registered VAT number. Previously it showed a bare "Valid" for any well-formed 9-digit number, which could be read as a genuine verification.
 * Updated the FAQ to state the same thing plainly for store owners evaluating the plugin.
@@ -209,6 +212,9 @@ You can donate via PayPal to help fund future features: [https://paypal.me/Theod
 * Company information fields
 
 == Upgrade Notice ==
+
+= 1.2.3 =
+Fixes two harmless-but-noisy PHP notices shown on WordPress 6.7+/WooCommerce 11.0+ (Block Checkout field registration ran one hook too early). No functional change.
 
 = 1.2.2 =
 Clarifies the checkout ΑΦΜ "Valid" message so it accurately says "correct format," not "verified" — the plugin only checks digit count by default and does not confirm a number is real. No settings change; text-only.

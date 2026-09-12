@@ -1,6 +1,6 @@
 # Greek VAT & Invoices for WooCommerce
 
-![Version](https://img.shields.io/badge/version-1.2.2-blue.svg)
+![Version](https://img.shields.io/badge/version-1.2.3-blue.svg)
 ![WordPress](https://img.shields.io/badge/wordpress-5.0%2B-blue.svg)
 ![WooCommerce](https://img.shields.io/badge/woocommerce-3.0%2B-purple.svg)
 ![License](https://img.shields.io/badge/license-GPL--2.0-green.svg)
@@ -207,6 +207,9 @@ Navigate to **WooCommerce → Settings → Ελληνικά Τιμολόγια**
 ---
 
 ## 📝 Changelog
+
+### Version 1.2.3 (2026-09-12)
+- ✅ Fixed "_load_textdomain_just_in_time" (WP 6.7+) and "woocommerce_register_additional_checkout_field called incorrectly" (WC 11.0+) notices — Block Checkout field registration moved from `woocommerce_blocks_loaded` to `woocommerce_init`, no functional change
 
 ### Version 1.2.2 (2026-09-10)
 - ✅ Clarified the checkout ΑΦΜ "Valid" message — it now explicitly says only the 9-digit format was checked, not that the number is a real, AADE-registered VAT number

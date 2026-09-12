@@ -3,7 +3,7 @@
  * Plugin Name: Greek VAT & Invoices for WooCommerce
  * Plugin URI: https://github.com/TheoSfak/greek-vat-invoices-for-woo
  * Description: Add Greek VAT, DOY and Invoice/Receipt selection to WooCommerce checkout. Simple and lightweight solution for Greek e-commerce.
- * Version: 1.2.2
+ * Version: 1.2.3
  * Author: Theodore Sfakianakis (irmaiden)
  * Author URI: https://paypal.me/TheodoreSfakianakis
  * Text Domain: greek-vat-invoices-for-woocommerce
@@ -23,7 +23,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('GRVATIN_VERSION', '1.2.2');
+define('GRVATIN_VERSION', '1.2.3');
 define('GRVATIN_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('GRVATIN_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('GRVATIN_PLUGIN_BASENAME', plugin_basename(__FILE__));

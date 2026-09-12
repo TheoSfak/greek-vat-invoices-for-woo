@@ -20,7 +20,12 @@ class GRVATIN_Block_Checkout {
     }
 
     private function __construct() {
-        add_action('woocommerce_blocks_loaded', array($this, 'register_fields'));
+        // woocommerce_blocks_loaded fires before `init`, too early for both the
+        // __() calls in register_fields() (WP 6.7+ "loaded too early" notice) and
+        // woocommerce_register_additional_checkout_field() itself (WC 11.0+ warns on
+        // this directly). woocommerce_init fires on `init` itself, which is what
+        // WooCommerce's own notice recommends instead.
+        add_action('woocommerce_init', array($this, 'register_fields'));
         add_action('woocommerce_blocks_enqueue_checkout_block_scripts_after', array($this, 'enqueue_scripts'));
         add_action('woocommerce_set_additional_field_value', array($this, 'save_field_to_order_meta'), 10, 4);
         add_filter('woocommerce_get_default_value_for_grvatin/invoice-type', array($this, 'default_invoice_type'), 10, 3);

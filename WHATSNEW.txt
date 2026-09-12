@@ -2,6 +2,35 @@
  Greek VAT & Invoices for WooCommerce - What's New
 ============================================================
 
+Version 1.2.3 (2026-09-12)
+------------------------------------------------------------
+
+ ★ Fixed: Two PHP Notices on Newer WordPress/WooCommerce
+
+   Sites running WordPress 6.7+ and/or WooCommerce 11.0+ could see:
+
+   "Function _load_textdomain_just_in_time was called incorrectly...
+   Translations should be loaded at the init action or later."
+
+   "Function woocommerce_register_additional_checkout_field was
+   called incorrectly. Additional checkout fields should be
+   registered on the woocommerce_init action or later."
+
+   Both traced to the same cause: Block Checkout field registration
+   ran on the `woocommerce_blocks_loaded` hook, which fires before
+   WordPress's `init` action — too early for both the field labels'
+   translation strings and the field-registration call itself.
+   Registration now runs on `woocommerce_init` instead, exactly as
+   WooCommerce's own guidance recommends. Purely a hook-timing fix —
+   fields register and behave identically, verified against both
+   Απόδειξη and Τιμολόγιο selections with WP_DEBUG logging on.
+
+   Modified files:
+   • includes/class-block-checkout.php — register_fields() now
+     hooked to woocommerce_init instead of woocommerce_blocks_loaded
+
+------------------------------------------------------------
+
 Version 1.2.2 (2026-09-10)
 ------------------------------------------------------------
 
