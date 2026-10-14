@@ -44,6 +44,8 @@ Add essential Greek tax fields (ΑΦΜ, ΔΟΥ, Business Info) and Invoice/Recei
 - ✅ **Business Details** - Company, ΑΦΜ, ΔΟΥ, activity and VAT exemption for invoice orders, so you don't need to open each order
 - ✅ **Safe** - Display only; works with Classic and Block checkout and with HPOS
 
+![Orders list Quick Preview, before and after](docs/screenshots/quick-preview-before-after.png)
+
 ### 🎨 User Experience
 - ✅ **Smart Field Visibility** - Fields appear/hide based on selection
 - ✅ **Input Validation** - Only numbers allowed in VAT field

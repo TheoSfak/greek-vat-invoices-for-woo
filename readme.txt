@@ -159,6 +159,7 @@ You can donate via PayPal to help fund future features: [https://paypal.me/Theod
 3. Real-time VAT validation
 4. Admin settings page
 5. Order meta with VAT information
+6. Orders list Quick Preview (eye icon): document type, invoice number, ΑΦΜ, ΔΟΥ and VAT exemption at a glance
 
 == Changelog ==
 
