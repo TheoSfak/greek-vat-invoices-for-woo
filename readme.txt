@@ -4,7 +4,7 @@ Tags: woocommerce, timologia, timologio, greek, checkout
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 1.2.3
+Stable tag: 1.2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -162,6 +162,10 @@ You can donate via PayPal to help fund future features: [https://paypal.me/Theod
 
 == Changelog ==
 
+= 1.2.4 (2026-10-14) =
+* New: invoice details now appear in the WooCommerce Orders list "Quick Preview" (the eye icon). At the top of the preview you see the document type (Τιμολόγιο / Απόδειξη), the invoice number and date once generated, and for invoices the company name, ΑΦΜ, ΔΟΥ, business activity and any VAT exemption — so orders can be processed without opening each one.
+* The preview block is read-only, escapes every value, works with both Classic and Block checkout and with HPOS, and fails safe: if anything goes wrong the standard preview is shown unchanged.
+
 = 1.2.3 (2026-09-12) =
 * Fixed two PHP notices on newer WordPress/WooCommerce versions: "Function _load_textdomain_just_in_time was called incorrectly" (WordPress 6.7+) and "Function woocommerce_register_additional_checkout_field was called incorrectly" (WooCommerce 11.0+). Both traced to Block Checkout field registration running on the `woocommerce_blocks_loaded` hook, which fires before `init`; it now runs on `woocommerce_init` instead, as WooCommerce's own guidance recommends. No functional change — fields register and behave identically, just without the notices.
 
@@ -212,6 +216,9 @@ You can donate via PayPal to help fund future features: [https://paypal.me/Theod
 * Company information fields
 
 == Upgrade Notice ==
+
+= 1.2.4 =
+New: invoice / receipt details (document type, invoice number, company, ΑΦΜ, ΔΟΥ, VAT exemption) are now shown in the Orders list Quick Preview (eye icon). Display only — no settings or data changes.
 
 = 1.2.3 =
 Fixes two harmless-but-noisy PHP notices shown on WordPress 6.7+/WooCommerce 11.0+ (Block Checkout field registration ran one hook too early). No functional change.

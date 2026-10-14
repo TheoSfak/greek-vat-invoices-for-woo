@@ -2,6 +2,44 @@
  Greek VAT & Invoices for WooCommerce - What's New
 ============================================================
 
+Version 1.2.4 (2026-10-14)
+------------------------------------------------------------
+
+ ★ New: Invoice Details in the Orders List "Quick Preview"
+
+   The eye icon on the WooCommerce Orders list opens a quick preview
+   of an order. It previously showed nothing from this plugin. It now
+   shows a compact block at the top of the preview:
+
+   • Invoice orders (Τιμολόγιο): invoice number + date (once the order
+     is Completed and a number exists), company name, ΑΦΜ, ΔΟΥ,
+     business activity, and the VAT exemption status/reason if any.
+   • Receipt orders (Απόδειξη): a single "Απόδειξη" line (plus the
+     number/date once generated).
+   • Orders with no invoice/receipt data (e.g. placed before the plugin
+     was installed) show no block at all.
+
+   New file:
+   • includes/class-order-preview.php
+
+   Modified files:
+   • greek-vat-invoices-for-woocommerce.php (load + init the new class,
+     version bump)
+   • assets/css/admin.css (styles for the preview block)
+
+   Safety notes:
+   • Display only: reads existing order meta, writes nothing.
+   • Every value is HTML-escaped before it is shown.
+   • Fail-open: any error inside the feature is caught and the standard
+     WooCommerce preview is shown unchanged.
+   • Works with HPOS and legacy order storage, and with both Classic
+     and Block checkout (uses the same order meta in both).
+   • Uses WooCommerce's own hooks:
+     woocommerce_admin_order_preview_get_order_details (filter) and
+     woocommerce_admin_order_preview_start (action).
+
+------------------------------------------------------------
+
 Version 1.2.3 (2026-09-12)
 ------------------------------------------------------------
 

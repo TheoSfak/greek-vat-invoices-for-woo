@@ -39,6 +39,11 @@ Add essential Greek tax fields (ΑΦΜ, ΔΟΥ, Business Info) and Invoice/Recei
 - ✅ **Per-Field Required/Optional** - Choose which invoice fields (Company Name, ΑΦΜ, ΔΟΥ, Business Activity) are required or optional
 - ✅ **Beautiful Settings Page** - Clean, modern admin interface
 
+### 👁️ Orders List Quick Preview
+- ✅ **Invoice Info at a Glance** - The eye-icon preview on WooCommerce → Orders shows the document type (Τιμολόγιο / Απόδειξη), invoice number and date
+- ✅ **Business Details** - Company, ΑΦΜ, ΔΟΥ, activity and VAT exemption for invoice orders, so you don't need to open each order
+- ✅ **Safe** - Display only; works with Classic and Block checkout and with HPOS
+
 ### 🎨 User Experience
 - ✅ **Smart Field Visibility** - Fields appear/hide based on selection
 - ✅ **Input Validation** - Only numbers allowed in VAT field
@@ -138,6 +143,8 @@ Navigate to **WooCommerce → Settings → Ελληνικά Τιμολόγια**
 1. Go to WooCommerce → Orders
 2. Open any order
 3. View customer's VAT and business details in order meta
+
+**Tip:** Click the 👁️ eye icon on the Orders list to see the document type, invoice number, ΑΦΜ, ΔΟΥ and more in the quick preview, without opening the order.
 
 ---
 

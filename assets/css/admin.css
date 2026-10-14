@@ -238,3 +238,41 @@
         width: auto;
     }
 }
+
+/* Orders list Quick Preview (eye icon): invoice / receipt block */
+.wc-order-preview .grvatin-preview-invoice {
+    margin: 20px 24px 0;
+    padding: 10px 14px;
+    background: #f6f7f7;
+    border-left: 4px solid #2271b1;
+    border-radius: 2px;
+}
+
+.wc-order-preview .grvatin-preview-invoice--receipt {
+    border-left-color: #a7aaad;
+}
+
+.wc-order-preview .grvatin-preview-invoice h2 {
+    margin: 0 0 4px;
+    padding: 0;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.wc-order-preview .grvatin-preview-invoice__number {
+    font-weight: 400;
+    color: #50575e;
+}
+
+.wc-order-preview .grvatin-preview-invoice p {
+    margin: 2px 0;
+}
+
+.wc-order-preview .grvatin-preview-invoice__field {
+    margin-right: 18px;
+}
+
+.wc-order-preview .grvatin-preview-invoice__exempt {
+    color: #1e8e3e;
+    font-weight: 600;
+}
