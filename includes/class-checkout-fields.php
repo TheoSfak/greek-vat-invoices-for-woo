@@ -33,9 +33,6 @@ class GRVATIN_Checkout_Fields {
         add_action('woocommerce_checkout_update_order_meta', array($this, 'save_invoice_fields'));
         add_action('woocommerce_checkout_update_customer', array($this, 'save_customer_fields'), 10, 2);
         
-        // Display fields in admin order
-        add_action('woocommerce_admin_order_data_after_billing_address', array($this, 'display_invoice_fields_admin'));
-        
         // Display fields in emails
         add_filter('woocommerce_email_order_meta_fields', array($this, 'display_invoice_fields_email'), 10, 3);
         
@@ -287,47 +284,6 @@ class GRVATIN_Checkout_Fields {
                 $activity = strtoupper($activity);
             }
             $customer->update_meta_data('billing_business_activity', $activity);
-        }
-    }
-    
-    /**
-     * Display invoice fields in admin order page
-     */
-    public function display_invoice_fields_admin($order) {
-        // Block checkout: WooCommerce displays additional fields automatically
-        if (get_option('grvatin_checkout_type', 'classic') === 'block') {
-            return;
-        }
-
-        $invoice_type = $order->get_meta('_billing_invoice_type');
-        $vat_number = $order->get_meta('_billing_vat_number');
-        $doy = $order->get_meta('_billing_doy');
-        $activity = $order->get_meta('_billing_business_activity');
-        $company = $order->get_billing_company();
-        
-        if ($invoice_type === 'invoice') {
-            echo '<div class="wcgvi-admin-invoice-fields">';
-            echo '<h3>' . esc_html__('Στοιχεία Τιμολογίου', 'greek-vat-invoices-for-woocommerce') . '</h3>';
-            
-            if ($company) {
-                echo '<p><strong>' . esc_html__('Επωνυμία:', 'greek-vat-invoices-for-woocommerce') . '</strong> ' . esc_html($company) . '</p>';
-            }
-            
-            if ($vat_number) {
-                echo '<p><strong>' . esc_html__('ΑΦΜ:', 'greek-vat-invoices-for-woocommerce') . '</strong> ' . esc_html($vat_number) . '</p>';
-            }
-            
-            if ($doy) {
-                echo '<p><strong>' . esc_html__('ΔΟΥ:', 'greek-vat-invoices-for-woocommerce') . '</strong> ' . esc_html($doy) . '</p>';
-            }
-            
-            if ($activity) {
-                echo '<p><strong>' . esc_html__('Επάγγελμα:', 'greek-vat-invoices-for-woocommerce') . '</strong> ' . esc_html($activity) . '</p>';
-            }
-            
-            echo '</div>';
-        } else {
-            echo '<p><strong>' . esc_html__('Document Type:', 'greek-vat-invoices-for-woocommerce') . '</strong> ' . esc_html__('Receipt', 'greek-vat-invoices-for-woocommerce') . '</p>';
         }
     }
     

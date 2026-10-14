@@ -2,6 +2,49 @@
  Greek VAT & Invoices for WooCommerce - What's New
 ============================================================
 
+Version 1.2.5 (2026-10-14)
+------------------------------------------------------------
+
+ ★ New: Invoice Details as a Tidy Card on the Order Edit Screen
+
+   On the WooCommerce order edit screen the invoice fields used to
+   appear as plain label/value lines (Block checkout) or as a plain
+   "Στοιχεία Τιμολογίου" block (Classic checkout). They now appear as
+   one card at the bottom of the Billing column:
+
+   • Header: document type (Τιμολόγιο / Απόδειξη) and, once generated,
+     the invoice number and date.
+   • Invoices: company name, ΑΦΜ (monospace), ΔΟΥ and business activity,
+     with labels above the values. Empty fields show a dash.
+   • Receipts: just the "Απόδειξη" header.
+   • The VAT exemption line is intentionally not part of the card; it
+     is still shown where it always was (General column, once an
+     invoice number exists).
+
+   New file:
+   • includes/class-order-admin-card.php
+
+   Modified files:
+   • includes/class-checkout-fields.php (removed the old plain admin
+     display and its hook; the card replaces it)
+   • greek-vat-invoices-for-woocommerce.php (load + init, version bump)
+   • assets/css/admin.css (card styles)
+
+   Safety notes:
+   • Display only: reads existing order meta, writes nothing.
+   • Every value is HTML-escaped.
+   • Fail-open: if the card cannot be built, nothing is hidden and the
+     order screen is shown exactly as WooCommerce built it.
+   • Block checkout: WooCommerce's plain lines are hidden only in the
+     read-only view, and only for orders where the card was built. The
+     edit form behind the pencil icon is untouched, so every field stays
+     editable, and saving an order changes none of the stored data.
+   • Uses WooCommerce's hooks woocommerce_admin_order_data_after_billing_address
+     (action) and woocommerce_admin_billing_fields /
+     woocommerce_admin_shipping_fields (filters, view context only).
+
+------------------------------------------------------------
+
 Version 1.2.4 (2026-10-14)
 ------------------------------------------------------------
 

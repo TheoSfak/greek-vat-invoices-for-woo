@@ -3,7 +3,7 @@
  * Plugin Name: Greek VAT & Invoices for WooCommerce
  * Plugin URI: https://github.com/TheoSfak/greek-vat-invoices-for-woo
  * Description: Add Greek VAT, DOY and Invoice/Receipt selection to WooCommerce checkout. Simple and lightweight solution for Greek e-commerce.
- * Version: 1.2.4
+ * Version: 1.2.5
  * Author: Theodore Sfakianakis (irmaiden)
  * Author URI: https://paypal.me/TheodoreSfakianakis
  * Text Domain: greek-vat-invoices-for-woocommerce
@@ -23,7 +23,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('GRVATIN_VERSION', '1.2.4');
+define('GRVATIN_VERSION', '1.2.5');
 define('GRVATIN_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('GRVATIN_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('GRVATIN_PLUGIN_BASENAME', plugin_basename(__FILE__));
@@ -82,6 +82,7 @@ class GRVATIN_Greek_VAT_Invoices {
         // require_once GRVATIN_PLUGIN_DIR . 'includes/class-email-handler.php'; // Disabled in v1.0.8 - Coming in future version
         require_once GRVATIN_PLUGIN_DIR . 'includes/class-order-handler.php';
         require_once GRVATIN_PLUGIN_DIR . 'includes/class-order-preview.php';
+        require_once GRVATIN_PLUGIN_DIR . 'includes/class-order-admin-card.php';
         require_once GRVATIN_PLUGIN_DIR . 'includes/class-block-checkout.php';
     }
     
@@ -111,6 +112,7 @@ class GRVATIN_Greek_VAT_Invoices {
         // GRVATIN_Email_Handler::get_instance(); // Disabled in v1.0.8 - Coming in future version
         GRVATIN_Order_Handler::get_instance();
         GRVATIN_Order_Preview::get_instance();
+        GRVATIN_Order_Admin_Card::get_instance();
     }
     
     /**

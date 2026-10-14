@@ -46,6 +46,12 @@ Add essential Greek tax fields (ΑΦΜ, ΔΟΥ, Business Info) and Invoice/Recei
 
 ![Orders list Quick Preview, before and after](docs/screenshots/quick-preview-before-after.png)
 
+### 🧾 Invoice Card on the Order Screen
+- ✅ **One Tidy Card** - Document type, invoice number and date, company, ΑΦΜ, ΔΟΥ and business activity at the bottom of the Billing column on the order edit screen
+- ✅ **Classic and Block Checkout** - Replaces the plain label/value lines; the edit form behind the pencil icon is unchanged
+
+![Order edit screen, before and after](docs/screenshots/order-edit-card-before-after.png)
+
 ### 🎨 User Experience
 - ✅ **Smart Field Visibility** - Fields appear/hide based on selection
 - ✅ **Input Validation** - Only numbers allowed in VAT field

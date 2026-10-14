@@ -4,7 +4,7 @@ Tags: woocommerce, timologia, timologio, greek, checkout
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 1.2.4
+Stable tag: 1.2.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -160,8 +160,14 @@ You can donate via PayPal to help fund future features: [https://paypal.me/Theod
 4. Admin settings page
 5. Order meta with VAT information
 6. Orders list Quick Preview (eye icon): document type, invoice number, ΑΦΜ, ΔΟΥ and VAT exemption at a glance
+7. Order edit screen: invoice details as one tidy card in the Billing column
 
 == Changelog ==
+
+= 1.2.5 (2026-10-14) =
+* New: on the order edit screen, the invoice details now appear as one tidy card at the bottom of the Billing column — document type (Τιμολόγιο / Απόδειξη), invoice number and date once generated, company name, ΑΦΜ, ΔΟΥ and business activity — instead of plain label/value lines. Empty fields show a dash.
+* Block Checkout: WooCommerce's plain lines for these fields are hidden in the read-only order view; the edit form behind the pencil icon is unchanged, so every field is still editable. Classic Checkout: the card replaces the previous "Στοιχεία Τιμολογίου" block.
+* Display only: nothing is written, every value is escaped, and if the card cannot be built the order screen is shown exactly as before. The VAT exemption status is still shown where it was.
 
 = 1.2.4 (2026-10-14) =
 * New: invoice details now appear in the WooCommerce Orders list "Quick Preview" (the eye icon). At the top of the preview you see the document type (Τιμολόγιο / Απόδειξη), the invoice number and date once generated, and for invoices the company name, ΑΦΜ, ΔΟΥ, business activity and any VAT exemption — so orders can be processed without opening each one.
@@ -217,6 +223,9 @@ You can donate via PayPal to help fund future features: [https://paypal.me/Theod
 * Company information fields
 
 == Upgrade Notice ==
+
+= 1.2.5 =
+New: invoice details are shown as one tidy card in the Billing column of the order edit screen. Display only — no settings or data changes.
 
 = 1.2.4 =
 New: invoice / receipt details (document type, invoice number, company, ΑΦΜ, ΔΟΥ, VAT exemption) are now shown in the Orders list Quick Preview (eye icon). Display only — no settings or data changes.

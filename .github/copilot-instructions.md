@@ -15,6 +15,7 @@ Singleton entry point: `GRVATIN_Greek_VAT_Invoices::get_instance()` in [greek-va
 | `GRVATIN_Admin_Settings` | `includes/class-admin-settings.php` | WooCommerce settings tab UI |
 | `GRVATIN_Order_Handler` | `includes/class-order-handler.php` | VAT exemptions, invoice numbering, order search |
 | `GRVATIN_Order_Preview` | `includes/class-order-preview.php` | Invoice/receipt block in the Orders list Quick Preview (read-only, escapes all output, fails open) |
+| `GRVATIN_Order_Admin_Card` | `includes/class-order-admin-card.php` | Invoice/receipt card in the Billing column of the order edit screen; hides WooCommerce's plain block-checkout lines in the read-only view (read-only, escapes all output, fails open) |
 | `GRVATIN_Invoice_Generator` | `includes/class-invoice-generator.php` | **DISABLED — not loaded** (planned PDF generation) |
 | `GRVATIN_Email_Handler` | `includes/class-email-handler.php` | **DISABLED — not loaded** (planned invoice emails) |
 
